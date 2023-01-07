@@ -1,8 +1,8 @@
 package Myhealth.myhealth.modeles;
 
-import jakarta.persistence.*;
 import lombok.Data;
 
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -18,5 +18,6 @@ public class Analyse {
     private String pieceJoint;
     private Date dateajout;
 
-    @ManyToOne private Dossier dossier;
+    @ManyToOne
+    private Dossier dossier;
 }

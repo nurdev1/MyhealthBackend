@@ -1,9 +1,10 @@
 package Myhealth.myhealth.modeles;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+
 import lombok.Data;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,8 @@ public class Medecin {
     private String specialite;
 
 
-    @ManyToOne private Hopital hopital;
+    @ManyToOne
+    private Hopital hopital;
 
 
     @JsonIgnore
@@ -38,7 +40,7 @@ public class Medecin {
                     CascadeType.MERGE
             })
     @JoinTable(
-            name="MedecinPatient",
+            name="Medecinpatient",
             joinColumns = @JoinColumn(name = "idmedecin"),
             inverseJoinColumns = @JoinColumn(name = "idpatient")
     )
