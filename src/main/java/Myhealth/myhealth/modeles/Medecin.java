@@ -2,7 +2,9 @@ package Myhealth.myhealth.modeles;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,6 +13,8 @@ import java.util.List;
 @Entity
 @Data
 @Table
+@AllArgsConstructor
+@NoArgsConstructor
 public class Medecin {
 
     @Id
@@ -26,6 +30,7 @@ public class Medecin {
     private String adresse;
     private String diplome;
     private String specialite;
+    private boolean etat;
 
 
     @ManyToOne
@@ -40,7 +45,7 @@ public class Medecin {
                     CascadeType.MERGE
             })
     @JoinTable(
-            name="Medecinpatient",
+            name="MedecinPatient",
             joinColumns = @JoinColumn(name = "idmedecin"),
             inverseJoinColumns = @JoinColumn(name = "idpatient")
     )

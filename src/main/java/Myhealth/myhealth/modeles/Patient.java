@@ -24,6 +24,7 @@ public class Patient {
     private String pieceidentite;
     private String ville;
     private String adresse;
+    private boolean etat;
 
 
     @ManyToMany(
@@ -33,7 +34,7 @@ public class Patient {
                     CascadeType.MERGE
             })
     @JoinTable(
-            name="Medecinpatient",
+            name="MedecinPatient",
             joinColumns = @JoinColumn(name = "idpatient"),
             inverseJoinColumns = @JoinColumn(name = "idmedecin")
     )
