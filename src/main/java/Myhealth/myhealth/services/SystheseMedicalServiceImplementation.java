@@ -12,7 +12,7 @@ public class SystheseMedicalServiceImplementation implements SystheseMedicalServ
 
     SyntheseMedicalRepository syntheseMedicalRepository;
     @Override
-    public ReponseMessage SystheseMedical(SyntheseMedical systheseMedical) {
+    public ReponseMessage AjouterSystheseMedical(SyntheseMedical systheseMedical) {
         if (syntheseMedicalRepository.findByIdsynthesemedical(systheseMedical.getIdsynthesemedical()) == null){
             syntheseMedicalRepository.save(systheseMedical);
             ReponseMessage message = new ReponseMessage("synthèse médical ajouté avec succes", true);

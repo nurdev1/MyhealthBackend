@@ -8,7 +8,7 @@ import java.util.List;
 public interface SystheseMedicalService {
 
     // Création d'un Systhese Medical
-    ReponseMessage SystheseMedical(SyntheseMedical systheseMedical);
+    ReponseMessage AjouterSystheseMedical(SyntheseMedical systheseMedical);
 
     // Mise à jour d'un Systhese Medical
     ReponseMessage modifierSystheseMedical(SyntheseMedical syntheseMedical);

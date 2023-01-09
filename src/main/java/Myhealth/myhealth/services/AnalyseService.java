@@ -11,7 +11,7 @@ public interface AnalyseService {
     ReponseMessage creerAnalyse(Analyse analyse);
 
     // Mise à jour d'un Analyse
-    ReponseMessage modifierImagerie(Analyse analyse);
+    ReponseMessage modifierAnalyse(Analyse analyse);
 
     //affichage d'un Analyse
 

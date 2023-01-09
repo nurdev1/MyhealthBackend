@@ -26,7 +26,7 @@ public class AnalyseServiceImplementation implements AnalyseService {
     }
 
     @Override
-    public ReponseMessage modifierImagerie(Analyse analyse) {
+    public ReponseMessage modifierAnalyse(Analyse analyse) {
 
         if (analyseRepository.findByIdanalyse(analyse.getIdanalyse()) !=null) {
             return analyseRepository.findById(analyse.getIdanalyse())
