@@ -16,6 +16,5 @@ public class Hopital {
     private String nom;
     private String ville;
     private String adresse;
-    @Lob
-    private byte[] photo;
+    private String photo;
 }

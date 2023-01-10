@@ -40,4 +40,5 @@ public class HopitalController {
 
         return hopitalService.SupprimerHopital(id);
     }
+
 }

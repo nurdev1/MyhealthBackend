@@ -15,7 +15,9 @@ public class Analyse {
     private Long idanalyse;
     private String libelle;
     private String description;
-    private String pieceJoint;
+    private Long size;
+    @Lob
+    private byte[] pieceJoint;
     private Date dateajout;
 
     @ManyToOne

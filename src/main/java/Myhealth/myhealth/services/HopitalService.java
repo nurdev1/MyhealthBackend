@@ -3,6 +3,7 @@ package Myhealth.myhealth.services;
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Hopital;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface HopitalService {
 
     //Suppression d'un Hopital
     ReponseMessage SupprimerHopital(Long idhopital);
+
+
 }

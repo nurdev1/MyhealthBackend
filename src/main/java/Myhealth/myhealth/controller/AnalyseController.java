@@ -21,4 +21,5 @@ public class AnalyseController {
     public ReponseMessage Supprimer(@PathVariable Long id){
         return analyseService.SupprimerAnalyse(id);
     }
+
 }
