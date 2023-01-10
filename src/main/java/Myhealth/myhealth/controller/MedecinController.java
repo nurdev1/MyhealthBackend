@@ -1,8 +1,7 @@
 package Myhealth.myhealth.controller;
 
 import Myhealth.myhealth.Message.ReponseMessage;
-import Myhealth.myhealth.modeles.CompteRendu;
-import Myhealth.myhealth.modeles.Dossier;
+
 import Myhealth.myhealth.modeles.Medecin;
 import Myhealth.myhealth.services.MedecinService;
 import lombok.AllArgsConstructor;

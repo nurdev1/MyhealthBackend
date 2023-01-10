@@ -2,7 +2,6 @@ package Myhealth.myhealth.controller;
 
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Dossier;
-import Myhealth.myhealth.reponse.MessageResponse;
 import Myhealth.myhealth.services.DossierService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

@@ -3,10 +3,9 @@ package Myhealth.myhealth.controller;
 import Myhealth.myhealth.modelFile.DatabaseFile;
 import Myhealth.myhealth.payloadFile.Response;
 import Myhealth.myhealth.services.DatabaseFileService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -15,6 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@AllArgsConstructor
+@RequestMapping("/import")
+@CrossOrigin(origins = "http://localhost:8100")
 public class FileUploadController {
 
     @Autowired
