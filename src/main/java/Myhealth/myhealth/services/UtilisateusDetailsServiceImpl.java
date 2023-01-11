@@ -1,7 +1,7 @@
 package Myhealth.myhealth.services;
 
-import Myhealth.myhealth.modeles.Collaborateurs;
-import Myhealth.myhealth.repository.CollaborateursRepository;
+import Myhealth.myhealth.modeles.Utilisateus;
+import Myhealth.myhealth.repository.UtilisateusRepository;
 import Myhealth.myhealth.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,10 +18,10 @@ l'utilisateur dans la documentation Spring.
  */
 
 @Service
-public class CollaborateurDetailsServiceImpl implements UserDetailsService, Services {
+public class UtilisateusDetailsServiceImpl implements UserDetailsService, Services {
 
       @Autowired
-      CollaborateursRepository collaborateursRepository;
+      UtilisateusRepository collaborateursRepository;
 
       @Autowired
       RoleRepository roleRepository;
@@ -30,14 +30,14 @@ public class CollaborateurDetailsServiceImpl implements UserDetailsService, Serv
   @Override
   @Transactional
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    Collaborateurs user = collaborateursRepository.findByUsername(username)
+    Utilisateus user = collaborateursRepository.findByUsername(username)
         .orElseThrow(() -> new UsernameNotFoundException("collaborateur non trouvé: " + username));
 
-    return CollaborateurDetailsImpl.build(user);
+    return UtilisateusDetailsImpl.build(user);
   }
 
 @Override
-  public String modifierCollaborateur(Collaborateurs collaborateurs) {
+  public String modifierCollaborateur(Utilisateus collaborateurs) {
       System.out.println("salut");
     if (collaborateursRepository.findById(collaborateurs.getId()) != null) {
         System.out.println("salut");
@@ -48,7 +48,7 @@ public class CollaborateurDetailsServiceImpl implements UserDetailsService, Serv
                 collaborateursRepository.save(c);
                 return  "Modifié Reçu avec succes";
 
-              }).orElseThrow(() -> new RuntimeException("Collaborateurs non trouvée !"));
+              }).orElseThrow(() -> new RuntimeException("Utilisateurs non trouvée !"));
     }else {
       return "Modification échoué";
     }

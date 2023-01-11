@@ -1,10 +1,12 @@
-package Myhealth.myhealth.modelFile;
+package Myhealth.myhealth.modeles;
 
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
+@Data
 @Table(name = "files")
 public class DatabaseFile {
 	@Id
@@ -60,4 +62,7 @@ public class DatabaseFile {
 	public void setData(byte[] data) {
 		this.data = data;
 	}
+	@ManyToOne
+	Utilisateus utilisateus;
+
 }

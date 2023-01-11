@@ -1,7 +1,7 @@
 package Myhealth.myhealth.jwt;
 
 
-import Myhealth.myhealth.services.CollaborateurDetailsImpl;
+import Myhealth.myhealth.services.UtilisateusDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public class JwtUtils {
   public String generateJwtToken(Authentication authentication) {
 
     //recupere les details de l'user actuel depuis autentication passer en parametre
-    CollaborateurDetailsImpl userPrincipal = (CollaborateurDetailsImpl) authentication.getPrincipal();
+    UtilisateusDetailsImpl userPrincipal = (UtilisateusDetailsImpl) authentication.getPrincipal();
 
     //generation du token
     return Jwts.builder()

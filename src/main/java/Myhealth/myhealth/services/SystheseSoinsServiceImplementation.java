@@ -29,7 +29,7 @@ public class SystheseSoinsServiceImplementation implements  SystheseSoinsService
         if (syntheseSoinsRepository.findByIdsynthesesoins(syntheseSoins.getIdsynthesesoins()) !=null) {
             return syntheseSoinsRepository.findById(syntheseSoins.getIdsynthesesoins())
                     .map(synthse1->{
-                        synthse1.setLibelle(syntheseSoins.getLibelle());
+                        synthse1.setNom(syntheseSoins.getNom());
                         synthse1.setDescription(syntheseSoins.getDescription());
                         syntheseSoins.setPieceJoint(syntheseSoins.getPieceJoint());
                         syntheseSoinsRepository.save(synthse1);

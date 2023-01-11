@@ -28,7 +28,7 @@ public class ImagerieServiceImplementation implements ImagerieService {
         if (imagerieRepository.findByIdimagerie(imagerie.getIdimagerie()) !=null) {
             return imagerieRepository.findById(imagerie.getIdimagerie())
                     .map(imagerie1->{
-                        imagerie1.setLibelle(imagerie.getLibelle());
+                        imagerie1.setNom(imagerie.getNom());
                         imagerie1.setDescription(imagerie.getDescription());
                         imagerie1.setPieceJoint(imagerie.getPieceJoint());
                         imagerieRepository.save(imagerie1);

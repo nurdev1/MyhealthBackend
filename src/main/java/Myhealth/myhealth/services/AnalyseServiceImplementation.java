@@ -31,7 +31,7 @@ public class AnalyseServiceImplementation implements AnalyseService {
         if (analyseRepository.findByIdanalyse(analyse.getIdanalyse()) !=null) {
             return analyseRepository.findById(analyse.getIdanalyse())
                     .map(analyse1->{
-                        analyse1.setLibelle(analyse.getLibelle());
+                        analyse1.setNom(analyse.getNom());
                         analyse1.setDescription(analyse.getDescription());
                         analyse1.setPieceJoint(analyse.getPieceJoint());
                         analyseRepository.save(analyse1);

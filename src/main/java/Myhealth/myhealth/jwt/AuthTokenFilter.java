@@ -1,6 +1,6 @@
 package Myhealth.myhealth.jwt;
 
-import Myhealth.myhealth.services.CollaborateurDetailsServiceImpl;
+import Myhealth.myhealth.services.UtilisateusDetailsServiceImpl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +34,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
   private JwtUtils jwtUtils;
 
   @Autowired
-  private CollaborateurDetailsServiceImpl userDetailsService;
+  private UtilisateusDetailsServiceImpl userDetailsService;
 
   private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 

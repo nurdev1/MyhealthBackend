@@ -3,8 +3,9 @@ package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.exception.FileNotFoundException;
 import Myhealth.myhealth.exception.FileStorageException;
-import Myhealth.myhealth.modelFile.DatabaseFile;
+import Myhealth.myhealth.modeles.DatabaseFile;
 import Myhealth.myhealth.repository.DatabaseFileRepository;
+import Myhealth.myhealth.repository.UtilisateusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -18,28 +19,30 @@ public class DatabaseFileServiceImplementation implements DatabaseFileService {
     @Autowired
     private DatabaseFileRepository dbFileRepository;
 
+    @Autowired
+    private UtilisateusRepository utilisateusRepository;
     @Override
-    public DatabaseFile storeFile(MultipartFile file) {
-        // Normalize file name
+    public DatabaseFile storeFile(MultipartFile file,Long idUser) {
+        // Normaliser le nom du fichier
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {
-            // Check if the file's name contains invalid characters
+            // Vérifiez si le nom du fichier contient des caractères invalides
             if(fileName.contains("..")) {
-                throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+                throw new FileStorageException("Pardon! Le nom de fichier contient une séquence de chemin non valide " + fileName);
             }
 
             DatabaseFile dbFile = new DatabaseFile(fileName, file.getContentType(), file.getBytes());
-
+            dbFile.setUtilisateus(utilisateusRepository.findById(idUser).get());
             return dbFileRepository.save(dbFile);
         } catch (IOException ex) {
-            throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+            throw new FileStorageException("Impossible de stocker le fichier" + fileName + ". Veuillez réessayer!", ex);
         }
     }
 
     @Override
     public DatabaseFile getFile(String fileId) {
         return dbFileRepository.findById(fileId)
-                .orElseThrow(() -> new FileNotFoundException("File not found with id " + fileId));
+                .orElseThrow(() -> new FileNotFoundException("Fichier introuvable avec l'identifiant" + fileId));
     }
 }

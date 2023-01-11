@@ -37,7 +37,7 @@ public class Medecin {
     private Hopital hopital;
 
 
-    @JsonIgnore
+   /* @JsonIgnore
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {
@@ -49,7 +49,7 @@ public class Medecin {
             joinColumns = @JoinColumn(name = "idmedecin"),
             inverseJoinColumns = @JoinColumn(name = "idpatient")
     )
-    private List<Patient> patients = new ArrayList<>();
+    private List<Patient> patients = new ArrayList<>();*/
 
 
 

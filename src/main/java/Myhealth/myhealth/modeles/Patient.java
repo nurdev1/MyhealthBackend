@@ -19,7 +19,7 @@ public class Patient {
     private String nom;
     private String prenom;
     private String photo;
-    private String telehone;
+    private String telephone;
     private String email;
     private String pieceidentite;
     private String ville;
@@ -27,7 +27,7 @@ public class Patient {
     private boolean etat;
 
 
-    @ManyToMany(
+ /*   @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
@@ -38,6 +38,6 @@ public class Patient {
             joinColumns = @JoinColumn(name = "idpatient"),
             inverseJoinColumns = @JoinColumn(name = "idmedecin")
     )
-    private List<Medecin> medecins = new ArrayList<>();
+    private List<Medecin> medecins = new ArrayList<>();*/
 
 }

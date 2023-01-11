@@ -46,10 +46,9 @@ Pour activer les expressions de sécurité de méthode , nous utilisons l' @Enab
 
 import Myhealth.myhealth.jwt.AuthEntryPointJwt;
 import Myhealth.myhealth.jwt.AuthTokenFilter;
-import Myhealth.myhealth.services.CollaborateurDetailsServiceImpl;
+import Myhealth.myhealth.services.UtilisateusDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -70,7 +69,7 @@ public class WebSecurityConfig {
 
 
   @Autowired
-  CollaborateurDetailsServiceImpl userDetailsService;
+  UtilisateusDetailsServiceImpl userDetailsService;
 
 
  /*

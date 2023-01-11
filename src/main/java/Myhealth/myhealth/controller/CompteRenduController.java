@@ -6,6 +6,8 @@ import Myhealth.myhealth.services.CompteRenduService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/compteRendu")
@@ -17,6 +19,10 @@ public class CompteRenduController {
     @PostMapping("/ajouter")
     ReponseMessage Ajouter(@RequestBody CompteRendu compteRendu){
       return   compteRenduService.creerCompteRendu(compteRendu);
+    }
+    @GetMapping("afficher")
+    public List<CompteRendu> Afficher(){
+        return compteRenduService.afficherToutLesCompteRendu();
     }
     @GetMapping("/modifier")
     public ReponseMessage Modifier(@RequestBody CompteRendu compteRendu){

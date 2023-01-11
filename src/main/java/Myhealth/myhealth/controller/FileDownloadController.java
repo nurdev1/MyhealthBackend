@@ -1,6 +1,6 @@
 package Myhealth.myhealth.controller;
 
-import Myhealth.myhealth.modelFile.DatabaseFile;
+import Myhealth.myhealth.modeles.DatabaseFile;
 import Myhealth.myhealth.services.DatabaseFileService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/Download")
+@RequestMapping("/download")
 @CrossOrigin(origins = "http://localhost:8100")
 public class FileDownloadController {
 

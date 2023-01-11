@@ -1,6 +1,6 @@
 package Myhealth.myhealth.controller;
 
-import Myhealth.myhealth.modelFile.DatabaseFile;
+import Myhealth.myhealth.modeles.DatabaseFile;
 import Myhealth.myhealth.payloadFile.Response;
 import Myhealth.myhealth.services.DatabaseFileService;
 import lombok.AllArgsConstructor;
@@ -22,9 +22,9 @@ public class FileUploadController {
     @Autowired
     private DatabaseFileService fileStorageService;
 
-    @PostMapping("/uploadFile")
-    public Response uploadFile(@RequestParam("file") MultipartFile file) {
-    	DatabaseFile fileName = fileStorageService.storeFile(file);
+    @PostMapping("/uploadFile/{idUser}")
+    public Response uploadFile(@RequestParam("file") MultipartFile file, @PathVariable Long idUser) {
+    	DatabaseFile fileName = fileStorageService.storeFile(file,idUser);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
@@ -36,10 +36,10 @@ public class FileUploadController {
     }
 
     @PostMapping("/uploadMultipleFiles")
-    public List<Response> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
+    public List<Response> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files, @PathVariable Long idUser) {
         return Arrays.asList(files)
                 .stream()
-                .map(file -> uploadFile(file))
+                .map(file -> uploadFile(file,idUser))
                 .collect(Collectors.toList());
     }
 }

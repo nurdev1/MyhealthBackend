@@ -1,7 +1,7 @@
 package Myhealth.myhealth.services;
 
 
-import Myhealth.myhealth.modeles.Collaborateurs;
+import Myhealth.myhealth.modeles.Utilisateus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class CollaborateurDetailsImpl implements UserDetails {
+public class UtilisateusDetailsImpl implements UserDetails {
 
   private static final long serialVersionUID = 1L;
   private Long id;
@@ -29,8 +29,8 @@ public class CollaborateurDetailsImpl implements UserDetails {
  */
   private Collection<? extends GrantedAuthority> authorities;
 
-  public CollaborateurDetailsImpl(Long id, String username, String email, String password,
-                                  Collection<? extends GrantedAuthority> authorities) {
+  public UtilisateusDetailsImpl(Long id, String username, String email, String password,
+                                Collection<? extends GrantedAuthority> authorities) {
     this.id = id;
     this.username = username;
     this.email = email;
@@ -39,7 +39,7 @@ public class CollaborateurDetailsImpl implements UserDetails {
   }
 
   //return l'user avec tous ces droits et toutes ces informations
-  public static CollaborateurDetailsImpl build(Collaborateurs user) {
+  public static UtilisateusDetailsImpl build(Utilisateus user) {
 
     /*
     * Dans Spring Security, nous pouvons considérer chaque GrantedAuthority comme un privilège individuel.
@@ -54,7 +54,7 @@ public class CollaborateurDetailsImpl implements UserDetails {
         .collect(Collectors.toList());
 
     //on cree retourne un objet CollaborateurDetailsImpl
-    return new CollaborateurDetailsImpl(
+    return new UtilisateusDetailsImpl(
         user.getId(), 
         user.getUsername(), 
         user.getEmail(),
@@ -113,7 +113,7 @@ public class CollaborateurDetailsImpl implements UserDetails {
       return true;
     if (o == null || getClass() != o.getClass())
       return false;
-    CollaborateurDetailsImpl user = (CollaborateurDetailsImpl) o;
+    UtilisateusDetailsImpl user = (UtilisateusDetailsImpl) o;
     return Objects.equals(id, user.id);
   }
 }

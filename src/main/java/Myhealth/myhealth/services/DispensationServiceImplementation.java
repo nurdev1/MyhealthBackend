@@ -30,7 +30,7 @@ public class DispensationServiceImplementation implements DispensationService{
         if (dispensationRepository.findByIddispensation(dispensation.getIddispensation()) !=null) {
             return dispensationRepository.findById(dispensation.getIddispensation())
                     .map(dispensation1->{
-                        dispensation1.setLibelle(dispensation.getLibelle());
+                        dispensation1.setNom(dispensation.getNom());
                         dispensation1.setDescription(dispensation.getDescription());
                         dispensation1.setPieceJoint(dispensation.getPieceJoint());
                         dispensationRepository.save(dispensation1);

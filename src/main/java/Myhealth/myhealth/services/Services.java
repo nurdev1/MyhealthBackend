@@ -1,11 +1,11 @@
 package Myhealth.myhealth.services;
 
-import Myhealth.myhealth.modeles.Collaborateurs;
+import Myhealth.myhealth.modeles.Utilisateus;
 
 
 public interface Services {
 
-    String modifierCollaborateur(Collaborateurs collaborateurs);
+    String modifierCollaborateur(Utilisateus collaborateurs);
     /*
     List<Role> afficherRoles();
     String modifierRole(Role roles);

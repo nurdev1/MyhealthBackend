@@ -14,11 +14,11 @@ public class MyhealthApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MyhealthApplication.class, args);
 	}
-	@EventListener(ApplicationReadyEvent.class)
+	/*@EventListener(ApplicationReadyEvent.class)
 	public void sendMail(){
 		emailSenderService.SendEmail("fatoudevweb1@gmail.com",
 				"tester",
 				"Salut Fatoumata par myhealth");
-	}
+	}*/
 
 }

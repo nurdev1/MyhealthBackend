@@ -1,13 +1,17 @@
 package Myhealth.myhealth.controller;
 
 import Myhealth.myhealth.Message.ReponseMessage;
-import Myhealth.myhealth.modeles.CompteRendu;
 import Myhealth.myhealth.modeles.SyntheseMedical;
 import Myhealth.myhealth.services.SystheseMedicalService;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@AllArgsConstructor
+@RequestMapping("/synthesemedical")
+@CrossOrigin(origins = "http://localhost:8100")
 public class SyntheseMedicalController {
 
     private SystheseMedicalService systheseMedicalService;

@@ -1,7 +1,7 @@
 package Myhealth.myhealth.repository;
 
 
-import Myhealth.myhealth.modelFile.DatabaseFile;
+import Myhealth.myhealth.modeles.DatabaseFile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

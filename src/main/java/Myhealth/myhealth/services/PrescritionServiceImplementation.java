@@ -30,7 +30,7 @@ public class PrescritionServiceImplementation implements PrescritionService {
         if (prescriptionRepository.findByIdprescription(prescription.getIdprescription()) !=null) {
             return prescriptionRepository.findById(prescription.getIdprescription())
                     .map(prescription1->{
-                        prescription1.setLibelle(prescription.getLibelle());
+                        prescription1.setNom(prescription.getNom());
                         prescription1.setDescription(prescription.getDescription());
                         prescription1.setPieceJoint(prescription.getPieceJoint());
                         prescriptionRepository.save(prescription1);

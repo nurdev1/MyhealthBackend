@@ -32,7 +32,7 @@ public class SystheseMedicalServiceImplementation implements SystheseMedicalServ
         if (syntheseMedicalRepository.findByIdsynthesemedical(syntheseMedical.getIdsynthesemedical()) !=null) {
             return syntheseMedicalRepository.findById(syntheseMedical.getIdsynthesemedical())
                     .map(syntheseMedical1->{
-                        syntheseMedical1.setLibelle(syntheseMedical.getLibelle());
+                        syntheseMedical1.setNom(syntheseMedical.getNom());
                         syntheseMedical1.setDescription((syntheseMedical.getDescription()));
                         syntheseMedical1.setPieceJoint(syntheseMedical.getPieceJoint());
                         syntheseMedicalRepository.save(syntheseMedical1);

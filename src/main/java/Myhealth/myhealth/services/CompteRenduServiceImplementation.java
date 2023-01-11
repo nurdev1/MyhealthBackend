@@ -30,7 +30,7 @@ public class CompteRenduServiceImplementation implements CompteRenduService{
         if (compteRenduRepository.findByIdcompterendu(compteRendu.getIdcompterendu()) !=null) {
             return compteRenduRepository.findById(compteRendu.getIdcompterendu())
                     .map(compteRendu1->{
-                        compteRendu1.setLibelle(compteRendu.getLibelle());
+                        compteRendu1.setNom(compteRendu.getNom());
                         compteRendu1.setDescription(compteRendu.getDescription());
                         compteRendu1.setPieceJoint(compteRendu.getPieceJoint());
                         compteRenduRepository.save(compteRendu1);

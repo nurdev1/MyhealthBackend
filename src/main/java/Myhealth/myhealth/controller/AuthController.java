@@ -1,16 +1,16 @@
 package Myhealth.myhealth.controller;
 
 import Myhealth.myhealth.jwt.JwtUtils;
-import Myhealth.myhealth.modeles.Collaborateurs;
+import Myhealth.myhealth.modeles.Utilisateus;
 import Myhealth.myhealth.modeles.ERole;
 import Myhealth.myhealth.modeles.Role;
 import Myhealth.myhealth.reponse.JwtResponse;
 import Myhealth.myhealth.reponse.MessageResponse;
-import Myhealth.myhealth.repository.CollaborateursRepository;
+import Myhealth.myhealth.repository.UtilisateusRepository;
 import Myhealth.myhealth.repository.RoleRepository;
 import Myhealth.myhealth.request.LoginRequest;
 import Myhealth.myhealth.request.SignupRequest;
-import Myhealth.myhealth.services.CollaborateurDetailsImpl;
+import Myhealth.myhealth.services.UtilisateusDetailsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class AuthController {
   AuthenticationManager authenticationManager;
 
   @Autowired
-  CollaborateursRepository collaborateursRepository;
+  UtilisateusRepository collaborateursRepository;
 
   @Autowired
   RoleRepository roleRepository;
@@ -91,7 +91,7 @@ public class AuthController {
     String jwt = jwtUtils.generateJwtToken(authentication);
 
     //on recupere les infos de l'user
-    CollaborateurDetailsImpl collaborateursDetails = (CollaborateurDetailsImpl) authentication.getPrincipal();
+    UtilisateusDetailsImpl collaborateursDetails = (UtilisateusDetailsImpl) authentication.getPrincipal();
 
     //on recupere les roles de l'users
     List<String> roles = collaborateursDetails.getAuthorities().stream()
@@ -127,7 +127,7 @@ public class AuthController {
     }
 
     // Create new user's account
-    Collaborateurs collaborateurs = new Collaborateurs(signUpRequest.getUsername(),
+    Utilisateus collaborateurs = new Utilisateus(signUpRequest.getUsername(),
 
                signUpRequest.getEmail(),
                encoder.encode(signUpRequest.getPassword()));
@@ -167,6 +167,6 @@ public class AuthController {
     collaborateurs.setRoles(roles);
     collaborateursRepository.save(collaborateurs);
 
-    return ResponseEntity.ok(new MessageResponse("Collaborateur enregistré avec succès!"));
+    return ResponseEntity.ok(new MessageResponse("Utilisateur enregistré avec succès!"));
   }
 }

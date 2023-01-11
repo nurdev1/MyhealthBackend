@@ -17,7 +17,7 @@ import java.util.Set;
       @UniqueConstraint(columnNames = "username"),
       @UniqueConstraint(columnNames = "email")
     })
-public class Collaborateurs {
+public class Utilisateus {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -41,10 +41,10 @@ public class Collaborateurs {
         inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles = new HashSet<>();
 
-  public Collaborateurs() {
+  public Utilisateus() {
   }
 
-  public Collaborateurs(String username, String email, String password) {
+  public Utilisateus(String username, String email, String password) {
     this.username = username;
     this.email = email;
     this.password = password;
@@ -89,5 +89,8 @@ public class Collaborateurs {
   public void setRoles(Set<Role> roles) {
     this.roles = roles;
   }
+
+  @ManyToOne
+  private Role role;
 
 }
