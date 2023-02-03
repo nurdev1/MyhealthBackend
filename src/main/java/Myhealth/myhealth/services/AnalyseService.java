@@ -17,6 +17,6 @@ public interface AnalyseService {
 
     List<Analyse> afficherToutLesAnalyse();
 
-    //Suppression d'un Imagerie
+    //Suppression d'un analyse
     ReponseMessage SupprimerAnalyse(Long idanalyse);
 }

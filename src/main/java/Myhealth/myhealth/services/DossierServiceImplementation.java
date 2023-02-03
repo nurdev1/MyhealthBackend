@@ -3,6 +3,7 @@ package Myhealth.myhealth.services;
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.repository.DossierRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 @Service
 public class DossierServiceImplementation  implements DossierService {
 
-
+    @Autowired
     DossierRepository dossierRepository;
 
     @Override

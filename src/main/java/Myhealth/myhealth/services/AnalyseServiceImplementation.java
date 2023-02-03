@@ -3,6 +3,7 @@ package Myhealth.myhealth.services;
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Analyse;
 import Myhealth.myhealth.repository.AnalyseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,8 +11,9 @@ import java.util.List;
 @Service
 public class AnalyseServiceImplementation implements AnalyseService {
 
-
+    @Autowired
     AnalyseRepository analyseRepository;
+
     @Override
     public ReponseMessage creerAnalyse(Analyse analyse) {
         if (analyseRepository.findByIdanalyse(analyse.getIdanalyse()) == null){

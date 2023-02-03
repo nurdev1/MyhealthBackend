@@ -5,7 +5,7 @@ import Myhealth.myhealth.exception.FileNotFoundException;
 import Myhealth.myhealth.exception.FileStorageException;
 import Myhealth.myhealth.modeles.DatabaseFile;
 import Myhealth.myhealth.repository.DatabaseFileRepository;
-import Myhealth.myhealth.repository.UtilisateusRepository;
+import Myhealth.myhealth.repository.DossierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -20,9 +20,9 @@ public class DatabaseFileServiceImplementation implements DatabaseFileService {
     private DatabaseFileRepository dbFileRepository;
 
     @Autowired
-    private UtilisateusRepository utilisateusRepository;
+    private DossierRepository dossierRepository;
     @Override
-    public DatabaseFile storeFile(MultipartFile file,Long idUser) {
+    public DatabaseFile storeFile(MultipartFile file,Long idUser,Long idDossier) {
         // Normaliser le nom du fichier
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
@@ -33,7 +33,8 @@ public class DatabaseFileServiceImplementation implements DatabaseFileService {
             }
 
             DatabaseFile dbFile = new DatabaseFile(fileName, file.getContentType(), file.getBytes());
-            dbFile.setUtilisateus(utilisateusRepository.findById(idUser).get());
+           // dbFile.setUtilisateus(utilisateusRepository.findById(idDossier).get());
+            dbFile.setDossier(dossierRepository.findByIddossier(idDossier));
             return dbFileRepository.save(dbFile);
         } catch (IOException ex) {
             throw new FileStorageException("Impossible de stocker le fichier" + fileName + ". Veuillez réessayer!", ex);

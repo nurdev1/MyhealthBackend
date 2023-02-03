@@ -19,4 +19,6 @@ public class Dossier {
     private String nom;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date = LocalDateTime.now();
+    @ManyToOne
+    private Patient patient;
 }

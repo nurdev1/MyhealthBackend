@@ -65,4 +65,29 @@ public class MedecinServiceImplemetation implements MedecinService {
             return message;
         }
     }
+
+    @Override
+    public List<Object> nombreMedecinparHopital(String nom) {
+        return medecinRepository.nombreMedecinparHopital(nom);
+    }
+
+    @Override
+    public List<Object> nombreMedecinHopital() {
+        return medecinRepository.nombreMedecinHopital();
+    }
+
+    @Override
+    public List<Object> NombreMedecinSpecialite() {
+        return medecinRepository.NombreMedecinSpecialite();
+    }
+
+    @Override
+    public List<Object> NombreMedecinParSpecialite(String specialite) {
+        return medecinRepository.NombreMedecinParSpecialite(specialite);
+    }
+
+    @Override
+    public int NombreMedecin() {
+        return medecinRepository.NombreMedecin();
+    }
 }

@@ -36,4 +36,22 @@ public class MedecinController {
     public ReponseMessage Supprimer(@PathVariable Long id){
         return medecinService.SupprimerMedecin(id);
     }
+
+    //nombre de médecin
+    @GetMapping("/compte")
+    public int nombreMedecin(){
+        return medecinService.NombreMedecin();
+    } //nombre de médecin
+    @GetMapping("/nbrspecialiste")
+    public List<Object> nombreSpecialiste(){
+        return medecinService.NombreMedecinSpecialite();
+    } //nombre de médecin
+    @GetMapping("/nbreparhopital")
+    public List<Object> nombreMedecin(@PathVariable String hopital){
+        return medecinService.nombreMedecinparHopital(hopital);
+    } //nombre de médecin
+    @GetMapping("/nbremedecinhopital")
+    public List<Object> nombreMedecinHopital(){
+        return medecinService.nombreMedecinHopital();
+    }
 }

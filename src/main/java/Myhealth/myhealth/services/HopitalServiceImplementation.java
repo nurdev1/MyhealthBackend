@@ -4,6 +4,10 @@ import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Hopital;
 import Myhealth.myhealth.repository.HopitalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -64,6 +68,62 @@ public class HopitalServiceImplementation implements HopitalService{
             return message;
         }
     }
+
+    @Override
+    public int NombreHopital() {
+        return 0;
+    }
+
+    @Override
+    public List<Object> NombreHopitalParVille() {
+        return null;
+    }
     //image
+
+
+
+    //filtre
+    @Override
+    public Page<Hopital> getRequestFilters(int page, int limit, String hopitalVille, Sort.Direction sortType) {
+        Page<Hopital> hopitalPage = null;
+        if(hopitalVille==null && sortType==null){
+            hopitalPage = getHopitalsList(page,limit);
+        }
+        if(hopitalVille!=null && sortType==null ){
+            hopitalPage = findHopitalByName(page,limit,hopitalVille);
+        }
+        if(hopitalVille==null && sortType != null ){
+            hopitalPage = getHopitalsOrderByMedecin(page,limit,sortType);
+        }
+        if(hopitalVille!=null && sortType!=null){
+            hopitalPage = findProductsByNameAndOrderByPrice(page,limit,hopitalVille,sortType);
+        }
+        return  hopitalPage;
+    }
+
+    private Page<Hopital> getHopitalsList(int page, int limit) {
+        Pageable pageable = PageRequest.of(page, limit);
+        return hopitalRepository.findAll(pageable);
+    }
+
+    private Page<Hopital> findHopitalByName(int page,int limit,String HopitalName) {
+        Pageable pageable = PageRequest.of(page, limit);
+        return hopitalRepository.findByNameContainingIgnoreCase(HopitalName, pageable);
+    }
+
+
+    private Page<Hopital> getHopitalsOrderByMedecin(int page, int limit,Sort.Direction sortType) {
+        Sort sort = Sort.by(sortType, "price");
+        Pageable pageable = PageRequest.of(page, limit,sort);
+        return hopitalRepository.findAll(pageable);
+    }
+
+    private Page<Hopital> findProductsByNameAndOrderByPrice(int page, int limit,
+                                                            String productName,
+                                                            Sort.Direction sortType) {
+        Sort sort = Sort.by(sortType, "price");
+        Pageable pageable = PageRequest.of(page, limit,sort);
+        return hopitalRepository.findByNameContainingIgnoreCase(productName,pageable);
+    }
 
 }

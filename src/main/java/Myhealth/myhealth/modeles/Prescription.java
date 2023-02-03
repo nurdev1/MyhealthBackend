@@ -23,5 +23,5 @@ public class Prescription {
     private LocalDateTime date = LocalDateTime.now();
 
     @ManyToOne
-    private Dossier dossier;
+    private Consultation consultation;
 }

@@ -8,7 +8,7 @@ import java.util.List;
 public interface ConsultationService {
 
     // Création d'un Consultation
-    ReponseMessage creerConsultation (Consultation consultation);
+    ReponseMessage creerConsultation (Consultation consultation, String medecin, String patient);
 
     // Mise à jour d'un Consultation
     ReponseMessage modifierConsultation (Consultation consultation);
@@ -19,4 +19,6 @@ public interface ConsultationService {
 
     //Suppression d'un Consultation
     ReponseMessage SupprimerConsultation (Long idconsultation );
+
+    int NombreConsultationMedecin();
 }

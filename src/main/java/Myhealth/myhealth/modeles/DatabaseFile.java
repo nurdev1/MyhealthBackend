@@ -63,6 +63,8 @@ public class DatabaseFile {
 		this.data = data;
 	}
 	@ManyToOne
-	Utilisateus utilisateus;
+	private Dossier dossier;
+	@ManyToOne
+	private  Utilisateus utilisateus;
 
 }

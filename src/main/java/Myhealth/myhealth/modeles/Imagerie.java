@@ -22,5 +22,5 @@ public class Imagerie {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date = LocalDateTime.now();
     @ManyToOne
-    private Dossier dossier;
+    private Consultation consultation;
 }

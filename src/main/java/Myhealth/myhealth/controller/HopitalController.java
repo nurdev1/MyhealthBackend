@@ -26,6 +26,7 @@ public class HopitalController {
     //afficher
     @GetMapping("/afficher")
     public List<Hopital> Afficher(){
+
         return hopitalService.afficherToutLesHopital();
     }
     @GetMapping
@@ -39,6 +40,18 @@ public class HopitalController {
     public ReponseMessage delete (@PathVariable Long id){
 
         return hopitalService.SupprimerHopital(id);
+    }
+
+    @GetMapping("/compte")
+    public int nombre(){
+
+        return hopitalService.NombreHopital();
+    }
+
+    @GetMapping("/compteparville")
+    public List<Object> CompteParVille(){
+
+        return hopitalService.NombreHopitalParVille();
     }
 
 }

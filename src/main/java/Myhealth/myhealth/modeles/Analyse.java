@@ -25,7 +25,7 @@ public class Analyse {
     private LocalDateTime date = LocalDateTime.now();
 
     @ManyToOne
-    private Dossier dossier;
+    private Consultation consultation;
    /* @OneToMany
     private List<DatabaseFile> files = new ArrayList<>();*/
 }

@@ -2,6 +2,8 @@ package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Hopital;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +23,11 @@ public interface HopitalService {
 
     //Suppression d'un Hopital
     ReponseMessage SupprimerHopital(Long idhopital);
+
+    int NombreHopital();
+    List<Object> NombreHopitalParVille();
+
+    Page<Hopital> getRequestFilters(int page, int limit, String productName, Sort.Direction sortType);
 
 
 }

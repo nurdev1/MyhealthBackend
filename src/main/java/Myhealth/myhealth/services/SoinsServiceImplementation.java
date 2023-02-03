@@ -1,18 +1,20 @@
 package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.Message.ReponseMessage;
-import Myhealth.myhealth.modeles.SyntheseDeSoins;
-import Myhealth.myhealth.repository.SyntheseSoinsRepository;
+import Myhealth.myhealth.modeles.Soins;
+import Myhealth.myhealth.repository.SoinsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class SystheseSoinsServiceImplementation implements  SystheseSoinsService {
+public class SoinsServiceImplementation implements SoinsService {
 
-    SyntheseSoinsRepository syntheseSoinsRepository;
+    @Autowired
+    SoinsRepository syntheseSoinsRepository;
     @Override
-    public ReponseMessage creerSyntheseSoins(SyntheseDeSoins syntheseDeSoins) {
+    public ReponseMessage creerSyntheseSoins(Soins syntheseDeSoins) {
         if (syntheseSoinsRepository.findByIdsynthesesoins(syntheseDeSoins.getIdsynthesesoins()) == null){
             syntheseSoinsRepository.save(syntheseDeSoins);
             ReponseMessage message = new ReponseMessage("synthèse de soins ajouté avec succes", true);
@@ -25,7 +27,7 @@ public class SystheseSoinsServiceImplementation implements  SystheseSoinsService
     }
 
     @Override
-    public ReponseMessage modifierSyntheseSoins(SyntheseDeSoins syntheseSoins) {
+    public ReponseMessage modifierSyntheseSoins(Soins syntheseSoins) {
         if (syntheseSoinsRepository.findByIdsynthesesoins(syntheseSoins.getIdsynthesesoins()) !=null) {
             return syntheseSoinsRepository.findById(syntheseSoins.getIdsynthesesoins())
                     .map(synthse1->{
@@ -45,7 +47,7 @@ public class SystheseSoinsServiceImplementation implements  SystheseSoinsService
 
 
     @Override
-    public List<SyntheseDeSoins> afficherToutLesSystheseSoins() {
+    public List<Soins> afficherToutLesSystheseSoins() {
         return syntheseSoinsRepository.findAll();
     }
 

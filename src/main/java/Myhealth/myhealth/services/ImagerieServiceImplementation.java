@@ -3,12 +3,14 @@ package Myhealth.myhealth.services;
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Imagerie;
 import Myhealth.myhealth.repository.ImagerieRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ImagerieServiceImplementation implements ImagerieService {
+    @Autowired
     ImagerieRepository imagerieRepository;
     @Override
     public ReponseMessage creerImagerie(Imagerie imagerie) {

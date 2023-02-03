@@ -15,7 +15,7 @@ public class PatientServiceImplementation implements PatientService{
     PatientRepository patientRepository;
     @Override
     public ReponseMessage creerPatient(Patient patient) {
-        if (patientRepository.findByIdpatient(patient.getIdpatient()) == null){
+        if (patientRepository.findByEmail(patient.getEmail()) == null){
             patientRepository.save(patient);
             ReponseMessage message = new ReponseMessage("patient ajouté avec succes", true);
             return  message;
@@ -61,5 +61,10 @@ public class PatientServiceImplementation implements PatientService{
             ReponseMessage message = new ReponseMessage("Patient non trouvé", false);
             return message;
         }
+    }
+
+    @Override
+    public int NombrePatient() {
+        return patientRepository.NombrePatient();
     }
 }

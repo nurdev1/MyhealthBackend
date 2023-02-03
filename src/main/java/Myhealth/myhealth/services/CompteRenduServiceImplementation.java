@@ -3,6 +3,7 @@ package Myhealth.myhealth.services;
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.CompteRendu;
 import Myhealth.myhealth.repository.CompteRenduRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @Service
 public class CompteRenduServiceImplementation implements CompteRenduService{
 
+    @Autowired
     CompteRenduRepository compteRenduRepository;
     @Override
     public ReponseMessage creerCompteRendu(CompteRendu compteRendu) {

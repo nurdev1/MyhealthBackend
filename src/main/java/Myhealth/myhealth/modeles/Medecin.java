@@ -25,16 +25,19 @@ public class Medecin {
     private String photo;
     private String telehone;
     private String email;
-    private String pieceidentite;
+  //  private String pieceidentite;
     private String ville;
     private String adresse;
     private String diplome;
     private String specialite;
-    private boolean etat;
+    private boolean etat = false;
 
 
     @ManyToOne
     private Hopital hopital;
+
+     @ManyToOne
+    private Utilisateus utilisateus;
 
 
    /* @JsonIgnore

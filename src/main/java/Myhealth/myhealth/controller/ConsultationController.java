@@ -1,7 +1,6 @@
 package Myhealth.myhealth.controller;
 
 import Myhealth.myhealth.Message.ReponseMessage;
-import Myhealth.myhealth.modeles.CompteRendu;
 import Myhealth.myhealth.modeles.Consultation;
 import Myhealth.myhealth.services.ConsultationService;
 import lombok.AllArgsConstructor;
@@ -16,9 +15,9 @@ import java.util.List;
 public class ConsultationController {
 
 private ConsultationService consultationService;
-    @PostMapping("/ajouter")
-    ReponseMessage Ajouter(@RequestBody Consultation consultation){
-        return   consultationService.creerConsultation(consultation);
+    @PostMapping("/ajouter/{medecin}/{patient}")
+    ReponseMessage Ajouter(@RequestBody Consultation consultation,  @PathVariable String medecin, @PathVariable String patient){
+        return   consultationService.creerConsultation(consultation,medecin,patient);
     }
     @GetMapping("/afficher")
     List<Consultation> Afficher(){
@@ -31,6 +30,11 @@ private ConsultationService consultationService;
 
     @DeleteMapping("/supprimer")
     public ReponseMessage Supprimer(@PathVariable Long id){
-        return consultationService.SupprimerConsultation(id);
+        return
+                consultationService.SupprimerConsultation(id);
+    }
+    //nombre consultation
+    int NombreConsultationMedecin(){
+      return   consultationService.NombreConsultationMedecin();
     }
 }

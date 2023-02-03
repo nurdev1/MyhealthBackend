@@ -17,6 +17,7 @@ public class Consultation {
     private Long idconsultation;
     private String titre;
     private String desciption;
+    private String fichier;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date = LocalDateTime.now();
     @ManyToOne

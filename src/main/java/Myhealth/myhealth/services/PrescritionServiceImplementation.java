@@ -3,6 +3,7 @@ package Myhealth.myhealth.services;
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Prescription;
 import Myhealth.myhealth.repository.PrescriptionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 public class PrescritionServiceImplementation implements PrescritionService {
 
 
+    @Autowired
     PrescriptionRepository prescriptionRepository;
     @Override
     public ReponseMessage creerPrescription(Prescription prescription) {

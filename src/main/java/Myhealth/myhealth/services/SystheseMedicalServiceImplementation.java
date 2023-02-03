@@ -3,6 +3,7 @@ package Myhealth.myhealth.services;
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.SyntheseMedical;
 import Myhealth.myhealth.repository.SyntheseMedicalRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.List;
 @Service
 public class SystheseMedicalServiceImplementation implements SystheseMedicalService {
 
+
+    @Autowired
     SyntheseMedicalRepository syntheseMedicalRepository;
     @Override
     public ReponseMessage AjouterSystheseMedical(SyntheseMedical systheseMedical) {

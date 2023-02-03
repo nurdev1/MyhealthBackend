@@ -1,7 +1,6 @@
 package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.Message.ReponseMessage;
-import Myhealth.myhealth.modeles.Medecin;
 import Myhealth.myhealth.modeles.Patient;
 
 import java.util.List;
@@ -18,4 +17,6 @@ public interface PatientService {
     List<Patient> afficherToutLesPatient();
     //Suppression d'un Patient
     ReponseMessage SupprimerPatient(Long idpatient);
+
+    int NombrePatient();
 }

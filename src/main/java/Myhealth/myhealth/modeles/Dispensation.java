@@ -6,7 +6,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Data
@@ -22,5 +21,5 @@ public class Dispensation {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date = LocalDateTime.now();
     @ManyToOne
-    private Dossier dossier;
+    private CompteRendu compteRendu;
 }

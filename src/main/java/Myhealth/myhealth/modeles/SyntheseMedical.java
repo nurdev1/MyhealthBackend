@@ -22,5 +22,5 @@ public class SyntheseMedical {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date = LocalDateTime.now();
     @ManyToOne
-    private Synthese synthese;
+    private CompteRendu compteRendu;
 }

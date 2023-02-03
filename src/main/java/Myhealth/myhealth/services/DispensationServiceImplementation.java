@@ -3,14 +3,16 @@ package Myhealth.myhealth.services;
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Dispensation;
 import Myhealth.myhealth.repository.DispensationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class DispensationServiceImplementation implements DispensationService{
-
+    @Autowired
     DispensationRepository dispensationRepository;
+
     @Override
     public ReponseMessage creerDispensation(Dispensation dispensation) {
         if (dispensationRepository.findByIddispensation(dispensation.getIddispensation()) == null){

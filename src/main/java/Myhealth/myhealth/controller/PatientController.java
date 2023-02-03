@@ -33,4 +33,11 @@ public class PatientController {
     public List<Patient> Afficher(){
         return patientService.afficherToutLesPatient();
     }
+
+    @GetMapping("/compte")
+    public int nombre(){
+        return patientService.NombrePatient();
+    }
+
+
 }
