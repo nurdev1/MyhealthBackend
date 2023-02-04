@@ -20,5 +20,5 @@ public interface HopitalRepository extends JpaRepository<Hopital, Long> {
     @Query(value = "SELECT COUNT(*),ville FROM hopital GROUP BY ville;",nativeQuery = true)
     List<Object> NombreHopitalParVille();
 
-    Page<Hopital> findByNameContainingIgnoreCase(String productName, Pageable pageable);
+    //Page<Hopital> findByNameContainingIgnoreCase(String productName, Pageable pageable);
 }
