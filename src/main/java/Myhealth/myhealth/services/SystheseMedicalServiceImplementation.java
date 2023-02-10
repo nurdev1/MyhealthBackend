@@ -1,6 +1,7 @@
 package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.Message.ReponseMessage;
+import Myhealth.myhealth.modeles.Prescription;
 import Myhealth.myhealth.modeles.SyntheseMedical;
 import Myhealth.myhealth.repository.SyntheseMedicalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class SystheseMedicalServiceImplementation implements SystheseMedicalServ
         return syntheseMedicalRepository.findAll();
     }
 
-    @Override
+ /*   @Override
     public ReponseMessage SupprimerSystheseMedical(Long idsysthesemedical) {
         if(syntheseMedicalRepository.findByIdsynthesemedical(idsysthesemedical) != null){
             syntheseMedicalRepository.deleteById(idsysthesemedical);
@@ -64,6 +65,20 @@ public class SystheseMedicalServiceImplementation implements SystheseMedicalServ
             ReponseMessage message = new ReponseMessage("Systhese Medical non trouvé", false);
             return message;
         }
+    }*/
+@Override
+    public ReponseMessage SupprimerSystheseMedical(Long id) {
+        final SyntheseMedical syntheseMedical = null;
+        if (syntheseMedicalRepository.findByIdsynthesemedical(id) != null) {
+            syntheseMedical.setEtat(false);
+            ReponseMessage message = new ReponseMessage(" Systhèse Medical supprimée avec succes", true);
+            return message;
+        }
+        else {
+            ReponseMessage message = new ReponseMessage(" Systhèse Medical non trouvée", false);
+            return message;
+        }
     }
+
     }
 

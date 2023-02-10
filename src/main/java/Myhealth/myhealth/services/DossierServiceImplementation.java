@@ -50,7 +50,7 @@ public class DossierServiceImplementation  implements DossierService {
         return dossierRepository.findAll();
     }
 
-    @Override
+ /*   @Override
     public ReponseMessage SupprimerDossier(Long iddossier) {
 
         if (dossierRepository.findByIddossier(iddossier) != null) {
@@ -59,6 +59,20 @@ public class DossierServiceImplementation  implements DossierService {
             return message;
         } else {
             ReponseMessage message = new ReponseMessage("dossier Medical non trouvé", false);
+            return message;
+        }
+    }*/
+
+    @Override
+    public ReponseMessage SupprimerDossier(Long id) {
+        final  Dossier dossier = null;
+        if (dossierRepository.findByIddossier(id) != null) {
+            dossier.setEtat(false);
+            ReponseMessage message = new ReponseMessage(" Dossier supprimée avec succes", true);
+            return message;
+        }
+        else {
+            ReponseMessage message = new ReponseMessage(" Dossier non trouvée", false);
             return message;
         }
     }

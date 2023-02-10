@@ -2,12 +2,14 @@ package Myhealth.myhealth.modeles;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Data
 @Table
+@NoArgsConstructor
 public class Hopital {
 
     @Id
@@ -17,4 +19,6 @@ public class Hopital {
     private String ville;
     private String adresse;
     private String photo;
+    private  String date;
+    private boolean etat = true;
 }

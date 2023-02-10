@@ -2,6 +2,7 @@ package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Imagerie;
+import Myhealth.myhealth.modeles.Prescription;
 import Myhealth.myhealth.repository.ImagerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,7 +50,7 @@ public class ImagerieServiceImplementation implements ImagerieService {
         return imagerieRepository.findAll();
     }
 
-    @Override
+/*    @Override
     public ReponseMessage SupprimerImagerie(Long idimagerie) {
         if(imagerieRepository.findByIdimagerie(idimagerie) != null){
             imagerieRepository.deleteById(idimagerie);
@@ -57,6 +58,20 @@ public class ImagerieServiceImplementation implements ImagerieService {
             return message;
         }else {
             ReponseMessage message = new ReponseMessage("imagerie Medical non trouvé", false);
+            return message;
+        }
+    }*/
+
+    @Override
+    public ReponseMessage SupprimerImagerie(Long id) {
+        final Imagerie imagerie = null;
+        if (imagerieRepository.findByIdimagerie(id) != null) {
+            imagerie.setEtat(false);
+            ReponseMessage message = new ReponseMessage(" Imagerie supprimée avec succes", true);
+            return message;
+        }
+        else {
+            ReponseMessage message = new ReponseMessage(" Imagerie non trouvée", false);
             return message;
         }
     }

@@ -24,6 +24,7 @@ public interface MedecinService {
     List<Object> NombreMedecinSpecialite();
     List<Object> NombreMedecinParSpecialite(@Param("specialite") String specialite);
     int NombreMedecin();
+    List<Object> HopitalListeMedecin();
 
 
 }

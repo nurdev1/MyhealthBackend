@@ -58,7 +58,7 @@ public class HopitalServiceImplementation implements HopitalService{
         return hopitalRepository.findAll();
     }
 
-    @Override
+ /*   @Override
     public ReponseMessage SupprimerHopital(Long idhopital) {
         if(hopitalRepository.findByIdhopital(idhopital) != null){
             hopitalRepository.deleteById(idhopital);
@@ -66,6 +66,20 @@ public class HopitalServiceImplementation implements HopitalService{
             return message;
         }else {
             ReponseMessage message = new ReponseMessage("hopital non trouvé", false);
+            return message;
+        }
+    }*/
+
+    @Override
+    public ReponseMessage SupprimerHopital(Long id) {
+        final  Hopital hopital = null;
+        if (hopitalRepository.findByIdhopital(id) != null) {
+            hopital.setEtat(false);
+            ReponseMessage message = new ReponseMessage(" Hôpital supprimée avec succes", true);
+            return message;
+        }
+        else {
+            ReponseMessage message = new ReponseMessage(" Hôpital non trouvée", false);
             return message;
         }
     }
@@ -78,6 +92,11 @@ public class HopitalServiceImplementation implements HopitalService{
     @Override
     public List<Object> NombreHopitalParVille() {
         return null;
+    }
+
+    @Override
+    public List<Hopital> NouveauHopital() {
+        return hopitalRepository.NouveauHopital();
     }
     //image
 

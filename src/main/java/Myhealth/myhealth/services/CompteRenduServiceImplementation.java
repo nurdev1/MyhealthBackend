@@ -51,7 +51,7 @@ public class CompteRenduServiceImplementation implements CompteRenduService{
         return compteRenduRepository.findAll();
     }
 
-    @Override
+  /*  @Override
     public ReponseMessage SupprimerCompteRendu(Long idcompterendu) {
 
         if(compteRenduRepository.findByIdcompterendu(idcompterendu) != null){
@@ -60,6 +60,20 @@ public class CompteRenduServiceImplementation implements CompteRenduService{
             return message;
         }else {
             ReponseMessage message = new ReponseMessage("Compte rendu Medical non trouvé", false);
+            return message;
+        }
+    }*/
+
+    @Override
+    public ReponseMessage SupprimerCompteRendu(Long id) {
+        final  CompteRendu compteRendu = null;
+        if (compteRenduRepository.findByIdcompterendu(id) != null) {
+            compteRendu.setEtat(false);
+            ReponseMessage message = new ReponseMessage(" Compte rendu supprimée avec succes", true);
+            return message;
+        }
+        else {
+            ReponseMessage message = new ReponseMessage(" Compte rendu non trouvée", false);
             return message;
         }
     }

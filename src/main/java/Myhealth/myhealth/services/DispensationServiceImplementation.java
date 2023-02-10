@@ -51,7 +51,7 @@ public class DispensationServiceImplementation implements DispensationService{
         return dispensationRepository.findAll();
     }
 
-    @Override
+  /*  @Override
     public ReponseMessage SupprimerDispensation(Long iddispensation) {
 
         if(dispensationRepository.findByIddispensation(iddispensation) != null){
@@ -60,6 +60,19 @@ public class DispensationServiceImplementation implements DispensationService{
             return message;
         }else {
             ReponseMessage message = new ReponseMessage("Dispensation Médical non trouvé", false);
+            return message;
+        }
+    }*/
+    @Override
+    public ReponseMessage SupprimerDispensation(Long id) {
+        final  Dispensation dispensation = null;
+        if (dispensationRepository.findByIddispensation(id) != null) {
+            dispensation.setEtat(false);
+            ReponseMessage message = new ReponseMessage("Dispensation supprimée avec succes", true);
+            return message;
+        }
+        else {
+            ReponseMessage message = new ReponseMessage(" Dispensation non trouvée", false);
             return message;
         }
     }

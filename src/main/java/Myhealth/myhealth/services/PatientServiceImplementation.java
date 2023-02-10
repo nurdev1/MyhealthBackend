@@ -1,6 +1,7 @@
 package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.Message.ReponseMessage;
+import Myhealth.myhealth.modeles.Medecin;
 import Myhealth.myhealth.modeles.Patient;
 import Myhealth.myhealth.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class PatientServiceImplementation implements PatientService{
         return patientRepository.findAll();
     }
 
-    @Override
+/*    @Override
     public ReponseMessage SupprimerPatient(Long idpatient) {
         if(patientRepository.findByIdpatient(idpatient) != null){
             patientRepository.deleteById(idpatient);
@@ -59,6 +60,19 @@ public class PatientServiceImplementation implements PatientService{
             return message;
         }else {
             ReponseMessage message = new ReponseMessage("Patient non trouvé", false);
+            return message;
+        }
+    }*/
+    @Override
+    public ReponseMessage SupprimerPatient(Long id) {
+        final Patient patient = null;
+        if (patientRepository.findByIdpatient(id) != null) {
+            patient.setEtat(false);
+            ReponseMessage message = new ReponseMessage("Patient supprimée avec succes", true);
+            return message;
+        }
+        else {
+            ReponseMessage message = new ReponseMessage("Patient non trouvée", false);
             return message;
         }
     }

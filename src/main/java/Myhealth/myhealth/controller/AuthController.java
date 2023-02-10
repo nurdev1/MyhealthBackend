@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 //@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
+//@CrossOrigin(origins = "*", maxAge = 3600, allowCredentials = "true")
 public class AuthController {
 
   private static final Logger log = LoggerFactory.getLogger(AuthController.class);

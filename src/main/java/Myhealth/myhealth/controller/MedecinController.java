@@ -54,4 +54,9 @@ public class MedecinController {
     public List<Object> nombreMedecinHopital(){
         return medecinService.nombreMedecinHopital();
     }
+
+    @GetMapping("listeMedecin")
+    public  List<Object> HopitalListeMedecin(){
+        return  medecinService.HopitalListeMedecin();
+    }
 }

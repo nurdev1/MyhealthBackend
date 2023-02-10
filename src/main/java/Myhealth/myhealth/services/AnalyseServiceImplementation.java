@@ -52,7 +52,7 @@ public class AnalyseServiceImplementation implements AnalyseService {
         return analyseRepository.findAll();
     }
 
-    @Override
+ /*   @Override
     public ReponseMessage SupprimerAnalyse(Long idanalyse) {
 
         if(analyseRepository.findByIdanalyse(idanalyse) != null){
@@ -61,6 +61,20 @@ public class AnalyseServiceImplementation implements AnalyseService {
             return message;
         }else {
             ReponseMessage message = new ReponseMessage("Analyse Medical non trouvé", false);
+            return message;
+        }
+    }*/
+
+    @Override
+    public ReponseMessage SupprimerAnalyse(Long id) {
+        final  Analyse analyse = null;
+        if (analyseRepository.findByIdanalyse(id) != null) {
+            analyse.setEtat(false);
+            ReponseMessage message = new ReponseMessage(" Analyse supprimée avec succes", true);
+            return message;
+        }
+        else {
+            ReponseMessage message = new ReponseMessage(" Analyse non trouvée", false);
             return message;
         }
     }

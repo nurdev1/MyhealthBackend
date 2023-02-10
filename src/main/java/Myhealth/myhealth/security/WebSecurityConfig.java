@@ -107,7 +107,7 @@ public class WebSecurityConfig {
 
       authProvider.setUserDetailsService(userDetailsService);
       authProvider.setPasswordEncoder(passwordEncoder());
-   
+
       return authProvider;
   }
 
@@ -119,7 +119,8 @@ public class WebSecurityConfig {
 
   @Bean
   public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
+
+      return new BCryptPasswordEncoder();
   }
   /*
   Pour activer la sécurité HTTP dans Spring, nous devons créer un bean SecurityFilterChain
@@ -135,23 +136,22 @@ public class WebSecurityConfig {
             .and()
         .authorizeRequests()
         .antMatchers("/api/auth/**").permitAll()
-      /*  .antMatchers("/api/bienvenue/**").permitAll()
-        .antMatchers("/api/roles/**").permitAll()
-        .antMatchers("/api/roles/**").permitAll()
-        .antMatchers("/api/dossier/**").permitAll()
+        .antMatchers("/patient/ajouter/**").permitAll()
+        .antMatchers("/medecin/ajouter/**").permitAll()
+        /*.antMatchers("/api/dossier/**").permitAll()
         .antMatchers("/api/patient/**").permitAll()
         .antMatchers("/api/medecin/**").permitAll()
         .antMatchers("/api/dossier/**").permitAll()*/
         .anyRequest().authenticated();
             //.and()
             //.oauth2Login();
-    http.formLogin();
+      http.formLogin();
 
 
     http.authenticationProvider(authenticationProvider());
 
     http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-    
+
     return http.build();
   }
 

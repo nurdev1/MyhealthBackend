@@ -4,6 +4,8 @@ package Myhealth.myhealth.modeles;
 
 
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -17,6 +19,7 @@ import java.util.Set;
       @UniqueConstraint(columnNames = "username"),
       @UniqueConstraint(columnNames = "email")
     })
+
 public class Utilisateus {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

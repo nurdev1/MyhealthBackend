@@ -54,6 +54,7 @@ public class MedecinServiceImplemetation implements MedecinService {
         return medecinRepository.findAll();
     }
 
+/*
     @Override
     public ReponseMessage SupprimerMedecin(Long idmedecin) {
         if (medecinRepository.findByIdmedecin(idmedecin) != null) {
@@ -65,6 +66,7 @@ public class MedecinServiceImplemetation implements MedecinService {
             return message;
         }
     }
+*/
 
     @Override
     public List<Object> nombreMedecinparHopital(String nom) {
@@ -90,4 +92,40 @@ public class MedecinServiceImplemetation implements MedecinService {
     public int NombreMedecin() {
         return medecinRepository.NombreMedecin();
     }
+
+    @Override
+    public List<Object> HopitalListeMedecin() {
+        return medecinRepository.HopitalListeMedecin();
+    }
+
+    @Override
+    public ReponseMessage SupprimerMedecin(Long idmedecin) {
+        final  Medecin medecin = null;
+        if (medecinRepository.findByIdmedecin(idmedecin) != null) {
+            medecin.setEtat(false);
+            ReponseMessage message = new ReponseMessage("Médecin supprimée avec succes", true);
+            return message;
+        }
+        else {
+            ReponseMessage message = new ReponseMessage("Médecin non trouvée", false);
+            return message;
+        }
+    }
+
+    public ReponseMessage activer(Long idmedecin) {
+        final  Medecin medecin = null;
+        if (medecinRepository.findByIdmedecin(idmedecin) != null) {
+            medecin.setEtat(false);
+            ReponseMessage message = new ReponseMessage("Médecin supprimée avec succes", true);
+            return message;
+        }
+        else {
+            ReponseMessage message = new ReponseMessage("Médecin non trouvée", false);
+            return message;
+        }
+    }
+
+
+
+
 }

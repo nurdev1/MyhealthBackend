@@ -2,6 +2,7 @@ package Myhealth.myhealth.modeles;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity
 @Data
 @Table
+@NoArgsConstructor
 public class Patient {
 
     @Id

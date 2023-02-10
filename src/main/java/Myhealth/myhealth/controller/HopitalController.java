@@ -53,5 +53,12 @@ public class HopitalController {
 
         return hopitalService.NombreHopitalParVille();
     }
+    @GetMapping("/nouveau")
+    public  List<Hopital> NouveauHopital(){
+
+        return hopitalService.NouveauHopital();
+    }
+
+
 
 }

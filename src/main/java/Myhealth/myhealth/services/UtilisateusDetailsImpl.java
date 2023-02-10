@@ -3,18 +3,22 @@ package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.modeles.Utilisateus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
+@NoArgsConstructor
+@AllArgsConstructor
+@Service
 public class UtilisateusDetailsImpl implements UserDetails {
 
-  private static final long serialVersionUID = 1L;
   private Long id;
   private String username;
 
@@ -29,14 +33,7 @@ public class UtilisateusDetailsImpl implements UserDetails {
  */
   private Collection<? extends GrantedAuthority> authorities;
 
-  public UtilisateusDetailsImpl(Long id, String username, String email, String password,
-                                Collection<? extends GrantedAuthority> authorities) {
-    this.id = id;
-    this.username = username;
-    this.email = email;
-    this.password = password;
-    this.authorities = authorities;
-  }
+
 
   //return l'user avec tous ces droits et toutes ces informations
   public static UtilisateusDetailsImpl build(Utilisateus user) {

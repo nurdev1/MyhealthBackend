@@ -50,7 +50,7 @@ public class ConsultationServiceImplementation implements ConsultationService {
         return null;
     }
 
-    @Override
+ /*   @Override
     public ReponseMessage SupprimerConsultation(Long idconsultation) {
         if(consultationRepository.findByIdconsultation(idconsultation) != null){
             consultationRepository.deleteById(idconsultation);
@@ -58,6 +58,20 @@ public class ConsultationServiceImplementation implements ConsultationService {
             return message;
         }else {
             ReponseMessage message = new ReponseMessage("consultation Medical non trouvé", false);
+            return message;
+        }
+    }*/
+
+    @Override
+    public ReponseMessage SupprimerConsultation(Long id) {
+        final  Consultation consultation = null;
+        if (consultationRepository.findByIdconsultation(id) != null) {
+            consultation.setEtat(false);
+            ReponseMessage message = new ReponseMessage(" Consultation supprimée avec succes", true);
+            return message;
+        }
+        else {
+            ReponseMessage message = new ReponseMessage(" Consultation non trouvée", false);
             return message;
         }
     }

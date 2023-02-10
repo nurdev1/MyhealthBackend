@@ -51,7 +51,7 @@ public class SoinsServiceImplementation implements SoinsService {
         return syntheseSoinsRepository.findAll();
     }
 
-    @Override
+ /*   @Override
     public ReponseMessage SupprimerSyntheseDeSoins(Long idsynthesesoins) {
         if(syntheseSoinsRepository.findByIdsynthesesoins(idsynthesesoins) != null){
             syntheseSoinsRepository.deleteById(idsynthesesoins);
@@ -59,6 +59,20 @@ public class SoinsServiceImplementation implements SoinsService {
             return message;
         }else {
             ReponseMessage message = new ReponseMessage("Synthese de soins non trouvé", false);
+            return message;
+        }
+    }*/
+
+    @Override
+    public ReponseMessage SupprimerSyntheseDeSoins(Long id) {
+        final  Soins  soins = null;
+        if (syntheseSoinsRepository.findByIdsynthesesoins(id) != null) {
+            soins.setEtat(false);
+            ReponseMessage message = new ReponseMessage(" Synthèse de soins supprimée avec succes", true);
+            return message;
+        }
+        else {
+            ReponseMessage message = new ReponseMessage(" Synthèse de soins non trouvée", false);
             return message;
         }
     }

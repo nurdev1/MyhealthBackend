@@ -31,4 +31,8 @@ public interface MedecinRepository extends JpaRepository<Medecin, Long> {
     @Query(value = "SELECT COUNT(*) FROM medecin,hopital WHERE medecin.hopital_idhopital=hopital.idhopital AND" +
             " hopital.nom=:nom;",nativeQuery = true)
     List<Object> nombreMedecinparHopital(@Param("nom")String nom);
+    @Query(value = "SELECT medecin.nom,medecin.prenom,medecin.photo,medecin.email,medecin.telehone," +
+            "hopital.nom,hopital.ville FROM medecin,hopital WHERE medecin.hopital_idhopital=" +
+            "hopital.idhopital;",nativeQuery = true)
+    List<Object> HopitalListeMedecin();
 }

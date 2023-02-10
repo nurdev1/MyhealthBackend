@@ -51,7 +51,7 @@ public class PrescritionServiceImplementation implements PrescritionService {
         return prescriptionRepository.findAll();
     }
 
-    @Override
+/*    @Override
     public ReponseMessage SupprimerPrescription(Long idprescription) {
         if(prescriptionRepository.findByIdprescription(idprescription) != null){
             prescriptionRepository.deleteById(idprescription);
@@ -59,6 +59,20 @@ public class PrescritionServiceImplementation implements PrescritionService {
             return message;
         }else {
             ReponseMessage message = new ReponseMessage("Systhese Medical non trouvé", false);
+            return message;
+        }
+    }*/
+
+    @Override
+    public ReponseMessage SupprimerPrescription(Long id) {
+        final  Prescription prescription = null;
+        if (prescriptionRepository.findByIdprescription(id) != null) {
+            prescription.setEtat(false);
+            ReponseMessage message = new ReponseMessage(" Prescription supprimée avec succes", true);
+            return message;
+        }
+        else {
+            ReponseMessage message = new ReponseMessage(" Prescription non trouvée", false);
             return message;
         }
     }
