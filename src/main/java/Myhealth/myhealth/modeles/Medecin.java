@@ -36,8 +36,13 @@ public class Medecin {
     @ManyToOne
     private Hopital hopital;
 
-     @ManyToOne
-    private Utilisateus utilisateus;
+    private String motdepasse;
+
+    @ManyToOne
+    private Role role;
+
+   /*  @ManyToOne
+    private Utilisateus utilisateus;*/
 
 
    /* @JsonIgnore

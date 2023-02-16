@@ -1,14 +1,17 @@
 package Myhealth.myhealth.controller;
 
 import Myhealth.myhealth.Message.ReponseMessage;
+import Myhealth.myhealth.mailNotification.EmailConstructor;
 import Myhealth.myhealth.modeles.Patient;
 import Myhealth.myhealth.repository.PatientRepository;
 import Myhealth.myhealth.repository.RoleRepository;
 import Myhealth.myhealth.services.PatientService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +27,10 @@ public class PatientController {
     private PatientService patientService;
     private PatientRepository patientRepository;
     private RoleRepository roleRepository;
+    private JavaMailSender mailSender;
+
+    @Autowired
+    EmailConstructor emailConstructor;
 
     @PostMapping("/ajouter")
     ResponseEntity<String> Ajouter(@RequestBody Patient patient1){
@@ -44,7 +51,9 @@ public class PatientController {
         System.err.println(patient1.getNom());
         if (patient1.getNom() != null){
             System.err.println("Creer hello");
+            mailSender.send(emailConstructor.constructNewUserEmail(patient1,patient1.getMotdepasse()));
             patientService.creerPatient(patient1);
+
         }
         i = i+1;
       return new ResponseEntity<>("patient enregister avec succès", HttpStatus.OK);

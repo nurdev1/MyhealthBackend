@@ -143,6 +143,10 @@ public class AuthController {
       Role userRole = roleRepository.findByName(ERole.ROLE_Patient);
       System.out.println("############################ attributionde role: " + userRole + "###########################################");
 
+      //on recupere le role de l'utilisateur
+      Role usermedecinRole = roleRepository.findByName(ERole.ROLE_Medecin);
+      System.out.println("############################ attributionde role: " + userRole + "###########################################");
+
       roles.add(userRole);//on ajoute le role de l'user à roles
       System.out.println("############################ affichage de role: " + roles + "###########################################");
 
@@ -154,11 +158,15 @@ public class AuthController {
           roles.add(adminRole);
 
           break;
+          case "patient":
+            //on recupere le role de l'utilisateur
+            Role patientRole = roleRepository.findByName(ERole.ROLE_Patient);
+            roles.add(patientRole);
         default://dans le cas écheant
 
           //on recupere le role de l'utilisateur
-          Role userRole = roleRepository.findByName(ERole.ROLE_Medecin);
-          roles.add(userRole);
+          Role medecinRole = roleRepository.findByName(ERole.ROLE_Medecin);
+          roles.add(medecinRole);
         }
       });
     }
