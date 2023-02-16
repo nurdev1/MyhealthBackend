@@ -2,9 +2,11 @@ package Myhealth.myhealth.controller;
 
 import Myhealth.myhealth.Message.ReponseMessage;
 
+import Myhealth.myhealth.mailNotification.EmailMedecinConstructor;
 import Myhealth.myhealth.modeles.Medecin;
 import Myhealth.myhealth.services.MedecinService;
 import lombok.AllArgsConstructor;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +18,16 @@ import java.util.List;
 public class MedecinController {
 
     private MedecinService medecinService;
+    private JavaMailSender mailSender;
+    EmailMedecinConstructor emailMedecinConstructor;
+
+/*    @PostMapping("/ajouter")
+    ReponseMessage Ajouter(@RequestBody Medecin medecin){
+
+       ReponseMessage message =  medecinService.creerMedecin(medecin);
+        mailSender.send(emailMedecinConstructor.constructNewMedecinEmail(medecin,medecin.getMotdepasse()));
+        return message;
+    }*/
 
     @PostMapping("/ajouter")
     ReponseMessage Ajouter(@RequestBody Medecin medecin){

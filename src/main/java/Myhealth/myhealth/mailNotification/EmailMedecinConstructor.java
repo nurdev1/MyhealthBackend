@@ -1,7 +1,6 @@
 package Myhealth.myhealth.mailNotification;
 
 import Myhealth.myhealth.modeles.Medecin;
-import Myhealth.myhealth.modeles.Patient;
 import lombok.AllArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -22,11 +21,11 @@ public class EmailMedecinConstructor {
 
     private TemplateEngine templateEngine;
 
-    public MimeMessagePreparator constructNewUserEmail(Medecin medecin, String motdepasse) {
+    public MimeMessagePreparator constructNewMedecinEmail(Medecin medecin, String motdepasse) {
         Context context = new Context();
-        context.setVariable("patient", medecin);
+        context.setVariable("medecin", medecin);
         context.setVariable("motdepasse", motdepasse);
-        String text = templateEngine.process("newUserEmailTemplate", context);
+        String text = templateEngine.process("newMedecinEmailTemplate", context);
         MimeMessagePreparator messagePreparator = new MimeMessagePreparator() {
             @Override
             public void prepare(MimeMessage mimeMessage) throws Exception {
@@ -41,9 +40,9 @@ public class EmailMedecinConstructor {
         return messagePreparator;
     }
 
-    public MimeMessagePreparator constructResetPasswordEmail(Patient patient, String motdepasse) {
+    public MimeMessagePreparator constructResetPasswordEmailMedecin(Medecin medecin, String motdepasse) {
         Context context = new Context();
-        context.setVariable("patient", patient);
+        context.setVariable("patient", medecin);
         context.setVariable("motdepasse", motdepasse);
         String text = templateEngine.process("resetPasswordEmailTemplate", context);
         MimeMessagePreparator messagePreparator = new MimeMessagePreparator() {
@@ -51,7 +50,7 @@ public class EmailMedecinConstructor {
             public void prepare(MimeMessage mimeMessage) throws Exception {
                 MimeMessageHelper email = new MimeMessageHelper(mimeMessage);
                 email.setPriority(1);
-                email.setTo(patient.getEmail());
+                email.setTo(medecin.getEmail());
                 email.setSubject("New Motdepasse - Orchard");
                 email.setText(text, true);
                 email.setFrom(new InternetAddress(env.getProperty("support.email")));
@@ -60,16 +59,16 @@ public class EmailMedecinConstructor {
         return messagePreparator;
     }
 
-    public MimeMessagePreparator constructUpdateUserProfileEmail(Patient patient) {
+    public MimeMessagePreparator constructUpdateMedecinProfileEmail(Medecin medecin) {
         Context context = new Context();
-        context.setVariable("patient", patient);
+        context.setVariable("patient", medecin);
         String text = templateEngine.process("updateUserProfileEmailTemplate", context);
         MimeMessagePreparator messagePreparator = new MimeMessagePreparator() {
             @Override
             public void prepare(MimeMessage mimeMessage) throws Exception {
                 MimeMessageHelper email = new MimeMessageHelper(mimeMessage);
                 email.setPriority(1);
-                email.setTo(patient.getEmail());
+                email.setTo(medecin.getEmail());
                 email.setSubject("Profile Update - Orchard");
                 email.setText(text, true);
                 email.setFrom(new InternetAddress(env.getProperty("support.email")));

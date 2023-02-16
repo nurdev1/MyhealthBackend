@@ -46,12 +46,12 @@ public class PatientController {
                 patient1.setCodePatient(codePatient);
             }
         }
-        String passe ="masante@2022";
+        String passe ="masante@2023";
         patient1.setMotdepasse(passe);
         System.err.println(patient1.getNom());
         if (patient1.getNom() != null){
             System.err.println("Creer hello");
-            mailSender.send(emailConstructor.constructNewUserEmail(patient1,patient1.getMotdepasse()));
+           // mailSender.send(emailConstructor.constructNewUserEmail(patient1,patient1.getMotdepasse()));
             patientService.creerPatient(patient1);
 
         }
