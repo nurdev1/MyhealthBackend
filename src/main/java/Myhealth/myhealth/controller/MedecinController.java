@@ -3,9 +3,13 @@ package Myhealth.myhealth.controller;
 import Myhealth.myhealth.Message.ReponseMessage;
 
 import Myhealth.myhealth.mailNotification.EmailMedecinConstructor;
+import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.modeles.Medecin;
 import Myhealth.myhealth.services.MedecinService;
+import Myhealth.myhealth.services.PatientService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +24,7 @@ public class MedecinController {
     private MedecinService medecinService;
     private JavaMailSender mailSender;
     EmailMedecinConstructor emailMedecinConstructor;
+    PatientService patientService;
 
 /*    @PostMapping("/ajouter")
     ReponseMessage Ajouter(@RequestBody Medecin medecin){
@@ -30,44 +35,98 @@ public class MedecinController {
     }*/
 
     @PostMapping("/ajouter")
-    ReponseMessage Ajouter(@RequestBody Medecin medecin){
-        return   medecinService.creerMedecin(medecin);
+    ReponseMessage Ajouter(@RequestBody Medecin medecin) {
+        return medecinService.creerMedecin(medecin);
     }
+
     @GetMapping("/modifier")
-    public ReponseMessage Modifier(@RequestBody Medecin medecin){
+    public ReponseMessage Modifier(@RequestBody Medecin medecin) {
         return medecinService.modifierMedecin(medecin);
     }
 
     @GetMapping("/afficher")
-    public List<Medecin> Afficher(){
+    public List<Medecin> Afficher() {
         return medecinService.afficherToutLesMedecin();
     }
 
     @DeleteMapping("/supprimer")
-    public ReponseMessage Supprimer(@PathVariable Long id){
+    public ReponseMessage Supprimer(@PathVariable Long id) {
         return medecinService.SupprimerMedecin(id);
     }
 
     //nombre de médecin
     @GetMapping("/compte")
-    public int nombreMedecin(){
+    public int nombreMedecin() {
         return medecinService.NombreMedecin();
     } //nombre de médecin
+
     @GetMapping("/nbrspecialiste")
-    public List<Object> nombreSpecialiste(){
+    public List<Object> nombreSpecialiste() {
         return medecinService.NombreMedecinSpecialite();
     } //nombre de médecin
+
     @GetMapping("/nbreparhopital")
-    public List<Object> nombreMedecin(@PathVariable String hopital){
+    public List<Object> nombreMedecin(@PathVariable String hopital) {
         return medecinService.nombreMedecinparHopital(hopital);
     } //nombre de médecin
+
     @GetMapping("/nbremedecinhopital")
-    public List<Object> nombreMedecinHopital(){
+    public List<Object> nombreMedecinHopital() {
         return medecinService.nombreMedecinHopital();
     }
 
     @GetMapping("listeMedecin")
-    public  List<Object> HopitalListeMedecin(){
-        return  medecinService.HopitalListeMedecin();
+    public List<Object> HopitalListeMedecin() {
+        return medecinService.HopitalListeMedecin();
+    }
+
+    /*@PostMapping
+    public ResponseEntity<Medecin> createUser(@RequestBody Medecin user) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(activatedUser);
+    }*/
+
+    @GetMapping("/patient/{codePatient}/dossiers")
+    public ResponseEntity<List<Dossier>> getDossiersForPatient(@PathVariable String codePatient) {
+        List<Dossier> dossiers = patientService.getDossiersForPatient(codePatient);
+        if (dossiers.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(dossiers, HttpStatus.OK);
+        }
+    }
+
+    //CRUD
+    @PostMapping("/patient/{codePatient}/dossiers")
+    public ResponseEntity<Dossier> createDossierForPatient(@PathVariable String codePatient, @RequestBody Dossier dossier) {
+        Dossier createdDossier = patientService.createDossierForPatient(codePatient, dossier);
+        if (createdDossier == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(createdDossier, HttpStatus.CREATED);
+        }
+    }
+
+ /*   @PutMapping("/patient/{codePatient}/dossiers/{dossierId}")
+    public ResponseEntity<Dossier> updateDossierForPatient(@PathVariable String codePatient, @PathVariable Long dossierId, @RequestBody Dossier dossier) {
+        Dossier updatedDossier = patientService.updateDossierForPatient(codePatient, dossierId, dossier);
+        if (updatedDossier == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }*/
+}
+
+
+/*@RestController
+@RequestMapping("/medecin")
+public class MedecinController {
+
+    @Autowired
+    private MedecinService medecinService;
+
+    @PostMapping("/add")
+    public ResponseEntity<Medecin> addMedecin(@RequestBody Medecin medecin) {
+        medecinService.addMedecin(medecin);
+        return new ResponseEntity<>(medecin, HttpStatus.CREATED);
     }
 }
+*/

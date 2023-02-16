@@ -1,12 +1,14 @@
 package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.Message.ReponseMessage;
-import Myhealth.myhealth.modeles.Medecin;
+import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.modeles.Patient;
+import Myhealth.myhealth.repository.DossierRepository;
 import Myhealth.myhealth.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -14,6 +16,8 @@ public class PatientServiceImplementation implements PatientService{
 
     @Autowired
     PatientRepository patientRepository;
+    @Autowired
+    DossierRepository dossierRepository;
     @Override
     public ReponseMessage creerPatient(Patient patient) {
         if (patientRepository.findByEmail(patient.getEmail()) == null){
@@ -81,4 +85,62 @@ public class PatientServiceImplementation implements PatientService{
     public int NombrePatient() {
         return patientRepository.NombrePatient();
     }
+
+    public Patient getPatientByCodePatient(String codePatient) {
+
+
+        return patientRepository.findByCodePatient(codePatient);
+    }
+
+    @Override
+    public List<Dossier> getDossiersForPatient(String codePatient) {
+        Patient patient = patientRepository.findByCodePatient(codePatient);
+        if (patient == null) {
+            return Collections.emptyList();
+        }
+        return dossierRepository.findByPatient(patient);
+    }
+//medecin CRUD dossier pour patient
+
+    @Override
+    public Dossier createDossierForPatient(String codePatient, Dossier dossier) {
+        Patient patient = patientRepository.findByCodePatient(codePatient);
+        if (patient == null) {
+            return null;
+        }
+        dossier.setPatient(patient);
+        return dossierRepository.save(dossier);
+    }
+
+    @Override
+    public Dossier updateDossierForPatient(String codePatient, Long dossierId, Dossier dossier) {
+        Patient patient = patientRepository.findByCodePatient(codePatient);
+        if (patient == null) {
+            return null;
+        }
+        Dossier existingDossier = dossierRepository.findById(dossierId).orElse(null);
+        if (existingDossier == null || !existingDossier.getPatient().equals(patient)) {
+            return null;
+        }
+        dossier.setPatient(patient);
+        dossier.setIddossier(existingDossier.getIddossier());
+        return dossierRepository.save(dossier);
+    }
+    @Override
+    public boolean deleteDossierForPatient(String codePatient, Long dossierId) {
+        Patient patient = patientRepository.findByCodePatient(codePatient);
+        if (patient == null) {
+            return false;
+        }
+        Dossier existingDossier = dossierRepository.findById(dossierId).orElse(null);
+        if (existingDossier == null || !existingDossier.getPatient().equals(patient)) {
+            return false;
+        }
+        dossierRepository.delete(existingDossier);
+        return true;
+    }
 }
+
+
+
+

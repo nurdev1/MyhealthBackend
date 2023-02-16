@@ -28,3 +28,10 @@ public class Consultation {
     @ManyToOne
     private Patient patient;
 }
+
+/*@ManyToMany(fetch = FetchType.LAZY)
+@JoinTable(name = "MedecinPatient",
+        joinColumns = @JoinColumn(name = "idmedecin"),
+        inverseJoinColumns = @JoinColumn(name = "idpatient"))
+private Set<Patient> patients = new HashSet<>();
+*/

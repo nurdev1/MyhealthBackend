@@ -79,4 +79,37 @@ public class PatientController {
     }
 
 
+
+
+
+    @GetMapping("/patient/{codePatient}")
+
+
+    public ResponseEntity<Patient> getPatientByCodePatient(@PathVariable String codePatient) {
+
+        Patient patient;
+
+
+
+         patient = patientService.getPatientByCodePatient(codePatient);
+
+
+        if (patient == null) {
+
+
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    else {
+
+
+        return new ResponseEntity<>(patient, HttpStatus.OK);
+    }
 }
+
+
+}
+
+
+
+
+

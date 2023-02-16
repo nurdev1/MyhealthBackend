@@ -2,10 +2,13 @@ package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Dossier;
+import Myhealth.myhealth.modeles.Patient;
 import Myhealth.myhealth.repository.DossierRepository;
+import Myhealth.myhealth.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -13,6 +16,8 @@ public class DossierServiceImplementation  implements DossierService {
 
     @Autowired
     DossierRepository dossierRepository;
+    @Autowired
+    PatientRepository patientRepository;
 
     @Override
     public ReponseMessage creerDossier(Dossier dossier) {
@@ -75,5 +80,30 @@ public class DossierServiceImplementation  implements DossierService {
             ReponseMessage message = new ReponseMessage(" Dossier non trouvée", false);
             return message;
         }
+    }
+
+    public List<Dossier> getDossiersForPatient(String codePatient) {
+        Patient patient = patientRepository.findByCodePatient(codePatient);
+
+
+        if (patient == null) {
+            return Collections.emptyList();
+        }
+        return dossierRepository.findByPatient(patient);
+    }
+
+    @Override
+    public Dossier addDossier(Long patientId, Long medecinId, Dossier dossierDto) {
+        return null;
+    }
+
+    @Override
+    public Dossier updateDossier(Long dossierId, Long medecinId, Dossier dossierDto) {
+        return null;
+    }
+
+    @Override
+    public void deleteDossier(Long dossierId, Long medecinId) {
+
     }
 }

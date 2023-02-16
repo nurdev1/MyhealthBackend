@@ -15,6 +15,8 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
    Patient findByEmail(String email);
    Boolean existsByEmail(String email);
 
+    Patient findByCodePatient(String codePatient);
+
     //nombre par spécialité
     @Query(value = "SELECT COUNT(*) FROM patient;",nativeQuery = true)
     int NombrePatient();

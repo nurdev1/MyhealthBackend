@@ -20,4 +20,10 @@ public interface DossierService {
 
     //Suppression d'un Dossier
     ReponseMessage SupprimerDossier(Long iddossier);
+    public List<Dossier> getDossiersForPatient(String codePatient);
+
+    Dossier addDossier(Long patientId, Long medecinId, Dossier dossierDto);
+    Dossier updateDossier(Long dossierId, Long medecinId, Dossier dossierDto);
+    void deleteDossier(Long dossierId, Long medecinId);
 }
+

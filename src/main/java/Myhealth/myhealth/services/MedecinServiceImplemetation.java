@@ -5,7 +5,9 @@ import Myhealth.myhealth.modeles.Medecin;
 import Myhealth.myhealth.repository.MedecinRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -126,6 +128,100 @@ public class MedecinServiceImplemetation implements MedecinService {
     }
 
 
+    public void ajouterMedecin(Medecin medecin, MultipartFile diplomeFile) throws IOException {
+        // Vérifier que le fichier est non vide
+        if (!diplomeFile.isEmpty()) {
+            // Lire le contenu du fichier dans un tableau de bytes
+            byte[] diplomeContent = diplomeFile.getBytes();
+            // Stocker le contenu du fichier dans le champ "diplome" de l'objet "Medecin"
+            medecin.setDiplome(String.valueOf(diplomeContent));
+        }
+        // Enregistrer le médecin dans la base de données
+        medecinRepository.save(medecin);
+    }
+
+/*public class MedecinService {
+
+    // Inject the JavaMailSender instance
+    @Autowired
+    private JavaMailSender javaMailSender;
+
+    @Autowired
+    private MedecinRepository medecinRepository;
+
+    public void addMedecin(Medecin medecin) {
+        // Save the new medecin in the database
+        Medecin newMedecin = medecinRepository.save(medecin);
+        // Get the email address of the new medecin
+        String email = newMedecin.getEmail();
+
+        try {
+            // Create a new MimeMessage instance
+            MimeMessage message = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            // Set the email subject
+            helper.setSubject("Activation de votre compte");
+            // Set the email recipient
+            helper.setTo(email);
+            // Set the email body
+            String activationLink = "http://example.com/activate?id=" + newMedecin.getIdmedecin();
+            String text = "Bonjour " + newMedecin.getPrenom() + ",\n\n" +
+                    "Votre compte a été créé avec succès. Veuillez cliquer sur le lien ci-dessous pour activer votre compte : \n\n" +
+                    activationLink + "\n\n" +
+                    "Cordialement,\n" +
+                    "L'équipe de notre site";
+            helper.setText(text, true);
+            // Send the email
+            javaMailSender.send(message);
+
+            // Update the medecin's state to "true"
+            newMedecin.setEtat(true);
+            medecinRepository.save(newMedecin);
+        } catch (MessagingException e) {
+            // Handle the exception
+        }
+    }
+}
+*/
+
+    /*@Service
+public class MedecinService {
+
+    @Autowired
+    private JavaMailSender javaMailSender;
+
+    @Autowired
+    private MedecinRepository medecinRepository;
+
+    public void addMedecin(Medecin medecin) {
+        Medecin newMedecin = medecinRepository.save(medecin);
+        String email = newMedecin.getEmail();
+
+        try {
+            MimeMessage message = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setSubject("Activation de votre compte");
+            helper.setTo(email);
+            String activationLink = "http://example.com/activate?id=" + newMedecin.getIdmedecin();
+            String text = "Bonjour " + newMedecin.getPrenom() + ",\n\n" +
+                    "Votre compte a été créé avec succès. Veuillez cliquer sur le lien ci-dessous pour activer votre compte : \n\n" +
+                    activationLink + "\n\n" +
+                    "Cordialement,\n" +
+                    "L'équipe de notre site";
+            helper.setText(text, true);
+            javaMailSender.send(message);
+
+            newMedecin.setEtat(true);
+            medecinRepository.save(newMedecin);
+        } catch (MessagingException e) {
+            // Handle the exception
+        }
+    }
+}
+*/
+
 
 
 }
+
+

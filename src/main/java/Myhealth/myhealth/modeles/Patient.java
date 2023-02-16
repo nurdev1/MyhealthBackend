@@ -41,3 +41,12 @@ public class Patient {
 
 
 }
+/*public Patient trouverPatientParCode(String codePatient) {
+    for (Patient patient : patients) {
+        if (patient.getCodePatient().equals(codePatient)) {
+            return patient;
+        }
+    }
+    return null; // patient non trouvé
+}
+*/
