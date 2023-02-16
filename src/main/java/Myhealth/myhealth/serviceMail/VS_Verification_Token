@@ -1,6 +1,0 @@
-CREATE TABLE verification_token{
-id Long NOT NULL auto_increment PRIMARY KEY,
-user_id Long,
-token VARCHAR(255),
-expery
-}

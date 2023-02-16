@@ -34,6 +34,18 @@ public class FileUploadController {
         return new Response(fileName.getFileName(), fileDownloadUri,
                 file.getContentType(), file.getSize());
     }
+    @PostMapping("/uploadFileUser/{idUser}")
+    public Response uploadFileUser(@RequestParam("file") MultipartFile file, @PathVariable Long idUser) {
+    	DatabaseFile fileName = fileStorageService.saveFile(file,idUser);
+
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/downloadFile/")
+                .path(fileName.getFileName())
+                .toUriString();
+
+        return new Response(fileName.getFileName(), fileDownloadUri,
+                file.getContentType(), file.getSize());
+    }
 
     @PostMapping("/uploadMultipleFiles")
     public List<Response> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files, @PathVariable Long idUser,@PathVariable Long idDossier) {

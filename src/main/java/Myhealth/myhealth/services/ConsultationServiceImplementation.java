@@ -13,32 +13,34 @@ public class ConsultationServiceImplementation implements ConsultationService {
 
     @Autowired
     ConsultationRepository consultationRepository;
+
     @Override
-    public ReponseMessage creerConsultation(Consultation consultation,  String medecin, String patient) {
-        if (consultationRepository.findByIdconsultation(consultation.getIdconsultation()) == null){
+    public ReponseMessage creerConsultation(Consultation consultation) {
+        if (consultationRepository.findByIdconsultation(consultation.getIdconsultation()) == null) {
             consultationRepository.save(consultation);
             ReponseMessage message = new ReponseMessage("consultation ajouté avec succes", true);
-            return  message;
-        }else {
+            return message;
+        } else {
             ReponseMessage message = new ReponseMessage("Ce consultation  existe déjà ", false);
 
             return message;
         }
     }
+    //,  int medecin, int patient
 
     @Override
-    public ReponseMessage modifierConsultation (Consultation consultation) {
-        if (consultationRepository.findByIdconsultation(consultation.getIdconsultation()) !=null) {
+    public ReponseMessage modifierConsultation(Consultation consultation) {
+        if (consultationRepository.findByIdconsultation(consultation.getIdconsultation()) != null) {
             return consultationRepository.findById(consultation.getIdconsultation())
-                    .map(consultation1->{
+                    .map(consultation1 -> {
                         consultation1.setTitre(consultation.getTitre());
                         consultation1.setDesciption(consultation.getDesciption());
                         consultation1.setFichier(consultation.getFichier());
                         consultationRepository.save(consultation1);
                         ReponseMessage message = new ReponseMessage("consultation modifié avec succes", true);
-                        return  message;
+                        return message;
                     }).orElseThrow(() -> new RuntimeException("Désole, consultation non trouvée"));
-        }else {
+        } else {
             ReponseMessage message = new ReponseMessage("Désole, consultation non trouvée", false);
 
             return message;
@@ -64,13 +66,12 @@ public class ConsultationServiceImplementation implements ConsultationService {
 
     @Override
     public ReponseMessage SupprimerConsultation(Long id) {
-        final  Consultation consultation = null;
+        final Consultation consultation = null;
         if (consultationRepository.findByIdconsultation(id) != null) {
             consultation.setEtat(false);
             ReponseMessage message = new ReponseMessage(" Consultation supprimée avec succes", true);
             return message;
-        }
-        else {
+        } else {
             ReponseMessage message = new ReponseMessage(" Consultation non trouvée", false);
             return message;
         }
@@ -80,4 +81,9 @@ public class ConsultationServiceImplementation implements ConsultationService {
     public int NombreConsultationMedecin() {
         return consultationRepository.NombreConsultationMedecin();
     }
+
+   /* @Override
+    public List<Object> MedecinConsultation(Long idmedecin) {
+        return consultationRepository.MedecinConsultation(idmedecin);
+    }*/
 }

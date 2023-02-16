@@ -19,7 +19,7 @@ public interface HopitalRepository extends JpaRepository<Hopital, Long> {
 
     @Query(value = "SELECT COUNT(*),ville FROM hopital GROUP BY ville;",nativeQuery = true)
     List<Object> NombreHopitalParVille();
-        @Query(value = "SELECT * from hopital ORDER BY date LIMIT 3;",nativeQuery = true)
+        @Query(value = "SELECT * FROM `hopital` ORDER BY hopital.date DESC LIMIT 3;",nativeQuery = true)
     List<Hopital> NouveauHopital();
 
 

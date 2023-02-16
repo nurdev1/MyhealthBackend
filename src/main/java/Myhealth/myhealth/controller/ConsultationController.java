@@ -15,15 +15,16 @@ import java.util.List;
 public class ConsultationController {
 
 private ConsultationService consultationService;
-    @PostMapping("/ajouter/{medecin}/{patient}")
-    ReponseMessage Ajouter(@RequestBody Consultation consultation,  @PathVariable String medecin, @PathVariable String patient){
-        return   consultationService.creerConsultation(consultation,medecin,patient);
+    @PostMapping("/ajouter")
+    ReponseMessage Ajouter(@RequestBody Consultation consultation){
+        return   consultationService.creerConsultation(consultation);
     }
+    //@PathVariable int medecin, @PathVariable int patient  ,medecin,patient
     @GetMapping("/afficher")
     List<Consultation> Afficher(){
         return consultationService.afficherToutLesConsultation();
     }
-    @GetMapping("/modifier")
+    @PutMapping("/modifier")
     public ReponseMessage Modifier(@RequestBody Consultation consultation){
         return consultationService.modifierConsultation(consultation);
     }
@@ -37,4 +38,9 @@ private ConsultationService consultationService;
     int NombreConsultationMedecin(){
       return   consultationService.NombreConsultationMedecin();
     }
+
+/*    @GetMapping("/afficher/idmedecin")
+    public List<Object> MedecinConsultation (Long idmedecin){
+        return consultationService.MedecinConsultation(idmedecin);
+    }*/
 }

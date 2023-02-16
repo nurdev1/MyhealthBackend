@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -17,19 +19,25 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idpatient;
-    //private String identifiant;
+    private String codePatient;
     private String nom;
     private String prenom;
     private String photo;
     private String telephone;
     private String email;
-   // private String pieceidentite;
     private String ville;
     private String adresse;
-    private boolean etat;
+    private boolean etat= true;
+    private String motdepasse;
 
-     @ManyToOne
-    private Utilisateus utilisateus;
+    @ManyToOne
+    private Role role;
+
+/*    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "patient_roles",
+            joinColumns = @JoinColumn(name = "id_patient"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();*/
 
 
 }

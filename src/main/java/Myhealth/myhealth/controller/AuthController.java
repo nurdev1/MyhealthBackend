@@ -140,7 +140,7 @@ public class AuthController {
       System.out.println("####################################" + signUpRequest.getRole() + "###########################################");
 
       //on recupere le role de l'utilisateur
-      Role userRole = roleRepository.findByName(ERole.ROLE_USER);
+      Role userRole = roleRepository.findByName(ERole.ROLE_Patient);
       System.out.println("############################ attributionde role: " + userRole + "###########################################");
 
       roles.add(userRole);//on ajoute le role de l'user à roles
@@ -157,7 +157,7 @@ public class AuthController {
         default://dans le cas écheant
 
           //on recupere le role de l'utilisateur
-          Role userRole = roleRepository.findByName(ERole.ROLE_USER);
+          Role userRole = roleRepository.findByName(ERole.ROLE_Medecin);
           roles.add(userRole);
         }
       });
