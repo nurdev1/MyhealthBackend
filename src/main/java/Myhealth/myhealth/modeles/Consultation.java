@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Data
@@ -21,8 +22,9 @@ public class Consultation {
     private String desciption;
     private String fichier;
     private boolean etat = true;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime date = LocalDateTime.now();
+    private Date date;
+    //@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    //private LocalDateTime date = LocalDateTime.now();
     @ManyToOne
     private Medecin medecin;
     @ManyToOne

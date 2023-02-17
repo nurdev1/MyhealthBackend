@@ -8,6 +8,7 @@ import Myhealth.myhealth.modeles.Medecin;
 import Myhealth.myhealth.services.MedecinService;
 import Myhealth.myhealth.services.PatientService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -113,20 +114,22 @@ public class MedecinController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }*/
-}
 
 
-/*@RestController
-@RequestMapping("/medecin")
-public class MedecinController {
 
-    @Autowired
-    private MedecinService medecinService;
+    @PostMapping("/activatedEmail")
+    public ResponseEntity<Medecin> addMedecin() {
+        medecinService.acivateEmailMedecin();
+        return new ResponseEntity<>( HttpStatus.CREATED);
+    }
 
-    @PostMapping("/add")
-    public ResponseEntity<Medecin> addMedecin(@RequestBody Medecin medecin) {
-        medecinService.addMedecin(medecin);
-        return new ResponseEntity<>(medecin, HttpStatus.CREATED);
+    @PutMapping("/{id}/activer")
+    public ResponseEntity<String> activerMedecin(@PathVariable("id") Long id) {
+        medecinService.activerMedecin(id);
+        return ResponseEntity.ok("Le médecin a été activé avec succès.");
     }
 }
-*/
+
+
+
+

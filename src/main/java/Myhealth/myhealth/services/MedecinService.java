@@ -26,7 +26,7 @@ public interface MedecinService {
     int NombreMedecin();
     List<Object> HopitalListeMedecin();
 
+    void acivateEmailMedecin();
 
-
-
+    void activerMedecin(Long id);
 }

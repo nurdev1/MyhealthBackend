@@ -2,11 +2,14 @@ package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Consultation;
+import Myhealth.myhealth.modeles.Medecin;
+import Myhealth.myhealth.modeles.Patient;
 import Myhealth.myhealth.repository.ConsultationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ConsultationServiceImplementation implements ConsultationService {
@@ -52,17 +55,6 @@ public class ConsultationServiceImplementation implements ConsultationService {
         return null;
     }
 
- /*   @Override
-    public ReponseMessage SupprimerConsultation(Long idconsultation) {
-        if(consultationRepository.findByIdconsultation(idconsultation) != null){
-            consultationRepository.deleteById(idconsultation);
-            ReponseMessage message = new ReponseMessage("consultation Medical supprimé avec succes", true);
-            return message;
-        }else {
-            ReponseMessage message = new ReponseMessage("consultation Medical non trouvé", false);
-            return message;
-        }
-    }*/
 
     @Override
     public ReponseMessage SupprimerConsultation(Long id) {
@@ -82,8 +74,47 @@ public class ConsultationServiceImplementation implements ConsultationService {
         return consultationRepository.NombreConsultationMedecin();
     }
 
-   /* @Override
-    public List<Object> MedecinConsultation(Long idmedecin) {
-        return consultationRepository.MedecinConsultation(idmedecin);
-    }*/
+    @Override
+    public Consultation saveOrUpdateConsultation(Consultation consultation) {
+        return consultationRepository.save(consultation);
+    }
+
+    @Override
+    public Optional<Consultation> getConsultationById(Long id) {
+        return consultationRepository.findById(id);
+    }
+
+    @Override
+    public List<Consultation> getAllConsultations() {
+        return consultationRepository.findAll();
+    }
+
+    @Override
+    public List<Consultation> getConsultationsByMedecinId(Long medecinId) {
+        return consultationRepository.findByMedecinIdmedecin(medecinId);
+    }
+
+    @Override
+    public List<Consultation> getConsultationsByPatientId(Long patientId) {
+        return consultationRepository.findByPatientIdpatient(patientId);
+    }
+
+    @Override
+    public void deleteConsultationById(Long id) {
+        consultationRepository.deleteById(id);
+    }
+
+    public Consultation creerConsultation(Medecin medecin, Patient patient, String titre, String desciption, String fichier) {
+        Consultation consultation = new Consultation();
+        consultation.setMedecin(medecin);
+        consultation.setPatient(patient);
+        consultation.setTitre(titre);
+        consultation.setDesciption(desciption);
+        consultation.setFichier(fichier);
+        consultationRepository.save(consultation);
+        return consultation;
+    }
+
 }
+
+

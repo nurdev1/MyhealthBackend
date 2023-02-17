@@ -4,11 +4,17 @@ import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Medecin;
 import Myhealth.myhealth.repository.MedecinRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @AllArgsConstructor
@@ -16,6 +22,8 @@ public class MedecinServiceImplemetation implements MedecinService {
 
 
     private MedecinRepository medecinRepository;
+    @Autowired
+    private JavaMailSender javaMailSender;
     @Override
     public ReponseMessage creerMedecin(Medecin medecin) {
         if (medecinRepository.findByEmail(medecin.getEmail()) == null){
@@ -183,18 +191,10 @@ public class MedecinServiceImplemetation implements MedecinService {
     }
 }
 */
-
-    /*@Service
-public class MedecinService {
-
-    @Autowired
-    private JavaMailSender javaMailSender;
-
-    @Autowired
-    private MedecinRepository medecinRepository;
-
-    public void addMedecin(Medecin medecin) {
-        Medecin newMedecin = medecinRepository.save(medecin);
+    @Override
+    public void acivateEmailMedecin() {
+        //Medecin newMedecin = medecinRepository.save(medecin);
+        Medecin newMedecin = null;
         String email = newMedecin.getEmail();
 
         try {
@@ -217,10 +217,13 @@ public class MedecinService {
             // Handle the exception
         }
     }
-}
-*/
-
-
+    @Override
+    public void activerMedecin(Long id) {
+        Medecin medecin = medecinRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Médecin introuvable"));
+        medecin.setEtat(true);
+        medecinRepository.save(medecin);
+    }
 
 }
 

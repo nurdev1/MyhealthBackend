@@ -141,8 +141,8 @@ public class WebSecurityConfig {
             .antMatchers("/dossier/**").permitAll()
             .antMatchers("/role/**").permitAll()
         .antMatchers("/hopital/**").permitAll()
-       /* .antMatchers("/api/patient/**").permitAll()
-        .antMatchers("/api/medecin/**").permitAll()
+        .antMatchers("/consultation/**").permitAll()
+       /* .antMatchers("/api/medecin/**").permitAll()
         .antMatchers("/api/dossier/**").permitAll()*/
         .anyRequest().authenticated();
             //.and()
