@@ -19,7 +19,7 @@ public class HopitalController {
 //ajouter hospital
     @PostMapping("/ajouter")
     public ReponseMessage ajouter(@RequestBody Hopital hopital){
-
+        System.out.println(hopital.getNom());
         return   hopitalService.creerHopital(hopital);
     }
 

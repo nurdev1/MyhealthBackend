@@ -5,8 +5,10 @@ import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.mailNotification.EmailMedecinConstructor;
 import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.modeles.Medecin;
+import Myhealth.myhealth.repository.RoleRepository;
 import Myhealth.myhealth.services.MedecinService;
 import Myhealth.myhealth.services.PatientService;
+import Myhealth.myhealth.services.RoleService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static Myhealth.myhealth.modeles.ERole.ROLE_Medecin;
+import static Myhealth.myhealth.modeles.ERole.ROLE_Patient;
 
 @RestController
 @AllArgsConstructor
@@ -26,19 +31,21 @@ public class MedecinController {
     private JavaMailSender mailSender;
     EmailMedecinConstructor emailMedecinConstructor;
     PatientService patientService;
+    private RoleRepository roleRepository;
 
-/*    @PostMapping("/ajouter")
+   @PostMapping("/ajouter")
     ReponseMessage Ajouter(@RequestBody Medecin medecin){
-
+       medecin.setRole(roleRepository.findByName(ROLE_Medecin));
        ReponseMessage message =  medecinService.creerMedecin(medecin);
+       System.out.println(medecin);
         mailSender.send(emailMedecinConstructor.constructNewMedecinEmail(medecin,medecin.getMotdepasse()));
         return message;
-    }*/
+    }
 
-    @PostMapping("/ajouter")
+/*   @PostMapping("/ajouter")
     ReponseMessage Ajouter(@RequestBody Medecin medecin) {
         return medecinService.creerMedecin(medecin);
-    }
+    }*/
 
     @GetMapping("/modifier")
     public ReponseMessage Modifier(@RequestBody Medecin medecin) {

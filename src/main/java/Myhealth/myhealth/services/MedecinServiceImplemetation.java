@@ -3,6 +3,7 @@ package Myhealth.myhealth.services;
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Medecin;
 import Myhealth.myhealth.repository.MedecinRepository;
+import Myhealth.myhealth.repository.RoleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,6 +16,9 @@ import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
+
+import static Myhealth.myhealth.modeles.ERole.ROLE_Medecin;
+import static Myhealth.myhealth.modeles.ERole.ROLE_Patient;
 
 @Service
 @AllArgsConstructor
@@ -48,6 +52,9 @@ public class MedecinServiceImplemetation implements MedecinService {
                         medecin1.setAdresse(medecin.getAdresse());
                         medecin1.setVille(medecin.getVille());
                         medecin1.setPhoto(medecin.getPhoto());
+                        medecin1.setTelehone(medecin.getTelehone());
+                        medecin1.setSpecialite(medecin.getSpecialite());
+                        medecin1.setHopital(medecin.getHopital());
                         medecinRepository.save(medecin1);
                         ReponseMessage message = new ReponseMessage("médecin modifié avec succes", true);
                         return  message;

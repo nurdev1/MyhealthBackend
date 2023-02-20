@@ -41,13 +41,16 @@ public class PatientController {
             System.err.println(patient1.getNom());
             patient1.setRole(roleRepository.findByName(ROLE_Patient));
             if (patient1.getPrenom() != null){
-                codePatient =patient1.getPrenom().substring(0,2) +patient1.getNom().substring(0,2)
-                        + patient1.getTelephone().substring(0,2)+ i;
+                System.out.println("dddddddddddddddddddddddddddddddddddddii");
+                codePatient ="M"+patient1.getPrenom().substring(0,4) +patient1.getNom().substring(0,2)
+                        + patient1.getTelephone().substring(0,3)+ i;
                 patient1.setCodePatient(codePatient);
+                System.out.println(codePatient);
+                System.out.println("ddddddddddddddddddddddddddddddddddddd");
             }
         }
-        String passe ="masante@2023";
-        patient1.setMotdepasse(passe);
+      /*  String passe ="masante@2023";
+        patient1.setMotdepasse(passe);*/
         System.err.println(patient1.getNom());
         if (patient1.getNom() != null){
             System.err.println("Creer hello");
