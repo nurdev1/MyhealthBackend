@@ -84,7 +84,7 @@ private PatientService patientService;
     public ResponseEntity<Consultation> updateConsultation(@PathVariable Long id, @RequestBody Consultation consultation) {
         Optional<Consultation> existingConsultation = consultationService.getConsultationById(id);
         if (existingConsultation.isPresent()) {
-            consultation.setIdconsultation(id);
+            consultation.setId(id);
             Consultation savedConsultation = consultationService.saveOrUpdateConsultation(consultation);
             return new ResponseEntity<>(savedConsultation, HttpStatus.OK);
         } else {

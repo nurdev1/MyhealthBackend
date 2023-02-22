@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PrescriptionRepository extends JpaRepository<Prescription,Long> {
 
-    Prescription findByIdprescription(Long idprescription);
+   // Prescription findByIdprescription(Long idprescription);
 }

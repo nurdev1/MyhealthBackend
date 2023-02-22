@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Entity
 @Data
 @Table
@@ -17,8 +18,10 @@ public class Dossier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Long iddossier;
+    private Long id;
     private String nom;
+    private String description;
+    private String pieceJoint;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date = LocalDateTime.now();
     private boolean etat = true;

@@ -19,7 +19,7 @@ public class ConsultationServiceImplementation implements ConsultationService {
 
     @Override
     public ReponseMessage creerConsultation(Consultation consultation) {
-        if (consultationRepository.findByIdconsultation(consultation.getIdconsultation()) == null) {
+        if (consultationRepository.findById(consultation.getId()) == null) {
             consultationRepository.save(consultation);
             ReponseMessage message = new ReponseMessage("consultation ajouté avec succes", true);
             return message;
@@ -33,11 +33,11 @@ public class ConsultationServiceImplementation implements ConsultationService {
 
     @Override
     public ReponseMessage modifierConsultation(Consultation consultation) {
-        if (consultationRepository.findByIdconsultation(consultation.getIdconsultation()) != null) {
-            return consultationRepository.findById(consultation.getIdconsultation())
+        if (consultationRepository.findById(consultation.getId()) != null) {
+            return consultationRepository.findById(consultation.getId())
                     .map(consultation1 -> {
-                        consultation1.setTitre(consultation.getTitre());
-                        consultation1.setDesciption(consultation.getDesciption());
+                        consultation1.setNom(consultation.getNom());
+                        consultation1.setDescription(consultation.getDescription());
                         consultation1.setFichier(consultation.getFichier());
                         consultationRepository.save(consultation1);
                         ReponseMessage message = new ReponseMessage("consultation modifié avec succes", true);
@@ -59,7 +59,7 @@ public class ConsultationServiceImplementation implements ConsultationService {
     @Override
     public ReponseMessage SupprimerConsultation(Long id) {
         final Consultation consultation = null;
-        if (consultationRepository.findByIdconsultation(id) != null) {
+        if (consultationRepository.findById(id) != null) {
             consultation.setEtat(false);
             ReponseMessage message = new ReponseMessage(" Consultation supprimée avec succes", true);
             return message;
@@ -91,12 +91,12 @@ public class ConsultationServiceImplementation implements ConsultationService {
 
     @Override
     public List<Consultation> getConsultationsByMedecinId(Long medecinId) {
-        return consultationRepository.findByMedecinIdmedecin(medecinId);
+        return consultationRepository.findByMedecinId(medecinId);
     }
 
     @Override
     public List<Consultation> getConsultationsByPatientId(Long patientId) {
-        return consultationRepository.findByPatientIdpatient(patientId);
+        return consultationRepository.findByPatientId(patientId);
     }
 
     @Override
@@ -108,8 +108,8 @@ public class ConsultationServiceImplementation implements ConsultationService {
         Consultation consultation = new Consultation();
         consultation.setMedecin(medecin);
         consultation.setPatient(patient);
-        consultation.setTitre(titre);
-        consultation.setDesciption(desciption);
+        consultation.setNom(titre);
+        consultation.setDescription(desciption);
         consultation.setFichier(fichier);
         consultationRepository.save(consultation);
         return consultation;

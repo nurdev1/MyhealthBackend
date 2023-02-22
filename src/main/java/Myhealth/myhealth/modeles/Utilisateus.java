@@ -4,7 +4,9 @@ package Myhealth.myhealth.modeles;
 
 
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -13,13 +15,15 @@ import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Entity
 @Table(name = "users",
     uniqueConstraints = { 
       @UniqueConstraint(columnNames = "username"),
       @UniqueConstraint(columnNames = "email")
     })
-
+@Getter
+@Setter
 public class Utilisateus {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +37,12 @@ public class Utilisateus {
   @Size(max = 50)
   @Email
   private String email;
-
+  private String nom;
+  private String prenom;
+  private String photo;
+  private String telephone;
+  private String ville;
+  private String adresse;
   @NotBlank
   @Size(max = 120)
   private String password;
@@ -52,7 +61,7 @@ public class Utilisateus {
     this.email = email;
     this.password = password;
   }
-
+/*
   public Long getId() {
     return id;
   }
@@ -94,6 +103,6 @@ public class Utilisateus {
   }
 
   @ManyToOne
-  private Role role;
+  private Role role;*/
 
 }

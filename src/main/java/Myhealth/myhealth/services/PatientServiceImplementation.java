@@ -34,8 +34,8 @@ public class PatientServiceImplementation implements PatientService{
 
     @Override
     public ReponseMessage modifierPatient(Patient patient) {
-        if (patientRepository.findByIdpatient(patient.getIdpatient()) !=null) {
-            return patientRepository.findById(patient.getIdpatient())
+        if (patientRepository.findById(patient.getId()) !=null) {
+            return patientRepository.findById(patient.getId())
                     .map(patient1->{
                         patient1.setNom(patient.getNom());
                         patient1.setPrenom(patient.getPrenom());
@@ -70,7 +70,7 @@ public class PatientServiceImplementation implements PatientService{
     @Override
     public ReponseMessage SupprimerPatient(Long id) {
         final Patient patient = null;
-        if (patientRepository.findByIdpatient(id) != null) {
+        if (patientRepository.findById(id) != null) {
             patient.setEtat(false);
             ReponseMessage message = new ReponseMessage("Patient supprimée avec succes", true);
             return message;
@@ -123,7 +123,7 @@ public class PatientServiceImplementation implements PatientService{
             return null;
         }
         dossier.setPatient(patient);
-        dossier.setIddossier(existingDossier.getIddossier());
+        dossier.setId(existingDossier.getId());
         return dossierRepository.save(dossier);
     }
     @Override
@@ -139,6 +139,8 @@ public class PatientServiceImplementation implements PatientService{
         dossierRepository.delete(existingDossier);
         return true;
     }
+
+
 }
 
 

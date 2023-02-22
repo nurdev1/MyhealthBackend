@@ -21,7 +21,7 @@ public class DossierServiceImplementation  implements DossierService {
 
     @Override
     public ReponseMessage creerDossier(Dossier dossier) {
-        if (dossierRepository.findByIddossier(dossier.getIddossier()) == null) {
+        if (dossierRepository.findById(dossier.getId()) == null) {
             dossierRepository.save(dossier);
             ReponseMessage message = new ReponseMessage("patient ajouté avec succes", true);
             return message;
@@ -35,8 +35,8 @@ public class DossierServiceImplementation  implements DossierService {
     @Override
     public ReponseMessage modifierDossier(Dossier dossier) {
 
-        if (dossierRepository.findByIddossier(dossier.getIddossier()) !=null) {
-            return dossierRepository.findById(dossier.getIddossier())
+        if (dossierRepository.findById(dossier.getId()) !=null) {
+            return dossierRepository.findById(dossier.getId())
                     .map(dossier1->{
                         dossier1.setNom(dossier.getNom());
                         dossierRepository.save(dossier1);
@@ -71,7 +71,7 @@ public class DossierServiceImplementation  implements DossierService {
     @Override
     public ReponseMessage SupprimerDossier(Long id) {
         final  Dossier dossier = null;
-        if (dossierRepository.findByIddossier(id) != null) {
+        if (dossierRepository.findById(id) != null) {
             dossier.setEtat(false);
             ReponseMessage message = new ReponseMessage(" Dossier supprimée avec succes", true);
             return message;

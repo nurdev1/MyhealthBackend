@@ -15,7 +15,7 @@ public class SoinsServiceImplementation implements SoinsService {
     SoinsRepository syntheseSoinsRepository;
     @Override
     public ReponseMessage creerSyntheseSoins(Soins syntheseDeSoins) {
-        if (syntheseSoinsRepository.findByIdsynthesesoins(syntheseDeSoins.getIdsynthesesoins()) == null){
+        if (syntheseSoinsRepository.findById(syntheseDeSoins.getId()) == null){
             syntheseSoinsRepository.save(syntheseDeSoins);
             ReponseMessage message = new ReponseMessage("synthèse de soins ajouté avec succes", true);
             return  message;
@@ -28,8 +28,8 @@ public class SoinsServiceImplementation implements SoinsService {
 
     @Override
     public ReponseMessage modifierSyntheseSoins(Soins syntheseSoins) {
-        if (syntheseSoinsRepository.findByIdsynthesesoins(syntheseSoins.getIdsynthesesoins()) !=null) {
-            return syntheseSoinsRepository.findById(syntheseSoins.getIdsynthesesoins())
+        if (syntheseSoinsRepository.findById(syntheseSoins.getId()) !=null) {
+            return syntheseSoinsRepository.findById(syntheseSoins.getId())
                     .map(synthse1->{
                         synthse1.setNom(syntheseSoins.getNom());
                         synthse1.setDescription(syntheseSoins.getDescription());
@@ -66,7 +66,7 @@ public class SoinsServiceImplementation implements SoinsService {
     @Override
     public ReponseMessage SupprimerSyntheseDeSoins(Long id) {
         final  Soins  soins = null;
-        if (syntheseSoinsRepository.findByIdsynthesesoins(id) != null) {
+        if (syntheseSoinsRepository.findById(id) != null) {
             soins.setEtat(false);
             ReponseMessage message = new ReponseMessage(" Synthèse de soins supprimée avec succes", true);
             return message;

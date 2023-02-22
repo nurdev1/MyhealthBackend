@@ -1,8 +1,7 @@
 package Myhealth.myhealth.modeles;
 
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,28 +10,19 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Data
-@Table
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
-public class Patient {
+public class Patient extends Utilisateus {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idpatient;
+
     private String codePatient;
-    private String nom;
-    private String prenom;
-    private String photo;
-    private String telephone;
-    private String email;
-    private String ville;
-    private String adresse;
     private boolean etat = true;
-   // private String motdepasse;
 
     @ManyToOne
     private Role role;
-    @ManyToOne
-    private Utilisateus utilisateus;
+//    @ManyToOne
+//    private Utilisateus utilisateus;
 
 }

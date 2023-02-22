@@ -12,18 +12,8 @@ import java.time.LocalDateTime;
 @Data
 @Table
 @NoArgsConstructor
-public class Soins {
+public class Soins extends CompteRendu{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idsynthesesoins;
-    private String nom;
-    private String description;
-    private String pieceJoint;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime date = LocalDateTime.now();
-    boolean etat = true;
 
-    @ManyToOne
-    private CompteRendu compteRendu;
+
 }

@@ -29,4 +29,6 @@ public interface PatientService {
     Dossier updateDossierForPatient(String codePatient, Long dossierId, Dossier dossier);
 
     boolean deleteDossierForPatient(String codePatient, Long dossierId);
+
+
 }

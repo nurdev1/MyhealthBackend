@@ -58,17 +58,6 @@ public class HopitalServiceImplementation implements HopitalService{
         return hopitalRepository.findAll();
     }
 
- /*   @Override
-    public ReponseMessage SupprimerHopital(Long idhopital) {
-        if(hopitalRepository.findByIdhopital(idhopital) != null){
-            hopitalRepository.deleteById(idhopital);
-            ReponseMessage message = new ReponseMessage("hopital supprimé avec succes", true);
-            return message;
-        }else {
-            ReponseMessage message = new ReponseMessage("hopital non trouvé", false);
-            return message;
-        }
-    }*/
 
     @Override
     public ReponseMessage SupprimerHopital(Long id) {
@@ -98,55 +87,17 @@ public class HopitalServiceImplementation implements HopitalService{
     public List<Hopital> NouveauHopital() {
         return hopitalRepository.NouveauHopital();
     }
-    //image
-
-
-
-    //filtre
-    @Override
-    public Page<Hopital> getRequestFilters(int page, int limit, String hopitalVille, Sort.Direction sortType) {
-        Page<Hopital> hopitalPage = null;
-        /*if(hopitalVille==null && sortType==null){
-            hopitalPage = getHopitalsList(page,limit);
-        }
-        if(hopitalVille!=null && sortType==null ){
-            hopitalPage = findHopitalByName(page,limit,hopitalVille);
-        }
-        if(hopitalVille==null && sortType != null ){
-            hopitalPage = getHopitalsOrderByMedecin(page,limit,sortType);
-        }
-        if(hopitalVille!=null && sortType!=null){
-            hopitalPage = findProductsByNameAndOrderByPrice(page,limit,hopitalVille,sortType);
-        }*/
-        return  hopitalPage;
-    }
 
     private Page<Hopital> getHopitalsList(int page, int limit) {
         Pageable pageable = PageRequest.of(page, limit);
         return hopitalRepository.findAll(pageable);
     }
 
-    /*private Page<Hopital> findHopitalByName(int page,int limit,String HopitalName) {
-        Pageable pageable = PageRequest.of(page, limit);
-        //return hopitalRepository.findByNameContainingIgnoreCase(HopitalName, pageable);
-        return new Page<Hopital>() {
-        };
-    }*/
-
-
     private Page<Hopital> getHopitalsOrderByMedecin(int page, int limit,Sort.Direction sortType) {
         Sort sort = Sort.by(sortType, "price");
         Pageable pageable = PageRequest.of(page, limit,sort);
         return hopitalRepository.findAll(pageable);
     }
-
-    /*private Page<Hopital> findProductsByNameAndOrderByPrice(int page, int limit,
-                                                            String productName,
-                                                            Sort.Direction sortType) {
-        Sort sort = Sort.by(sortType, "price");
-        Pageable pageable = PageRequest.of(page, limit,sort);
-        return hopitalRepository.findByNameContainingIgnoreCase(productName,pageable);
-    }*/
 
 
 }

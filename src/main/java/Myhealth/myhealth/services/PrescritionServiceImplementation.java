@@ -16,7 +16,7 @@ public class PrescritionServiceImplementation implements PrescritionService {
     PrescriptionRepository prescriptionRepository;
     @Override
     public ReponseMessage creerPrescription(Prescription prescription) {
-        if (prescriptionRepository.findByIdprescription(prescription.getIdprescription()) == null){
+        if (prescriptionRepository.findById(prescription.getId()) == null){
             prescriptionRepository.save(prescription);
             ReponseMessage message = new ReponseMessage("prescription ajouté avec succes", true);
             return  message;
@@ -29,12 +29,12 @@ public class PrescritionServiceImplementation implements PrescritionService {
 
     @Override
     public ReponseMessage modifierPrescription(Prescription prescription) {
-        if (prescriptionRepository.findByIdprescription(prescription.getIdprescription()) !=null) {
-            return prescriptionRepository.findById(prescription.getIdprescription())
+        if (prescriptionRepository.findById(prescription.getId()) !=null) {
+            return prescriptionRepository.findById(prescription.getId())
                     .map(prescription1->{
-                        prescription1.setNom(prescription.getNom());
+                  /*      prescription1.setNom(prescription.getNom());
                         prescription1.setDescription(prescription.getDescription());
-                        prescription1.setPieceJoint(prescription.getPieceJoint());
+                        prescription1.setPieceJoint(prescription.getPieceJoint());*/
                         prescriptionRepository.save(prescription1);
                         ReponseMessage message = new ReponseMessage("Patient modifié avec succes", true);
                         return  message;
@@ -66,7 +66,7 @@ public class PrescritionServiceImplementation implements PrescritionService {
     @Override
     public ReponseMessage SupprimerPrescription(Long id) {
         final  Prescription prescription = null;
-        if (prescriptionRepository.findByIdprescription(id) != null) {
+        if (prescriptionRepository.findById(id) != null) {
             prescription.setEtat(false);
             ReponseMessage message = new ReponseMessage(" Prescription supprimée avec succes", true);
             return message;

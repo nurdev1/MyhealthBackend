@@ -15,7 +15,7 @@ public class CompteRenduServiceImplementation implements CompteRenduService{
     CompteRenduRepository compteRenduRepository;
     @Override
     public ReponseMessage creerCompteRendu(CompteRendu compteRendu) {
-        if (compteRenduRepository.findByIdcompterendu(compteRendu.getIdcompterendu()) == null){
+        if (compteRenduRepository.findById(compteRendu.getId()) == null){
             compteRenduRepository.save(compteRendu);
             ReponseMessage message = new ReponseMessage("compte Rendu ajouté avec succes", true);
             return  message;
@@ -29,8 +29,8 @@ public class CompteRenduServiceImplementation implements CompteRenduService{
     @Override
     public ReponseMessage modifierCompteRendu(CompteRendu compteRendu) {
 
-        if (compteRenduRepository.findByIdcompterendu(compteRendu.getIdcompterendu()) !=null) {
-            return compteRenduRepository.findById(compteRendu.getIdcompterendu())
+        if (compteRenduRepository.findById(compteRendu.getId()) !=null) {
+            return compteRenduRepository.findById(compteRendu.getId())
                     .map(compteRendu1->{
                         compteRendu1.setNom(compteRendu.getNom());
                         compteRendu1.setDescription(compteRendu.getDescription());
@@ -67,7 +67,7 @@ public class CompteRenduServiceImplementation implements CompteRenduService{
     @Override
     public ReponseMessage SupprimerCompteRendu(Long id) {
         final  CompteRendu compteRendu = null;
-        if (compteRenduRepository.findByIdcompterendu(id) != null) {
+        if (compteRenduRepository.findById(id) != null) {
             compteRendu.setEtat(false);
             ReponseMessage message = new ReponseMessage(" Compte rendu supprimée avec succes", true);
             return message;

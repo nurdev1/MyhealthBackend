@@ -22,10 +22,10 @@ public class EmailConstructor {
 
     private TemplateEngine templateEngine;
 
-    public MimeMessagePreparator constructNewUserEmail(Patient patient, String motdepasse) {
+    public MimeMessagePreparator constructNewUserEmail(Patient patient, String codePatient) {
         Context context = new Context();
         context.setVariable("patient", patient);
-        context.setVariable("motdepasse", motdepasse);
+        context.setVariable("codePatient", codePatient);
         String text = templateEngine.process("newUserEmailTemplate", context);
         MimeMessagePreparator messagePreparator = new MimeMessagePreparator() {
             @Override

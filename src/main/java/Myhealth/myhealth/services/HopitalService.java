@@ -28,7 +28,6 @@ public interface HopitalService {
     List<Object> NombreHopitalParVille();
     List<Hopital> NouveauHopital();
 
-    Page<Hopital> getRequestFilters(int page, int limit, String productName, Sort.Direction sortType);
 
 
 }

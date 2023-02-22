@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SyntheseMedicalRepository extends JpaRepository<SyntheseMedical,Long> {
 
-    SyntheseMedical findByIdsynthesemedical(Long idsynthesemedical);
+  //  SyntheseMedical findByIdsynthesemedical(Long idsynthesemedical);
 }

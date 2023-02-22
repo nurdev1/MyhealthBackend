@@ -18,8 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static Myhealth.myhealth.modeles.ERole.ROLE_Medecin;
-import static Myhealth.myhealth.modeles.ERole.ROLE_Patient;
+import static Myhealth.myhealth.modeles.ERole.*;
 
 @RestController
 @AllArgsConstructor
@@ -35,10 +34,10 @@ public class MedecinController {
 
    @PostMapping("/ajouter")
     ReponseMessage Ajouter(@RequestBody Medecin medecin){
-       medecin.setRole(roleRepository.findByName(ROLE_Medecin));
+       medecin.setRole(roleRepository.findByName(MEDECIN));
        ReponseMessage message =  medecinService.creerMedecin(medecin);
        System.out.println(medecin);
-        mailSender.send(emailMedecinConstructor.constructNewMedecinEmail(medecin,medecin.getMotdepasse()));
+       // mailSender.send(emailMedecinConstructor.constructNewMedecinEmail(medecin,medecin.getPassword()));
         return message;
     }
 

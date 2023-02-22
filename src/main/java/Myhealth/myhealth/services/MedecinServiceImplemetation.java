@@ -3,7 +3,6 @@ package Myhealth.myhealth.services;
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Medecin;
 import Myhealth.myhealth.repository.MedecinRepository;
-import Myhealth.myhealth.repository.RoleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,8 +16,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static Myhealth.myhealth.modeles.ERole.ROLE_Medecin;
-import static Myhealth.myhealth.modeles.ERole.ROLE_Patient;
 
 @Service
 @AllArgsConstructor
@@ -44,17 +41,17 @@ public class MedecinServiceImplemetation implements MedecinService {
 
     @Override
     public ReponseMessage modifierMedecin(Medecin medecin) {
-        if (medecinRepository.findByIdmedecin(medecin.getIdmedecin()) !=null) {
-            return medecinRepository.findById(medecin.getIdmedecin())
+        if (medecinRepository.findById(medecin.getId()) !=null) {
+            return medecinRepository.findById(medecin.getId())
                     .map(medecin1->{
                         medecin1.setNom(medecin.getNom());
                         medecin1.setPrenom(medecin.getPrenom());
                         medecin1.setAdresse(medecin.getAdresse());
                         medecin1.setVille(medecin.getVille());
                         medecin1.setPhoto(medecin.getPhoto());
-                        medecin1.setTelehone(medecin.getTelehone());
+                        medecin1.setTelephone(medecin.getTelephone());
                         medecin1.setSpecialite(medecin.getSpecialite());
-                        medecin1.setHopital(medecin.getHopital());
+                      //  medecin1.setHopital(medecin.getHopital());
                         medecinRepository.save(medecin1);
                         ReponseMessage message = new ReponseMessage("médecin modifié avec succes", true);
                         return  message;
@@ -74,19 +71,6 @@ public class MedecinServiceImplemetation implements MedecinService {
         return medecinRepository.findAll();
     }
 
-/*
-    @Override
-    public ReponseMessage SupprimerMedecin(Long idmedecin) {
-        if (medecinRepository.findByIdmedecin(idmedecin) != null) {
-            medecinRepository.deleteById(idmedecin);
-            ReponseMessage message = new ReponseMessage("Médecin supprimée avec succes", true);
-            return message;
-        } else {
-            ReponseMessage message = new ReponseMessage("Médecin non trouvée", false);
-            return message;
-        }
-    }
-*/
 
     @Override
     public List<Object> nombreMedecinparHopital(String nom) {
@@ -121,7 +105,7 @@ public class MedecinServiceImplemetation implements MedecinService {
     @Override
     public ReponseMessage SupprimerMedecin(Long idmedecin) {
         final  Medecin medecin = null;
-        if (medecinRepository.findByIdmedecin(idmedecin) != null) {
+        if (medecinRepository.findById(idmedecin) != null) {
             medecin.setEtat(false);
             ReponseMessage message = new ReponseMessage("Médecin supprimée avec succes", true);
             return message;
@@ -134,7 +118,7 @@ public class MedecinServiceImplemetation implements MedecinService {
 
     public ReponseMessage activer(Long idmedecin) {
         final  Medecin medecin = null;
-        if (medecinRepository.findByIdmedecin(idmedecin) != null) {
+        if (medecinRepository.findById(idmedecin) != null) {
             medecin.setEtat(false);
             ReponseMessage message = new ReponseMessage("Médecin supprimée avec succes", true);
             return message;
@@ -158,49 +142,7 @@ public class MedecinServiceImplemetation implements MedecinService {
         medecinRepository.save(medecin);
     }
 
-/*public class MedecinService {
 
-    // Inject the JavaMailSender instance
-    @Autowired
-    private JavaMailSender javaMailSender;
-
-    @Autowired
-    private MedecinRepository medecinRepository;
-
-    public void addMedecin(Medecin medecin) {
-        // Save the new medecin in the database
-        Medecin newMedecin = medecinRepository.save(medecin);
-        // Get the email address of the new medecin
-        String email = newMedecin.getEmail();
-
-        try {
-            // Create a new MimeMessage instance
-            MimeMessage message = javaMailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            // Set the email subject
-            helper.setSubject("Activation de votre compte");
-            // Set the email recipient
-            helper.setTo(email);
-            // Set the email body
-            String activationLink = "http://example.com/activate?id=" + newMedecin.getIdmedecin();
-            String text = "Bonjour " + newMedecin.getPrenom() + ",\n\n" +
-                    "Votre compte a été créé avec succès. Veuillez cliquer sur le lien ci-dessous pour activer votre compte : \n\n" +
-                    activationLink + "\n\n" +
-                    "Cordialement,\n" +
-                    "L'équipe de notre site";
-            helper.setText(text, true);
-            // Send the email
-            javaMailSender.send(message);
-
-            // Update the medecin's state to "true"
-            newMedecin.setEtat(true);
-            medecinRepository.save(newMedecin);
-        } catch (MessagingException e) {
-            // Handle the exception
-        }
-    }
-}
-*/
     @Override
     public void acivateEmailMedecin() {
         //Medecin newMedecin = medecinRepository.save(medecin);
@@ -212,7 +154,7 @@ public class MedecinServiceImplemetation implements MedecinService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setSubject("Activation de votre compte");
             helper.setTo(email);
-            String activationLink = "http://example.com/activate?id=" + newMedecin.getIdmedecin();
+            String activationLink = "http://example.com/activate?id=" + newMedecin.getId();
             String text = "Bonjour " + newMedecin.getPrenom() + ",\n\n" +
                     "Votre compte a été créé avec succès. Veuillez cliquer sur le lien ci-dessous pour activer votre compte : \n\n" +
                     activationLink + "\n\n" +

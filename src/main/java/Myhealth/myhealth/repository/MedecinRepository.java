@@ -12,7 +12,6 @@ public interface MedecinRepository extends JpaRepository<Medecin, Long> {
 
     //Medecin findByNumero(String numero);
     Medecin findByEmail(String email);
-    Medecin findByIdmedecin(Long id);
 
     @Query(value = "SELECT COUNT(*) FROM medecin;",nativeQuery = true)
     int NombreMedecin();

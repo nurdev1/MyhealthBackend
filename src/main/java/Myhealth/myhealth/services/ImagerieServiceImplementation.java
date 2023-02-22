@@ -15,7 +15,7 @@ public class ImagerieServiceImplementation implements ImagerieService {
     ImagerieRepository imagerieRepository;
     @Override
     public ReponseMessage creerImagerie(Imagerie imagerie) {
-        if (imagerieRepository.findByIdimagerie(imagerie.getIdimagerie()) == null){
+        if (imagerieRepository.findById(imagerie.getId()) == null){
             imagerieRepository.save(imagerie);
             ReponseMessage message = new ReponseMessage("Imagerie ajouté avec succes", true);
             return  message;
@@ -28,12 +28,12 @@ public class ImagerieServiceImplementation implements ImagerieService {
 
     @Override
     public ReponseMessage modifierImagerie(Imagerie imagerie) {
-        if (imagerieRepository.findByIdimagerie(imagerie.getIdimagerie()) !=null) {
-            return imagerieRepository.findById(imagerie.getIdimagerie())
+        if (imagerieRepository.findById(imagerie.getId()) !=null) {
+            return imagerieRepository.findById(imagerie.getId())
                     .map(imagerie1->{
                         imagerie1.setNom(imagerie.getNom());
                         imagerie1.setDescription(imagerie.getDescription());
-                        imagerie1.setPieceJoint(imagerie.getPieceJoint());
+                        imagerie1.setFichier(imagerie.getFichier());
                         imagerieRepository.save(imagerie1);
                         ReponseMessage message = new ReponseMessage("imagerie modifié avec succes", true);
                         return  message;
@@ -65,7 +65,7 @@ public class ImagerieServiceImplementation implements ImagerieService {
     @Override
     public ReponseMessage SupprimerImagerie(Long id) {
         final Imagerie imagerie = null;
-        if (imagerieRepository.findByIdimagerie(id) != null) {
+        if (imagerieRepository.findById(id) != null) {
             imagerie.setEtat(false);
             ReponseMessage message = new ReponseMessage(" Imagerie supprimée avec succes", true);
             return message;

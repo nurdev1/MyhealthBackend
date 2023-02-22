@@ -51,49 +51,4 @@ public class UtilisateusDetailsServiceImpl implements UserDetailsService, Servic
             return "Modification échoué";
         }
     }
-
-
-/*
-    @Override
-    public List<Role> afficherRoles() {
-        return roleRepository.findAll();
-    }
- */
-
-    /*
-    @Override
-    public String modifierRole(Role role) {
-        if (roleRepository.findById(role.getId()) !=null) {
-            return roleRepository.findById(role.getId())
-                    .map(r -> {
-                        r.setName(role.getName());
-                        roleRepository.save(r);
-                        return  "roles modifié avec succes";
-                    }).orElseThrow(() -> new RuntimeException("Activité non trouvée !"));
-        }else {
-            return "Modification échoué";
-        }
-    }
-    @Override
-    public String supprimerRole(Long id) {
-        if(roleRepository.findById(id).get() != null){
-            roleRepository.deleteById(id);
-            return "Modification Reçu";
-        }else {
-            return "Modification échoué";
-        }
-    }
-    @Override
-    public String supprimerCollaborateur(Long id) {
-        if(collaborateursRepository.findById(id).get() != null){
-            collaborateursRepository.deleteById(id);
-            return "Modification reçue";
-        }else{
-            return null;
-        }
-    }
-     */
-
-
-
 }

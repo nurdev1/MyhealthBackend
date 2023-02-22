@@ -17,7 +17,7 @@ public class SystheseMedicalServiceImplementation implements SystheseMedicalServ
     SyntheseMedicalRepository syntheseMedicalRepository;
     @Override
     public ReponseMessage AjouterSystheseMedical(SyntheseMedical systheseMedical) {
-        if (syntheseMedicalRepository.findByIdsynthesemedical(systheseMedical.getIdsynthesemedical()) == null){
+        if (syntheseMedicalRepository.findById(systheseMedical.getId()) == null){
             syntheseMedicalRepository.save(systheseMedical);
             ReponseMessage message = new ReponseMessage("synthèse médical ajouté avec succes", true);
             return  message;
@@ -33,8 +33,8 @@ public class SystheseMedicalServiceImplementation implements SystheseMedicalServ
     @Override
     public ReponseMessage modifierSystheseMedical(SyntheseMedical syntheseMedical) {
 
-        if (syntheseMedicalRepository.findByIdsynthesemedical(syntheseMedical.getIdsynthesemedical()) !=null) {
-            return syntheseMedicalRepository.findById(syntheseMedical.getIdsynthesemedical())
+        if (syntheseMedicalRepository.findById(syntheseMedical.getId()) !=null) {
+            return syntheseMedicalRepository.findById(syntheseMedical.getId())
                     .map(syntheseMedical1->{
                         syntheseMedical1.setNom(syntheseMedical.getNom());
                         syntheseMedical1.setDescription((syntheseMedical.getDescription()));
@@ -69,7 +69,7 @@ public class SystheseMedicalServiceImplementation implements SystheseMedicalServ
 @Override
     public ReponseMessage SupprimerSystheseMedical(Long id) {
         final SyntheseMedical syntheseMedical = null;
-        if (syntheseMedicalRepository.findByIdsynthesemedical(id) != null) {
+        if (syntheseMedicalRepository.findById(id) != null) {
             syntheseMedical.setEtat(false);
             ReponseMessage message = new ReponseMessage(" Systhèse Medical supprimée avec succes", true);
             return message;

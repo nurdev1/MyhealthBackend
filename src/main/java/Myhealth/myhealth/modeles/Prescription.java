@@ -13,18 +13,7 @@ import java.util.Date;
 @Data
 @Table
 @NoArgsConstructor
-public class Prescription {
+public class Prescription extends Consultation {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idprescription;
-    private String nom;
-    private String description;
-    private String pieceJoint;
-    private boolean etat = true;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime date = LocalDateTime.now();
 
-    @ManyToOne
-    private Consultation consultation;
 }

@@ -1,6 +1,7 @@
 package Myhealth.myhealth.controller;
 
 import Myhealth.myhealth.Message.ReponseMessage;
+import Myhealth.myhealth.jwt.JwtUtils;
 import Myhealth.myhealth.mailNotification.EmailConstructor;
 import Myhealth.myhealth.modeles.Patient;
 import Myhealth.myhealth.repository.PatientRepository;
@@ -12,11 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static Myhealth.myhealth.modeles.ERole.ROLE_Patient;
+import static Myhealth.myhealth.modeles.ERole.PATIENT;
+
 
 @Data
 @RestController
@@ -31,19 +34,25 @@ public class PatientController {
 
     @Autowired
     EmailConstructor emailConstructor;
+    //encoder du password
+    @Autowired
+    PasswordEncoder encoder;
+    @Autowired
+    JwtUtils jwtUtils;
 
     @PostMapping("/ajouter")
     ResponseEntity<String> Ajouter(@RequestBody Patient patient1){
+
         String codePatient;
         int  i = 0 ;
         if(patientRepository.existsByEmail(patient1.getEmail())==false){
             System.err.println("hello");
             System.err.println(patient1.getNom());
-            patient1.setRole(roleRepository.findByName(ROLE_Patient));
+            patient1.setRole(roleRepository.findByName(PATIENT));
             if (patient1.getPrenom() != null){
                 System.out.println("dddddddddddddddddddddddddddddddddddddii");
-                codePatient ="M"+patient1.getPrenom().substring(0,4) +patient1.getNom().substring(0,2)
-                        + patient1.getTelephone().substring(0,3)+ i;
+                codePatient ="M"+patient1.getPrenom().substring(0,5) +patient1.getNom().substring(0,2)
+                        + patient1.getTelephone().substring(0,3);
                 patient1.setCodePatient(codePatient);
                 System.out.println(codePatient);
                 System.out.println("ddddddddddddddddddddddddddddddddddddd");
@@ -54,7 +63,7 @@ public class PatientController {
         System.err.println(patient1.getNom());
         if (patient1.getNom() != null){
             System.err.println("Creer hello");
-            mailSender.send(emailConstructor.constructNewUserEmail(patient1,patient1.getMotdepasse()));
+          //  mailSender.send(emailConstructor.constructNewUserEmail(patient1,patient1.getCodePatient()));
             patientService.creerPatient(patient1);
 
         }

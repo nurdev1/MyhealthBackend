@@ -16,7 +16,7 @@ public class AnalyseServiceImplementation implements AnalyseService {
 
     @Override
     public ReponseMessage creerAnalyse(Analyse analyse) {
-        if (analyseRepository.findByIdanalyse(analyse.getIdanalyse()) == null){
+        if (analyseRepository.findById(analyse.getId()) == null){
             analyseRepository.save(analyse);
             ReponseMessage message = new ReponseMessage("analyse ajouté avec succes", true);
             return  message;
@@ -30,12 +30,12 @@ public class AnalyseServiceImplementation implements AnalyseService {
     @Override
     public ReponseMessage modifierAnalyse(Analyse analyse) {
 
-        if (analyseRepository.findByIdanalyse(analyse.getIdanalyse()) !=null) {
-            return analyseRepository.findById(analyse.getIdanalyse())
+        if (analyseRepository.findById(analyse.getId()) !=null) {
+            return analyseRepository.findById(analyse.getId())
                     .map(analyse1->{
                         analyse1.setNom(analyse.getNom());
                         analyse1.setDescription(analyse.getDescription());
-                        analyse1.setPieceJoint(analyse.getPieceJoint());
+                        analyse1.setFichier(analyse.getFichier());
                         analyseRepository.save(analyse1);
                         ReponseMessage message = new ReponseMessage("analyse modifié avec succes", true);
                         return  message;
@@ -68,7 +68,7 @@ public class AnalyseServiceImplementation implements AnalyseService {
     @Override
     public ReponseMessage SupprimerAnalyse(Long id) {
         final  Analyse analyse = null;
-        if (analyseRepository.findByIdanalyse(id) != null) {
+        if (analyseRepository.findById(id) != null) {
             analyse.setEtat(false);
             ReponseMessage message = new ReponseMessage(" Analyse supprimée avec succes", true);
             return message;

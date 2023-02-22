@@ -6,6 +6,7 @@ import Myhealth.myhealth.modeles.ERole;
 import Myhealth.myhealth.modeles.Role;
 import Myhealth.myhealth.reponse.JwtResponse;
 import Myhealth.myhealth.reponse.MessageResponse;
+import Myhealth.myhealth.repository.PatientRepository;
 import Myhealth.myhealth.repository.UtilisateusRepository;
 import Myhealth.myhealth.repository.RoleRepository;
 import Myhealth.myhealth.request.LoginRequest;
@@ -41,6 +42,8 @@ public class AuthController {
 
   @Autowired
   UtilisateusRepository collaborateursRepository;
+  @Autowired
+  PatientRepository patientRepository;
 
   @Autowired
   RoleRepository roleRepository;
@@ -140,11 +143,11 @@ public class AuthController {
       System.out.println("####################################" + signUpRequest.getRole() + "###########################################");
 
       //on recupere le role de l'utilisateur
-      Role userRole = roleRepository.findByName(ERole.ROLE_Patient);
+      Role userRole = roleRepository.findByName(ERole.PATIENT);
       System.out.println("############################ attributionde role: " + userRole + "###########################################");
 
       //on recupere le role de l'utilisateur
-      Role usermedecinRole = roleRepository.findByName(ERole.ROLE_Medecin);
+      Role usermedecinRole = roleRepository.findByName(ERole.MEDECIN);
       System.out.println("############################ attributionde role: " + userRole + "###########################################");
 
       roles.add(userRole);//on ajoute le role de l'user à roles
@@ -154,18 +157,18 @@ public class AuthController {
       strRoles.forEach(role -> {//on parcours le role
         switch (role) {
         case "admin"://si le role est à égale à admin
-          Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN);
+          Role adminRole = roleRepository.findByName(ERole.ADMIN);
           roles.add(adminRole);
 
           break;
           case "patient":
             //on recupere le role de l'utilisateur
-            Role patientRole = roleRepository.findByName(ERole.ROLE_Patient);
+            Role patientRole = roleRepository.findByName(ERole.PATIENT);
             roles.add(patientRole);
         default://dans le cas écheant
 
           //on recupere le role de l'utilisateur
-          Role medecinRole = roleRepository.findByName(ERole.ROLE_Medecin);
+          Role medecinRole = roleRepository.findByName(ERole.MEDECIN);
           roles.add(medecinRole);
         }
       });

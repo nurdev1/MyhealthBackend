@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ConsultationRepository extends JpaRepository<Consultation,Long> {
 
-    Consultation findByIdconsultation(Long idconsultation);
+   // Consultation findByIdconsultation(Long id);
 
     @Query(value = "SELECT COUNT(idconsultation) FROM medecin,consultation,patient WHERE" +
             " medecin.idmedecin=consultation.medecin_idmedecin AND " +
@@ -18,6 +18,6 @@ public interface ConsultationRepository extends JpaRepository<Consultation,Long>
    /* @Query(value = "SELECT * FROM consultation WHERE consultation.medecin_idmedecin =:consultation;",nativeQuery = true)
     List<Object> MedecinConsultation(@Param("specialite") Long idmedecin);*/
 
-    List<Consultation> findByMedecinIdmedecin(Long medecinIdmedecin);
-    List<Consultation> findByPatientIdpatient(Long patientIdpatient);
+    List<Consultation> findByMedecinId(Long medecinIdmedecin);
+    List<Consultation> findByPatientId(Long patientIdpatient);
 }

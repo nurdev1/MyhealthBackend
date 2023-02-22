@@ -15,7 +15,7 @@ public class DispensationServiceImplementation implements DispensationService{
 
     @Override
     public ReponseMessage creerDispensation(Dispensation dispensation) {
-        if (dispensationRepository.findByIddispensation(dispensation.getIddispensation()) == null){
+        if (dispensationRepository.findById(dispensation.getId()) == null){
             dispensationRepository.save(dispensation);
             ReponseMessage message = new ReponseMessage("Dispensation ajouté avec succes", true);
             return  message;
@@ -29,8 +29,8 @@ public class DispensationServiceImplementation implements DispensationService{
     @Override
     public ReponseMessage modifierDispensation(Dispensation dispensation) {
 
-        if (dispensationRepository.findByIddispensation(dispensation.getIddispensation()) !=null) {
-            return dispensationRepository.findById(dispensation.getIddispensation())
+        if (dispensationRepository.findById(dispensation.getId()) !=null) {
+            return dispensationRepository.findById(dispensation.getId())
                     .map(dispensation1->{
                         dispensation1.setNom(dispensation.getNom());
                         dispensation1.setDescription(dispensation.getDescription());
@@ -66,7 +66,7 @@ public class DispensationServiceImplementation implements DispensationService{
     @Override
     public ReponseMessage SupprimerDispensation(Long id) {
         final  Dispensation dispensation = null;
-        if (dispensationRepository.findByIddispensation(id) != null) {
+        if (dispensationRepository.findById(id) != null) {
             dispensation.setEtat(false);
             ReponseMessage message = new ReponseMessage("Dispensation supprimée avec succes", true);
             return message;

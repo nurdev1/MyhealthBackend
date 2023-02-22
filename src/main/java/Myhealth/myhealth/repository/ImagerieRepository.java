@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ImagerieRepository extends JpaRepository<Imagerie,Long> {
 
-    Imagerie findByIdimagerie(Long idimagerie);
+   // Imagerie findByIdimagerie(Long idimagerie);
 }

@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AnalyseRepository extends JpaRepository<Analyse, Long> {
 
-    Analyse findByIdanalyse(Long idanalyse);
+    //Analyse findByIdanalyse(Long idanalyse);
 }

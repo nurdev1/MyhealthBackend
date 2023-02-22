@@ -12,17 +12,6 @@ import java.time.LocalDateTime;
 @Data
 @Table
 @NoArgsConstructor
-public class Dispensation {
+public class Dispensation  extends CompteRendu{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long iddispensation;
-    private String nom;
-    private String description;
-    private String pieceJoint;
-    boolean etat = true;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime date = LocalDateTime.now();
-    @ManyToOne
-    private CompteRendu compteRendu;
 }
