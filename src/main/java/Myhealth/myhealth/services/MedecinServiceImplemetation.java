@@ -68,6 +68,9 @@ public class MedecinServiceImplemetation implements MedecinService {
 
     @Override
     public List<Medecin> afficherToutLesMedecin() {
+        Medecin medecin;
+
+
         return medecinRepository.findAll();
     }
 

@@ -54,6 +54,7 @@ public class MedecinController {
 
     @GetMapping("/afficher")
     public List<Medecin> Afficher() {
+
         return medecinService.afficherToutLesMedecin();
     }
 

@@ -40,24 +40,9 @@ public class Medecin {
 
     @ManyToOne
     private Role role;
+    @ManyToOne
+    private Utilisateus utilisateus;
 
-   /*  @ManyToOne
-    private Utilisateus utilisateus;*/
-
-
-   /* @JsonIgnore
-    @ManyToMany(
-            fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
-    @JoinTable(
-            name="MedecinPatient",
-            joinColumns = @JoinColumn(name = "idmedecin"),
-            inverseJoinColumns = @JoinColumn(name = "idpatient")
-    )
-    private List<Patient> patients = new ArrayList<>();*/
 
 
 

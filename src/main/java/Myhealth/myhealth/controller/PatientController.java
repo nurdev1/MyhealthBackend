@@ -54,7 +54,7 @@ public class PatientController {
         System.err.println(patient1.getNom());
         if (patient1.getNom() != null){
             System.err.println("Creer hello");
-           // mailSender.send(emailConstructor.constructNewUserEmail(patient1,patient1.getMotdepasse()));
+            mailSender.send(emailConstructor.constructNewUserEmail(patient1,patient1.getMotdepasse()));
             patientService.creerPatient(patient1);
 
         }

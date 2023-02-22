@@ -27,26 +27,12 @@ public class Patient {
     private String email;
     private String ville;
     private String adresse;
-    private boolean etat= true;
-    private String motdepasse;
+    private boolean etat = true;
+   // private String motdepasse;
 
     @ManyToOne
     private Role role;
-
-/*    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "patient_roles",
-            joinColumns = @JoinColumn(name = "id_patient"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();*/
-
+    @ManyToOne
+    private Utilisateus utilisateus;
 
 }
-/*public Patient trouverPatientParCode(String codePatient) {
-    for (Patient patient : patients) {
-        if (patient.getCodePatient().equals(codePatient)) {
-            return patient;
-        }
-    }
-    return null; // patient non trouvé
-}
-*/

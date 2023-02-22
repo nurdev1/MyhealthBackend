@@ -27,5 +27,7 @@ public class CompteRendu {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date = LocalDateTime.now();
     private boolean etat = true;
+    @ManyToOne
+    private Dossier dossier;
 
 }
