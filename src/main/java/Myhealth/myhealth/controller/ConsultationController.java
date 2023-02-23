@@ -32,6 +32,8 @@ private MedecinService medecinService;
 private PatientService patientService;
     @PostMapping("/ajouter")
     ReponseMessage Ajouter(@RequestBody Consultation consultation){
+        System.out.println(consultation);
+      //  System.out.println(consultation.getPatient().getId());
         return   consultationService.creerConsultation(consultation);
     }
     //@PathVariable int medecin, @PathVariable int patient  ,medecin,patient

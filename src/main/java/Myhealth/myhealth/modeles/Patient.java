@@ -15,14 +15,10 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Patient extends Utilisateus {
-
-
     private String codePatient;
     private boolean etat = true;
 
     @ManyToOne
     private Role role;
-//    @ManyToOne
-//    private Utilisateus utilisateus;
 
 }

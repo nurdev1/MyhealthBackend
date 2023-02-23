@@ -2,8 +2,7 @@ package Myhealth.myhealth.modeles;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,7 +11,10 @@ import java.util.Date;
 @Entity
 @Data
 @Table
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Dossier {
 
     @Id
@@ -24,6 +26,11 @@ public class Dossier {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date = LocalDateTime.now();
     private boolean etat = true;
+    private String taille;
+    private String poids;
+    private String groupeSanguin;
+    private String antecedentsMedicaux;
+    private String traitements;
     @ManyToOne
     private Patient patient;
 }

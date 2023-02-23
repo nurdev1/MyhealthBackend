@@ -19,7 +19,7 @@ public interface DossierService {
     List<Dossier> afficherToutLesDossier();
 
     //Suppression d'un Dossier
-    ReponseMessage SupprimerDossier(Long iddossier);
+    ReponseMessage SupprimerDossier(Long id);
     public List<Dossier> getDossiersForPatient(String codePatient);
 
     Dossier addDossier(Long patientId, Long medecinId, Dossier dossierDto);

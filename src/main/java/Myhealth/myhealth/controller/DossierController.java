@@ -21,6 +21,11 @@ public class DossierController {
     //ajout
     @PostMapping("/ajouter")
     public  ReponseMessage Ajouter(@RequestBody Dossier dossier){
+        System.out.println(dossier);
+        System.out.println("vgggggggggggggggg  hhhhhhhhhh");
+        System.out.println(dossier.getPatient().getId());
+        System.out.println("jhfvbhvbfjknjgknbnhghbvgvgggggggggggggggggggggggggggggggggggggg");
+        System.out.println(dossier.getId());
         return dossierService.creerDossier(dossier);
     }
     //modifier
@@ -60,6 +65,7 @@ public class DossierController {
         dossierService.deleteDossier(dossierId, medecinId);
         return new ResponseEntity<>("Le dossier a été supprimé avec succès", HttpStatus.OK);
     }
+
 
 }
 

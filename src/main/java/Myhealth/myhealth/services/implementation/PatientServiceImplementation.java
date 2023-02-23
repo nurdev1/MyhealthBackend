@@ -1,10 +1,11 @@
-package Myhealth.myhealth.services;
+package Myhealth.myhealth.services.implementation;
 
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.modeles.Patient;
 import Myhealth.myhealth.repository.DossierRepository;
 import Myhealth.myhealth.repository.PatientRepository;
+import Myhealth.myhealth.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-public class PatientServiceImplementation implements PatientService{
+public class PatientServiceImplementation implements PatientService {
 
     @Autowired
     PatientRepository patientRepository;

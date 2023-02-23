@@ -1,10 +1,11 @@
-package Myhealth.myhealth.services;
+package Myhealth.myhealth.services.implementation;
 
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Consultation;
 import Myhealth.myhealth.modeles.Medecin;
 import Myhealth.myhealth.modeles.Patient;
 import Myhealth.myhealth.repository.ConsultationRepository;
+import Myhealth.myhealth.services.ConsultationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class ConsultationServiceImplementation implements ConsultationService {
     @Autowired
     ConsultationRepository consultationRepository;
 
-    @Override
+/*    @Override
     public ReponseMessage creerConsultation(Consultation consultation) {
         if (consultationRepository.findById(consultation.getId()) == null) {
             consultationRepository.save(consultation);
@@ -28,7 +29,19 @@ public class ConsultationServiceImplementation implements ConsultationService {
 
             return message;
         }
+    }*/
+@Override
+public ReponseMessage creerConsultation(Consultation consultation) {
+    if (consultationRepository.findByNom(consultation.getNom()) == null) {
+        consultationRepository.save(consultation);
+        ReponseMessage message = new ReponseMessage("consultation ajouté avec succes", true);
+        return message;
+    } else {
+        ReponseMessage message = new ReponseMessage("Ce consultation  existe déjà ", false);
+
+        return message;
     }
+}
     //,  int medecin, int patient
 
     @Override

@@ -10,7 +10,7 @@ import java.util.List;
 public interface ConsultationRepository extends JpaRepository<Consultation,Long> {
 
    // Consultation findByIdconsultation(Long id);
-
+Consultation  findByNom(String nom);
     @Query(value = "SELECT COUNT(idconsultation) FROM medecin,consultation,patient WHERE" +
             " medecin.idmedecin=consultation.medecin_idmedecin AND " +
             "patient.idpatient=consultation.patient_idpatient;",nativeQuery = true)

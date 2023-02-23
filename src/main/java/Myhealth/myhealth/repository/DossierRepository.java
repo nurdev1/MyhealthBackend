@@ -11,5 +11,7 @@ import java.util.List;
 public interface DossierRepository extends JpaRepository<Dossier, Long> {
 
     //Dossier findByIddossier(Long id);
+    Dossier findByNom(String nom);
+
     List<Dossier> findByPatient(Patient patient);
 }

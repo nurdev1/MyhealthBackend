@@ -1,10 +1,11 @@
-package Myhealth.myhealth.services;
+package Myhealth.myhealth.services.implementation;
 
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.modeles.Patient;
 import Myhealth.myhealth.repository.DossierRepository;
 import Myhealth.myhealth.repository.PatientRepository;
+import Myhealth.myhealth.services.DossierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,17 @@ public class DossierServiceImplementation  implements DossierService {
 
     @Override
     public ReponseMessage creerDossier(Dossier dossier) {
+        if (dossierRepository.findByNom(dossier.getNom()) == null) {
+            dossierRepository.save(dossier);
+            ReponseMessage message = new ReponseMessage("dossier ajouté avec succes", true);
+            return message;
+        } else {
+            ReponseMessage message = new ReponseMessage("Ce dossier existe déjà ", false);
+
+            return message;
+        }
+    }
+    /*public ReponseMessage creerDossier(Dossier dossier) {
         if (dossierRepository.findById(dossier.getId()) == null) {
             dossierRepository.save(dossier);
             ReponseMessage message = new ReponseMessage("patient ajouté avec succes", true);
@@ -30,7 +42,7 @@ public class DossierServiceImplementation  implements DossierService {
 
             return message;
         }
-    }
+    }*/
 
     @Override
     public ReponseMessage modifierDossier(Dossier dossier) {
@@ -54,19 +66,6 @@ public class DossierServiceImplementation  implements DossierService {
     public List<Dossier> afficherToutLesDossier() {
         return dossierRepository.findAll();
     }
-
- /*   @Override
-    public ReponseMessage SupprimerDossier(Long iddossier) {
-
-        if (dossierRepository.findByIddossier(iddossier) != null) {
-            dossierRepository.deleteById(iddossier);
-            ReponseMessage message = new ReponseMessage("dossier Medical supprimé avec succes", true);
-            return message;
-        } else {
-            ReponseMessage message = new ReponseMessage("dossier Medical non trouvé", false);
-            return message;
-        }
-    }*/
 
     @Override
     public ReponseMessage SupprimerDossier(Long id) {

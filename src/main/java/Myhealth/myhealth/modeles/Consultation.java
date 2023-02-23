@@ -27,6 +27,8 @@ public class Consultation {
     private String fichier;
     private boolean etat = true;
     private Date date;
+    private  String observations;
+    private String medicaments;
     //@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     //private LocalDateTime date = LocalDateTime.now();
     @ManyToOne

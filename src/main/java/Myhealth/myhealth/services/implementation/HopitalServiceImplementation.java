@@ -1,8 +1,9 @@
-package Myhealth.myhealth.services;
+package Myhealth.myhealth.services.implementation;
 
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Hopital;
 import Myhealth.myhealth.repository.HopitalRepository;
+import Myhealth.myhealth.services.HopitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 @Service
-public class HopitalServiceImplementation implements HopitalService{
+public class HopitalServiceImplementation implements HopitalService {
 
    @Autowired
     public HopitalRepository hopitalRepository;

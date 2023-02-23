@@ -19,14 +19,6 @@ public class Medecin extends Utilisateus{
     private String specialite;
     private boolean etat = false;
 
-
-   /* @ManyToMany
-    private Hopital hopital;*/
-   // private String motdepasse;
-
-
-   /* @ManyToOne
-    private Utilisateus utilisateus;*/
   @JsonIgnore
   @ManyToMany(
           fetch = FetchType.LAZY,
