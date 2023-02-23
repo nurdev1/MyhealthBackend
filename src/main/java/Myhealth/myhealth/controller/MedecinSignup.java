@@ -1,17 +1,21 @@
 package Myhealth.myhealth.controller;
 
+import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.jwt.JwtUtils;
 import Myhealth.myhealth.modeles.ERole;
+import Myhealth.myhealth.modeles.Medecin;
 import Myhealth.myhealth.modeles.Patient;
 import Myhealth.myhealth.modeles.Role;
-import Myhealth.myhealth.modeles.Utilisateus;
 import Myhealth.myhealth.reponse.JwtResponse;
 import Myhealth.myhealth.reponse.MessageResponse;
+import Myhealth.myhealth.repository.MedecinRepository;
 import Myhealth.myhealth.repository.PatientRepository;
 import Myhealth.myhealth.repository.RoleRepository;
 import Myhealth.myhealth.request.LoginRequest;
+import Myhealth.myhealth.request.SignupMedecinRequest;
 import Myhealth.myhealth.request.SignupPatientRequest;
-import Myhealth.myhealth.request.SignupRequest;
+import Myhealth.myhealth.services.MedecinDetailsImpl;
+import Myhealth.myhealth.services.MedecinService;
 import Myhealth.myhealth.services.PatientDetailsImpl;
 import Myhealth.myhealth.services.UtilisateusDetailsImpl;
 import org.slf4j.Logger;
@@ -29,28 +33,77 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static Myhealth.myhealth.modeles.ERole.PATIENT;
 
 @RestController
-@RequestMapping("/patient")
-public class PatientSignup {
+@RequestMapping("/medecin")
+public class MedecinSignup {
 
     private static final Logger log = LoggerFactory.getLogger(AuthController.class);
 
     @Autowired
     AuthenticationManager authenticationManager;
 
+    @Autowired
+    MedecinRepository medecinRepository;
 
+    @Autowired
+    RoleRepository roleRepository;
+    @Autowired
+    MedecinService medecinService;
+
+    @Autowired
+    PasswordEncoder encoder;
 
     @Autowired
     JwtUtils jwtUtils;
 
+    @PostMapping("/signup")
+    public ResponseEntity<?> registerMedecin(@Valid @RequestBody SignupMedecinRequest signupMedecinRequest) {
+        if (medecinRepository.existsByEmail(signupMedecinRequest.getUsername())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Erreur: Ce nom d'utilisateur existe déjà!"));
+        }
 
+        if (medecinRepository.existsByEmail(signupMedecinRequest.getEmail())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Erreur: Cet email est déjà utilisé!"));
+        }
+
+        // Create new patient's account
+        Medecin medecin = new Medecin();
+
+
+        medecin.setUsername(signupMedecinRequest.getUsername());
+        medecin.setEmail(signupMedecinRequest.getEmail());
+                encoder.encode(signupMedecinRequest.getPassword());
+        medecin.setNom(signupMedecinRequest.getNom());
+        medecin.setPrenom(signupMedecinRequest.getPrenom());
+        medecin.setPhoto(signupMedecinRequest.getPhoto());
+        medecin.setTelephone(signupMedecinRequest.getTelephone());
+        medecin.setSpecialite(signupMedecinRequest.getSpecialitet());
+        medecin.setPassword(encoder.encode(signupMedecinRequest.getPassword()));
+        // patient.setRole(roleRepository.findByName(PATIENT));
+        Role patientRole = roleRepository.findByName(ERole.MEDECIN);
+               // .orElseThrow(() -> new RuntimeException("Erreur: le rôle n'est pas trouvé."));
+        medecin.setRole(patientRole);
+
+
+
+        System.out.println(medecin);
+        // mailSender.send(emailMedecinConstructor.constructNewMedecinEmail(medecin,medecin.getPassword()));
+
+        medecinRepository.save(medecin);
+        System.out.println(medecin);
+
+        return ResponseEntity.ok(new MessageResponse("Medecin enregistré avec succès!"));
+    }
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -88,10 +141,10 @@ public class PatientSignup {
         String jwt = jwtUtils.generateJwtToken(authentication);
 
         //on recupere les infos de l'user
-        UtilisateusDetailsImpl patientDetails = (UtilisateusDetailsImpl) authentication.getPrincipal();
+        UtilisateusDetailsImpl medecinDetails = (UtilisateusDetailsImpl) authentication.getPrincipal();
 
         //on recupere les roles de l'users
-        List<String> roles = patientDetails.getAuthorities().stream()
+        List<String> roles = medecinDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
@@ -99,12 +152,10 @@ public class PatientSignup {
 
         //on retourne une reponse, contenant l'id username, e-mail et le role du collaborateur
         return ResponseEntity.ok(new JwtResponse(jwt,
-                patientDetails.getId(),
-                patientDetails.getUsername(),
-                patientDetails.getEmail(),
+                medecinDetails.getId(),
+                medecinDetails.getUsername(),
+                medecinDetails.getEmail(),
                 roles));
     }
-
-
 
 }

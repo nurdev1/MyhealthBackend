@@ -1,8 +1,11 @@
 package Myhealth.myhealth.services;
 
+import Myhealth.myhealth.modeles.Medecin;
+import Myhealth.myhealth.modeles.Patient;
 import Myhealth.myhealth.modeles.Utilisateus;
-import Myhealth.myhealth.repository.UtilisateusRepository;
+import Myhealth.myhealth.repository.MedecinRepository;
 import Myhealth.myhealth.repository.RoleRepository;
+import Myhealth.myhealth.repository.UtilisateusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,10 +19,10 @@ l'utilisateur dans la documentation Spring.
  */
 
 @Service
-public class UtilisateusDetailsServiceImpl implements UserDetailsService, Services {
+public class MedecinDetailsServiceImpl implements UserDetailsService, Services {
 
     @Autowired
-    UtilisateusRepository collaborateursRepository;
+    MedecinRepository medecinRepository;
 
     @Autowired
     RoleRepository roleRepository;
@@ -28,25 +31,25 @@ public class UtilisateusDetailsServiceImpl implements UserDetailsService, Servic
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Utilisateus user = collaborateursRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("collaborateur non trouvé: " + username));
+        Medecin user = medecinRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Médecin non trouvé: " + username));
 
-        return UtilisateusDetailsImpl.build(user);
+        return MedecinDetailsImpl.build(user);
     }
 
     @Override
     public String modifierCollaborateur(Utilisateus collaborateurs) {
         System.out.println("salut");
-        if (collaborateursRepository.findById(collaborateurs.getId()) != null) {
+        if (medecinRepository.findById(collaborateurs.getId()) != null) {
             System.out.println("salut");
-            return collaborateursRepository.findById(collaborateurs.getId())
+            return medecinRepository.findById(collaborateurs.getId())
                     .map(c -> {
                         c.setPassword(collaborateurs.getPassword());
                         c.setEmail(collaborateurs.getEmail());
-                        collaborateursRepository.save(c);
+                        medecinRepository.save(c);
                         return  "Modifié Reçu avec succes";
 
-                    }).orElseThrow(() -> new RuntimeException("Utilisateurs non trouvée !"));
+                    }).orElseThrow(() -> new RuntimeException("Medecin non trouvée !"));
         }else {
             return "Modification échoué";
         }

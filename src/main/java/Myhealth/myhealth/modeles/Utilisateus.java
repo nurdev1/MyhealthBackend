@@ -4,6 +4,7 @@ package Myhealth.myhealth.modeles;
 
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +25,8 @@ import java.util.Set;
     })
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Utilisateus {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,8 +56,7 @@ public class Utilisateus {
         inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles = new HashSet<>();
 
-  public Utilisateus() {
-  }
+
 
   public Utilisateus(String username, String email, String password) {
     this.username = username;

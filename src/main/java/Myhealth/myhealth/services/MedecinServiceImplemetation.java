@@ -177,6 +177,31 @@ public class MedecinServiceImplemetation implements MedecinService {
         medecinRepository.save(medecin);
     }
 
+
+      /*  public void registerPatient(SignupPatientRequest signupPatientRequest) throws UsernameAlreadyExistsException, EmailAlreadyExistsException {
+            if (patientRepository.existsByUsername(signupPatientRequest.getUsername())) {
+                throw new UsernameAlreadyExistsException();
+            }
+
+            if (patientRepository.existsByEmail(signupPatientRequest.getEmail())) {
+                throw new EmailAlreadyExistsException();
+            }
+
+            Patient patient = new Patient();
+            patient.setUsername(signupPatientRequest.getUsername());
+            patient.setEmail(signupPatientRequest.getEmail());
+            patient.setPassword(passwordEncoder.encode(signupPatientRequest.getPassword()));
+            patient.setNom(signupPatientRequest.getNom());
+            patient.setPrenom(signupPatientRequest.getPrenom());
+            patient.setPhoto(signupPatientRequest.getPhoto());
+            patient.setTelephone(signupPatientRequest.getTelephone());
+            patient.setAdresse(signupPatientRequest.getAdresse());
+            patient.setRole(Role.PATIENT);
+            patientRepository.save(patient);
+        }
+    */
+
+
 }
 
 

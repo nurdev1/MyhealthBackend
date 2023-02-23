@@ -4,7 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class SignupPatientRequest {
+public class SignupMedecinRequest {
 
     @NotBlank
     @Size(max = 20)
@@ -20,7 +20,7 @@ public class SignupPatientRequest {
     private String password;
 
     @NotBlank
-    private String codePatient;
+    private String specialite;
     @NotBlank
     private String nom;
     @NotBlank
@@ -29,6 +29,8 @@ public class SignupPatientRequest {
     private String telephone;
     @NotBlank
     private String photo;
+    @NotBlank
+    private String diplome;
 
     public String getUsername() {
         return username;
@@ -54,12 +56,20 @@ public class SignupPatientRequest {
         this.password = password;
     }
 
-    public String getCodePatient() {
-        return codePatient;
+    public String getDiplome() {
+        return diplome;
     }
 
-    public void setCodePatient(String codePatient) {
-        this.codePatient = codePatient;
+    public void setDiplome(String diplome) {
+        this.diplome = diplome;
+    }
+
+    public String getSpecialitet() {
+        return specialite;
+    }
+
+    public void setSpecialite(String specialite) {
+        this.specialite = specialite;
     }
 
 

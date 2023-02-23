@@ -3,9 +3,13 @@ package Myhealth.myhealth.controller;
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.jwt.JwtUtils;
 import Myhealth.myhealth.mailNotification.EmailConstructor;
+import Myhealth.myhealth.modeles.ERole;
 import Myhealth.myhealth.modeles.Patient;
+import Myhealth.myhealth.modeles.Role;
+import Myhealth.myhealth.reponse.MessageResponse;
 import Myhealth.myhealth.repository.PatientRepository;
 import Myhealth.myhealth.repository.RoleRepository;
+import Myhealth.myhealth.request.SignupPatientRequest;
 import Myhealth.myhealth.services.PatientService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +20,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static Myhealth.myhealth.modeles.ERole.PATIENT;
@@ -40,7 +45,10 @@ public class PatientController {
     @Autowired
     JwtUtils jwtUtils;
 
-    @PostMapping("/ajouter")
+
+
+
+   /* @PostMapping("/ajouter")
     ResponseEntity<String> Ajouter(@RequestBody Patient patient1){
 
         String codePatient;
@@ -58,8 +66,8 @@ public class PatientController {
                 System.out.println("ddddddddddddddddddddddddddddddddddddd");
             }
         }
-      /*  String passe ="masante@2023";
-        patient1.setMotdepasse(passe);*/
+      *//*  String passe ="masante@2023";
+        patient1.setMotdepasse(passe);*//*
         System.err.println(patient1.getNom());
         if (patient1.getNom() != null){
             System.err.println("Creer hello");
@@ -69,7 +77,74 @@ public class PatientController {
         }
         i = i+1;
       return new ResponseEntity<>("patient enregister avec succès", HttpStatus.OK);
-    }
+    }*/
+   @PostMapping("signup")
+   public ResponseEntity<?> registerPatient(@Valid @RequestBody SignupPatientRequest signupPatientRequest) {
+       if (patientRepository.existsByEmail(signupPatientRequest.getUsername())) {
+           return ResponseEntity
+                   .badRequest()
+                   .body(new MessageResponse("Erreur: Ce nom d'utilisateur existe déjà!"));
+       }
+
+       if (patientRepository.existsByEmail(signupPatientRequest.getEmail())) {
+           return ResponseEntity
+                   .badRequest()
+                   .body(new MessageResponse("Erreur: Cet email est déjà utilisé!"));
+       }
+
+       // Create new patient's account
+       Patient patient = new Patient();
+
+
+       patient.setUsername(signupPatientRequest.getUsername());
+       patient.setEmail(signupPatientRequest.getEmail());
+       encoder.encode(signupPatientRequest.getPassword());
+       patient.setNom(signupPatientRequest.getNom());
+       patient.setPrenom(signupPatientRequest.getPrenom());
+       patient.setPhoto(signupPatientRequest.getPhoto());
+       patient.setTelephone(signupPatientRequest.getTelephone());
+       patient.setAdresse(signupPatientRequest.getCodePatient());
+       patient.setPassword(encoder.encode(signupPatientRequest.getPassword()));
+       // patient.setRole(roleRepository.findByName(PATIENT));
+       Role patientRole = roleRepository.findByName(ERole.PATIENT);
+       // .orElseThrow(() -> new RuntimeException("Erreur: le rôle n'est pas trouvé."));
+       patient.setRole(patientRole);
+
+
+
+      /*  Role patientRole = roleRepository.findByName(PATIENT)
+                .orElseThrow(() -> new RuntimeException("Erreur: le rôle n'est pas trouvé."));
+        Set<Role> roles = new HashSet<>();
+        roles.add(patientRole);
+        patient.setRoles(roles);*/
+       String codePatient;
+       int  i = 0 ;
+       if(patientRepository.existsByEmail(patient.getEmail())==false){
+           System.err.println("hello");
+           System.err.println(patient.getNom());
+           patient.setRole(roleRepository.findByName(PATIENT));
+           if (patient.getPrenom() != null){
+               System.out.println("dddddddddddddddddddddddddddddddddddddii");
+               codePatient ="M"+patient.getTelephone().substring(0,2) + patient.getPrenom().substring(0,2) +patient.getNom().substring(0,2)
+                       +  patient.getUsername().substring(0,2);
+               patient.setCodePatient(codePatient);
+               System.out.println(codePatient);
+               System.out.println("ddddddddddddddddddddddddddddddddddddd");
+           }
+       }
+      /*  String passe ="masante@2023";
+        patient1.setMotdepasse(passe);*/
+       System.err.println(patient.getNom());
+       if (patient.getNom() != null){
+           System.err.println("Creer hello");
+           //  mailSender.send(emailConstructor.constructNewUserEmail(patient1,patient1.getCodePatient()));
+       }
+       i = i+1;
+
+       patientRepository.save(patient);
+
+       return ResponseEntity.ok(new MessageResponse("Patient enregistré avec succès!"));
+   }
     @GetMapping("/modifier")
     public ReponseMessage Modifier(@RequestBody Patient patient){
         return patientService.modifierPatient(patient);
