@@ -102,6 +102,8 @@ public class PatientSignup {
                 patientDetails.getId(),
                 patientDetails.getUsername(),
                 patientDetails.getEmail(),
+                patientDetails.getNom(),
+                patientDetails.getPrenom(),
                 roles));
     }
 

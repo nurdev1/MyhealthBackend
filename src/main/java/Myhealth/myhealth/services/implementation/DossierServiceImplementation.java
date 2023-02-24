@@ -105,4 +105,18 @@ public class DossierServiceImplementation  implements DossierService {
     public void deleteDossier(Long dossierId, Long medecinId) {
 
     }
+
+/*    public Consultation updateConsultation(Long id, Consultation consultation) {
+        Consultation existingConsultation = consultationRepository.findById(id).orElse(null);
+        if (existingConsultation == null) {
+            return null;
+        }
+        existingConsultation.setDate(consultation.getDate());
+        existingConsultation.setPatient(consultation.getPatient());
+        existingConsultation.setMedecin(consultation.getMedecin());
+        // Autres champs à mettre à jour...
+        return consultationRepository.save(existingConsultation);
+    }*/
+
+
 }

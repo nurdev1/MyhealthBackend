@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-//@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("api/auth")
 //@CrossOrigin(origins = "*", maxAge = 3600, allowCredentials = "true")
@@ -108,6 +108,8 @@ public class AuthController {
                          collaborateursDetails.getId(),
                          collaborateursDetails.getUsername(),
                          collaborateursDetails.getEmail(),
+            collaborateursDetails.getNom(),
+            collaborateursDetails.getPrenom(),
                          roles));
   }
 

@@ -136,13 +136,13 @@ public class WebSecurityConfig {
             .and()
         .authorizeRequests()
         .antMatchers("/api/auth/**").permitAll()
-        .antMatchers("/patient/**").permitAll()
-        .antMatchers("/medecin/**").permitAll()
-            .antMatchers("/dossier/**").permitAll()
+        .antMatchers("/patient/signup**").permitAll()
+        .antMatchers("/medecin/save**").permitAll()
+     /*       .antMatchers("/dossier/**").permitAll()
             .antMatchers("/role/**").permitAll()
         .antMatchers("/hopital/**").permitAll()
         .antMatchers("/consultation/**").permitAll()
-        .antMatchers("/analyse/**").permitAll()
+        .antMatchers("/analyse/**").permitAll()*/
        /* .antMatchers("/api/dossier/**").permitAll()*/
         .anyRequest().authenticated();
             //.and()

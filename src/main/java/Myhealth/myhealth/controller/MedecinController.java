@@ -65,13 +65,13 @@ public ResponseEntity<?> registerMedecin(@Valid @RequestBody SignupMedecinReques
     if (medecinRepository.existsByEmail(signupMedecinRequest.getUsername())) {
         return ResponseEntity
                 .badRequest()
-                .body(new MessageResponse("Erreur: Ce nom d'utilisateur existe déjà!"));
+                .body(new MessageResponse("Erreur: Ce nom médecin existe déjà!"));
     }
 
     if (medecinRepository.existsByEmail(signupMedecinRequest.getEmail())) {
         return ResponseEntity
                 .badRequest()
-                .body(new MessageResponse("Erreur: Cet email est déjà utilisé!"));
+                .body(new MessageResponse("Erreur: Ce médecin est déjà utilisé!"));
     }
 
     // Create new patient's account

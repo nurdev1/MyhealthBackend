@@ -23,6 +23,8 @@ public class UtilisateusDetailsImpl implements UserDetails {
   private String username;
 
   private String email;
+  private String nom;
+  private  String prenom;
 
   @JsonIgnore
   private String password;
@@ -55,6 +57,8 @@ public class UtilisateusDetailsImpl implements UserDetails {
         user.getId(), 
         user.getUsername(), 
         user.getEmail(),
+            user.getNom(),
+            user.getPrenom(),
         user.getPassword(), 
         authorities
     );
@@ -74,10 +78,19 @@ public class UtilisateusDetailsImpl implements UserDetails {
     return email;
   }
 
+  public String getNom() {
+    return nom;
+  }
+
+  public String getPrenom() {
+    return prenom;
+  }
+
   @Override
   public String getPassword() {
     return password;
   }
+
 
   @Override
   public String getUsername() {

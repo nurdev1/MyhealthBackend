@@ -155,6 +155,8 @@ public class MedecinSignup {
                 medecinDetails.getId(),
                 medecinDetails.getUsername(),
                 medecinDetails.getEmail(),
+                medecinDetails.getNom(),
+                medecinDetails.getPrenom(),
                 roles));
     }
 
