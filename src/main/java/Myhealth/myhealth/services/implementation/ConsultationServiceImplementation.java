@@ -18,9 +18,20 @@ public class ConsultationServiceImplementation implements ConsultationService {
     @Autowired
     ConsultationRepository consultationRepository;
 
-/*    @Override
+    /*    @Override
+        public ReponseMessage creerConsultation(Consultation consultation) {
+            if (consultationRepository.findById(consultation.getId()) == null) {
+                consultationRepository.save(consultation);
+                ReponseMessage message = new ReponseMessage("consultation ajouté avec succes", true);
+                return message;
+            } else {
+                ReponseMessage message = new ReponseMessage("Ce consultation  existe déjà ", false);
+                return message;
+            }
+        }*/
+    @Override
     public ReponseMessage creerConsultation(Consultation consultation) {
-        if (consultationRepository.findById(consultation.getId()) == null) {
+        if (consultationRepository.findByNom(consultation.getNom()) == null) {
             consultationRepository.save(consultation);
             ReponseMessage message = new ReponseMessage("consultation ajouté avec succes", true);
             return message;
@@ -29,19 +40,7 @@ public class ConsultationServiceImplementation implements ConsultationService {
 
             return message;
         }
-    }*/
-@Override
-public ReponseMessage creerConsultation(Consultation consultation) {
-    if (consultationRepository.findByNom(consultation.getNom()) == null) {
-        consultationRepository.save(consultation);
-        ReponseMessage message = new ReponseMessage("consultation ajouté avec succes", true);
-        return message;
-    } else {
-        ReponseMessage message = new ReponseMessage("Ce consultation  existe déjà ", false);
-
-        return message;
     }
-}
     //,  int medecin, int patient
 
     @Override

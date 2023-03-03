@@ -23,7 +23,7 @@ public interface MedecinService {
     List<Object> nombreMedecinHopital();
     List<Object> NombreMedecinSpecialite();
     List<Object> NombreMedecinParSpecialite(@Param("specialite") String specialite);
-    int NombreMedecin();
+    List<Object> NombreMedecin();
     List<Object> HopitalListeMedecin();
 
     void acivateEmailMedecin();

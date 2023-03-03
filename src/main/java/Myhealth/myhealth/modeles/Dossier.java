@@ -26,11 +26,6 @@ public class Dossier {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date = LocalDateTime.now();
     private boolean etat = true;
-    private String taille;
-    private String poids;
-    private String groupeSanguin;
-    private String antecedentsMedicaux;
-    private String traitements;
     @ManyToOne
     private Patient patient;
 }

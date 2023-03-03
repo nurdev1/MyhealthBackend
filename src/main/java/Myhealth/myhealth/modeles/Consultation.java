@@ -28,13 +28,14 @@ public class Consultation {
     private boolean etat = true;
     private Date date;
     private  String observations;
-    private String medicaments;
     //@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     //private LocalDateTime date = LocalDateTime.now();
     @ManyToOne
     private Medecin medecin;
     @ManyToOne
     private Patient patient;
+    @ManyToOne
+    private Dossier dossier;
 }
 
 /*@ManyToMany(fetch = FetchType.LAZY)

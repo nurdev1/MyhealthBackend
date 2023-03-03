@@ -1,7 +1,6 @@
 package Myhealth.myhealth.repository;
 
 import Myhealth.myhealth.modeles.Medecin;
-import Myhealth.myhealth.modeles.Utilisateus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,20 +14,20 @@ public interface MedecinRepository extends JpaRepository<Medecin, Long> {
     //Medecin findByNumero(String numero);
     Medecin findByEmail(String email);
 
-        boolean existsByUsername(String username);
-        boolean existsByEmail(String email);
+    boolean existsByUsername(String username);
+    boolean existsByEmail(String email);
     Optional<Medecin> findByUsername(String username);
 
 
 
-    @Query(value = "SELECT COUNT(*) FROM medecin;",nativeQuery = true)
-    int NombreMedecin();
+    @Query(value = "SELECT * FROM `users` ORDER BY date DESC LIMIT 3;",nativeQuery = true)
+    List<Object> NombreMedecin();
     //nombre par spécialité
-    @Query(value = "SELECT COUNT(*) FROM medecin WHERE medecin.specialite=:specialite;",nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM `users` WHERE medecin.specialite=:specialite;",nativeQuery = true)
     List<Object> NombreMedecinParSpecialite(@Param("specialite") String specialite);
 
     //nombre par spécialité
-    @Query(value = "SELECT COUNT(*),medecin.specialite FROM medecin GROUP BY medecin.specialite;",nativeQuery = true)
+    @Query(value = "SELECT COUNT(*),medecin.specialite FROM `users` GROUP BY medecin.specialite;",nativeQuery = true)
     List<Object> NombreMedecinSpecialite();
 
     @Query(value = "SELECT COUNT(*),hopital.nom FROM medecin,hopital WHERE " +

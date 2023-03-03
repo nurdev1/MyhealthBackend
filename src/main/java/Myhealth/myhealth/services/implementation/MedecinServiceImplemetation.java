@@ -52,7 +52,7 @@ public class MedecinServiceImplemetation implements MedecinService {
                         medecin1.setPhoto(medecin.getPhoto());
                         medecin1.setTelephone(medecin.getTelephone());
                         medecin1.setSpecialite(medecin.getSpecialite());
-                      //  medecin1.setHopital(medecin.getHopital());
+                        //  medecin1.setHopital(medecin.getHopital());
                         medecinRepository.save(medecin1);
                         ReponseMessage message = new ReponseMessage("médecin modifié avec succes", true);
                         return  message;
@@ -94,7 +94,7 @@ public class MedecinServiceImplemetation implements MedecinService {
     }
 
     @Override
-    public int NombreMedecin() {
+    public List<Object> NombreMedecin() {
         return medecinRepository.NombreMedecin();
     }
 
@@ -188,11 +188,9 @@ public class MedecinServiceImplemetation implements MedecinService {
             if (patientRepository.existsByUsername(signupPatientRequest.getUsername())) {
                 throw new UsernameAlreadyExistsException();
             }
-
             if (patientRepository.existsByEmail(signupPatientRequest.getEmail())) {
                 throw new EmailAlreadyExistsException();
             }
-
             Patient patient = new Patient();
             patient.setUsername(signupPatientRequest.getUsername());
             patient.setEmail(signupPatientRequest.getEmail());
@@ -206,7 +204,6 @@ public class MedecinServiceImplemetation implements MedecinService {
             patientRepository.save(patient);
         }
     */
-
 
 }
 

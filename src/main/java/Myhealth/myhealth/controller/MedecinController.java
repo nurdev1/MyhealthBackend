@@ -120,7 +120,7 @@ public ResponseEntity<?> registerMedecin(@Valid @RequestBody SignupMedecinReques
 
     //nombre de médecin
     @GetMapping("/compte")
-    public int nombreMedecin() {
+    public List<Object> nombreMedecin() {
         return medecinService.NombreMedecin();
     } //nombre de médecin
 
