@@ -23,6 +23,8 @@ public class Hopital {
     private String ville;
     private String adresse;
     private String photo;
+    private String email;
+    private String telephone;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date = LocalDateTime.now();
     private boolean etat = true;

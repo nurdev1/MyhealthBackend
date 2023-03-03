@@ -42,4 +42,6 @@ public interface MedecinRepository extends JpaRepository<Medecin, Long> {
             "hopital.nom,hopital.ville FROM medecin,hopital WHERE medecin.hopital_idhopital=" +
             "hopital.idhopital;",nativeQuery = true)
     List<Object> HopitalListeMedecin();
+    @Query(value = "SELECT * FROM `users` ORDER BY date DESC LIMIT 3;\n",nativeQuery = true)
+    List<Medecin> dernier();
 }

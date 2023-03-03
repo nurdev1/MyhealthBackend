@@ -29,4 +29,5 @@ public interface MedecinService {
     void acivateEmailMedecin();
 
     void activerMedecin(Long id);
+    List<Medecin> dernier();
 }

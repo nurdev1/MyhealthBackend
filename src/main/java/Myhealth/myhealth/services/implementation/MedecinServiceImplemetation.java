@@ -178,6 +178,11 @@ public class MedecinServiceImplemetation implements MedecinService {
         medecinRepository.save(medecin);
     }
 
+    @Override
+    public List<Medecin> dernier() {
+        return medecinRepository.dernier();
+    }
+
 
       /*  public void registerPatient(SignupPatientRequest signupPatientRequest) throws UsernameAlreadyExistsException, EmailAlreadyExistsException {
             if (patientRepository.existsByUsername(signupPatientRequest.getUsername())) {

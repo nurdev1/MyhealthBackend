@@ -4,6 +4,7 @@ package Myhealth.myhealth.modeles;
 
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -46,6 +48,8 @@ public class Utilisateus {
   private String telephone;
   private String ville;
   private String adresse;
+  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+  private LocalDateTime date = LocalDateTime.now();
   @NotBlank
   @Size(max = 120)
   private String password;

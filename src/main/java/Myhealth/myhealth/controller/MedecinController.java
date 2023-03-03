@@ -143,6 +143,11 @@ public ResponseEntity<?> registerMedecin(@Valid @RequestBody SignupMedecinReques
     public List<Object> HopitalListeMedecin() {
         return medecinService.HopitalListeMedecin();
     }
+       @GetMapping("dernier")
+    public List<Medecin> dernier() {
+        return medecinService.dernier();
+    }
+
 
     /*@PostMapping
     public ResponseEntity<Medecin> createUser(@RequestBody Medecin user) {
