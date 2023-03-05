@@ -1,14 +1,19 @@
 package Myhealth.myhealth.services.implementation;
 
 import Myhealth.myhealth.Message.ReponseMessage;
+import Myhealth.myhealth.exception.FileStorageException;
 import Myhealth.myhealth.modeles.Consultation;
+import Myhealth.myhealth.modeles.DatabaseFile;
 import Myhealth.myhealth.modeles.Medecin;
 import Myhealth.myhealth.modeles.Patient;
 import Myhealth.myhealth.repository.ConsultationRepository;
 import Myhealth.myhealth.services.ConsultationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,11 +35,27 @@ public class ConsultationServiceImplementation implements ConsultationService {
             }
         }*/
     @Override
-    public ReponseMessage creerConsultation(Consultation consultation) {
+    public ReponseMessage creerConsultation(Consultation consultation, MultipartFile file) {
         if (consultationRepository.findByNom(consultation.getNom()) == null) {
-            consultationRepository.save(consultation);
+            // Normaliser le nom du fichier
+            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+            try {
+                // Vérifiez si le nom du fichier contient des caractères invalides
+                if(fileName.contains("..")) {
+                    throw new FileStorageException("Pardon! Le nom de fichier contient une séquence de chemin non valide " + fileName);
+                }
+
+                Consultation dbFile = new Consultation(fileName, file.getContentType(), file.getBytes());
+                consultationRepository.save(consultation);
+                ReponseMessage message = new ReponseMessage("consultation ajouté avec succes", true);
+                return message;
+            } catch (IOException ex) {
+                throw new FileStorageException("Impossible de stocker le fichier" + fileName + ". Veuillez réessayer!", ex);
+            }
+           /* consultationRepository.save(consultation);
             ReponseMessage message = new ReponseMessage("consultation ajouté avec succes", true);
-            return message;
+            return message;*/
         } else {
             ReponseMessage message = new ReponseMessage("Ce consultation  existe déjà ", false);
 

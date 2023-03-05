@@ -140,11 +140,11 @@ public class WebSecurityConfig {
         .antMatchers("/medecin/save**").permitAll()
             .antMatchers("/hopital/**").permitAll()
          .antMatchers("/medecin/**").permitAll()
-            .antMatchers("/patient/**").permitAll()
+/*            .antMatchers("/patient/**").permitAll()
             .antMatchers("/dossier/**").permitAll()
             .antMatchers("/consultation/**").permitAll()
             .antMatchers("/synthesemedical/**").permitAll()
-            .antMatchers("/consultation/**").permitAll()
+            .antMatchers("/consultation/**").permitAll()*/
       /*      .antMatchers("/role/**").permitAll()
         .antMatchers("/hopital/**").permitAll()
         .antMatchers("/consultation/**").permitAll()

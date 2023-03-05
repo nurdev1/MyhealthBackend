@@ -57,17 +57,6 @@ public class PatientServiceImplementation implements PatientService {
         return patientRepository.findAll();
     }
 
-/*    @Override
-    public ReponseMessage SupprimerPatient(Long idpatient) {
-        if(patientRepository.findByIdpatient(idpatient) != null){
-            patientRepository.deleteById(idpatient);
-            ReponseMessage message = new ReponseMessage("Patient supprimé avec succes", true);
-            return message;
-        }else {
-            ReponseMessage message = new ReponseMessage("Patient non trouvé", false);
-            return message;
-        }
-    }*/
     @Override
     public ReponseMessage SupprimerPatient(Long id) {
         final Patient patient = null;
@@ -141,28 +130,6 @@ public class PatientServiceImplementation implements PatientService {
         return true;
     }
 
-    /*public Patient registerPatient(SignupRequest signUpRequest) {
-        if (patientRepository.existsByUsername(signUpRequest.getUsername())) {
-            throw new UsernameAlreadyExistsException("Ce nom d'utilisateur existe déjà!");
-        }
-
-        if (patientRepository.existsByEmail(signUpRequest.getEmail())) {
-            throw new EmailAlreadyExistsException("Cet email est déjà utilisé!");
-        }
-
-        // Create new patient's account
-        Patient patient = new Patient(signUpRequest.getUsername(), signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()), signUpRequest.getNom(), signUpRequest.getPrenom(),
-                signUpRequest.getPhoto(), signUpRequest.getTelephone(), signUpRequest.getVille(),
-                signUpRequest.getAdresse());
-
-        // Set patient role
-        Role patientRole = new Role();
-        patientRole.setName(ERole.PATIENT);
-        patient.setRoles(Collections.singleton(patientRole));
-
-        return patientRepository.save(patient);
-    }*/
 }
 
 

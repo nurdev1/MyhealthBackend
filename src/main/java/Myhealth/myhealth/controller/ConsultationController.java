@@ -2,22 +2,20 @@ package Myhealth.myhealth.controller;
 
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Consultation;
-import Myhealth.myhealth.modeles.Medecin;
-import Myhealth.myhealth.modeles.Patient;
+import Myhealth.myhealth.modeles.DatabaseFile;
+import Myhealth.myhealth.payloadFile.Response;
 import Myhealth.myhealth.services.ConsultationService;
 import Myhealth.myhealth.services.MedecinService;
 import Myhealth.myhealth.services.PatientService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -31,10 +29,16 @@ private ConsultationService consultationService;
 private MedecinService medecinService;
 private PatientService patientService;
     @PostMapping("/ajouter")
-    ReponseMessage Ajouter(@RequestBody Consultation consultation){
+    ReponseMessage Ajouter(@RequestBody Consultation consultation, MultipartFile file){
         System.out.println(consultation);
-      //  System.out.println(consultation.getPatient().getId());
-        return   consultationService.creerConsultation(consultation);
+        Consultation fileName = (Consultation) file;
+
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/downloadFile/")
+                .path(fileName.getFileName())
+                .toUriString();
+
+        return   consultationService.creerConsultation(consultation,file);
     }
     //@PathVariable int medecin, @PathVariable int patient  ,medecin,patient
     @GetMapping("/afficher")
@@ -82,7 +86,7 @@ private PatientService patientService;
         return new ResponseEntity<>(savedConsultation, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}")/**/
     public ResponseEntity<Consultation> updateConsultation(@PathVariable Long id, @RequestBody Consultation consultation) {
         Optional<Consultation> existingConsultation = consultationService.getConsultationById(id);
         if (existingConsultation.isPresent()) {

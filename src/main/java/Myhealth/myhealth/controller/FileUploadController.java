@@ -22,21 +22,9 @@ public class FileUploadController {
     @Autowired
     private DatabaseFileService fileStorageService;
 
-    @PostMapping("/uploadFile/{id}/{idUser}")
-    public Response uploadFile(@RequestParam("file") MultipartFile file, @PathVariable Long idUser, @PathVariable Long id) {
-    	DatabaseFile fileName = fileStorageService.storeFile(file,id,idUser);
-
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
-                .path(fileName.getFileName())
-                .toUriString();
-
-        return new Response(fileName.getFileName(), fileDownloadUri,
-                file.getContentType(), file.getSize());
-    }
-    @PostMapping("/uploadFileUser/{idUser}")
-    public Response uploadFileUser(@RequestParam("file") MultipartFile file, @PathVariable Long idUser) {
-    	DatabaseFile fileName = fileStorageService.saveFile(file,idUser);
+    @PostMapping("/uploadFile")
+    public Response uploadFile(@RequestParam("file") MultipartFile file) {
+    	DatabaseFile fileName = fileStorageService.storeFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
@@ -48,10 +36,10 @@ public class FileUploadController {
     }
 
     @PostMapping("/uploadMultipleFiles")
-    public List<Response> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files, @PathVariable Long idUser,@PathVariable Long id) {
+    public List<Response> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         return Arrays.asList(files)
                 .stream()
-                .map(file -> uploadFile(file,idUser,id))
+                .map(file -> uploadFile(file))
                 .collect(Collectors.toList());
     }
 }

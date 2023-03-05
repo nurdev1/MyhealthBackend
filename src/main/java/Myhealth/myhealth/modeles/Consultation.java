@@ -25,6 +25,12 @@ public class Consultation {
     private String nom;
     private String description;
     private String fichier;
+    private String fileName;
+
+    private String fileType;
+
+    @Lob
+    private byte[] data;
     private boolean etat = true;
     private Date date;
     private  String observations;
@@ -35,7 +41,38 @@ public class Consultation {
     @ManyToOne
     private Patient patient;
     @ManyToOne
-    private Dossier dossier;
+    private Hopital hopital;
+
+    public Consultation(String fileName, String fileType, byte[] data) {
+        this.fileName = fileName;
+        this.fileType = fileType;
+        this.data = data;
+    }
+
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public String getFileType() {
+        return fileType;
+    }
+
+    public byte[] getData() {
+        return data;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
+    }
+
+    public void setData(byte[] data) {
+        this.data = data;
+    }
 }
 
 /*@ManyToMany(fetch = FetchType.LAZY)

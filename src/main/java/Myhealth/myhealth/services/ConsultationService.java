@@ -2,14 +2,16 @@ package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Consultation;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 public interface ConsultationService {
 
     // Création d'un Consultation
-    ReponseMessage creerConsultation (Consultation consultation);
+    ReponseMessage creerConsultation (Consultation consultation, MultipartFile file) ;
     //, int medecin, int patient
 
     // Mise à jour d'un Consultation
