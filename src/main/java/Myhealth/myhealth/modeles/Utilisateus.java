@@ -44,7 +44,12 @@ public class Utilisateus {
   private String email;
   private String nom;
   private String prenom;
-  private String photo;
+  private String fileName;
+
+  private String fileType;
+
+  @Lob
+  private byte[] data;
   private String telephone;
   private String ville;
   private String adresse;
@@ -66,6 +71,16 @@ public class Utilisateus {
     this.username = username;
     this.email = email;
     this.password = password;
+  }
+  public String getFileName() {
+
+
+    return fileName;
+  }
+  public void setFileName(String fileName) {
+
+
+    this.fileName = fileName;
   }
 
 }

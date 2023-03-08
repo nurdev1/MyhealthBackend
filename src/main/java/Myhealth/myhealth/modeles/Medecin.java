@@ -6,7 +6,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -32,7 +34,9 @@ public class Medecin extends Utilisateus{
           inverseJoinColumns = @JoinColumn(name = "idhopital")
   )
   private List<Hopital> hopitals = new ArrayList<>();
-    @ManyToOne
-    private Role role;
+   /*@ManyToOne
+    private Role role;*/
+    @ManyToMany
+    private Set<Role> roles = new HashSet<>();
 
 }

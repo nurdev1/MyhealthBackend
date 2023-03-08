@@ -70,7 +70,7 @@ public class PatientSignup {
 
         Authentication authentication = authenticationManager.authenticate(
                 //on lui fournit un objet avec username et password fournit par l'admin
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+                new UsernamePasswordAuthenticationToken(loginRequest.getCodePatient(), loginRequest.getPassword()));
 
     /*
       SecurityContext et SecurityContextHolder sont deux classes fondamentales de Spring Security .

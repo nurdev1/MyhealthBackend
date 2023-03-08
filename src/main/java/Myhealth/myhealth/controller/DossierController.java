@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -27,6 +28,12 @@ public class DossierController {
         System.out.println("jhfvbhvbfjknjgknbnhghbvgvgggggggggggggggggggggggggggggggggggggg");
         System.out.println(dossier.getId());
         return dossierService.creerDossier(dossier);
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<Dossier> uploadFile(@RequestBody Dossier dossier,@RequestParam("file") MultipartFile file) {
+        dossierService.storeFile(dossier,file);
+        return new ResponseEntity<>(dossier, HttpStatus.CREATED);
     }
     //modifier
     @PutMapping("/modifier")

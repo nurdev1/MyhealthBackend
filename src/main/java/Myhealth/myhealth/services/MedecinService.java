@@ -1,8 +1,10 @@
 package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.Message.ReponseMessage;
+import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.modeles.Medecin;
 import org.springframework.data.repository.query.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -30,4 +32,5 @@ public interface MedecinService {
 
     void activerMedecin(Long id);
     List<Medecin> dernier();
+    public Medecin storeFile(MultipartFile file);
 }

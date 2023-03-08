@@ -22,7 +22,12 @@ public class Hopital {
     private String nom;
     private String ville;
     private String adresse;
-    private String photo;
+    private String fileName;
+
+    private String fileType;
+
+    @Lob
+    private byte[] data;
     private String email;
     private String telephone;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -42,4 +47,14 @@ public class Hopital {
             inverseJoinColumns = @JoinColumn(name = "idmedecin")
     )
     private List<Medecin> medecins = new ArrayList<>();
+    public String getFileName() {
+
+
+        return fileName;
+    }
+    public void setFileName(String fileName) {
+
+
+        this.fileName = fileName;
+    }
 }

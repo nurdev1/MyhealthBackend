@@ -1,6 +1,7 @@
 package Myhealth.myhealth.services.implementation;
 
 import Myhealth.myhealth.Message.ReponseMessage;
+import Myhealth.myhealth.exception.FileStorageException;
 import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.modeles.Patient;
 import Myhealth.myhealth.repository.DossierRepository;
@@ -8,7 +9,11 @@ import Myhealth.myhealth.repository.PatientRepository;
 import Myhealth.myhealth.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,6 +36,31 @@ public class PatientServiceImplementation implements PatientService {
             return message;
         }
 
+    }
+    @Override
+    public Patient Save(MultipartFile file) {
+        // Normalize the file name
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        try {
+            // Check if the file name contains invalid characters
+            if(fileName.contains("..")) {
+                throw new FileStorageException("Pardon! Le nom de fichier contient une séquence de chemin non valide " + fileName);
+            }
+
+            // Create a new Dossier object with the file name, content type, and data
+            Patient patient = new Patient();
+            patient.setFileName(fileName);
+            patient.setFileType(file.getContentType());
+            patient.setData(file.getBytes());
+            patient.setDate(LocalDateTime.now());
+            patient.setEtat(true);
+
+            // Save the Dossier object to the database
+            return patientRepository.save(patient);
+        } catch (IOException ex) {
+            throw new FileStorageException("Impossible de stocker le fichier" + fileName + ". Veuillez réessayer!", ex);
+        }
     }
 
     @Override

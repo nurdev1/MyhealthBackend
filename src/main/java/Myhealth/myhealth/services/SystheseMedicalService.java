@@ -1,7 +1,9 @@
 package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.Message.ReponseMessage;
+import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.modeles.SyntheseMedical;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,6 +21,7 @@ public interface SystheseMedicalService {
 
     //Suppression d'un SystheseMedical
     ReponseMessage SupprimerSystheseMedical(Long idsysthesemedical);
+    public SyntheseMedical storeFile(SyntheseMedical systheseMedical,MultipartFile file);
 }
 
 

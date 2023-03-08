@@ -1,6 +1,7 @@
 package Myhealth.myhealth.services.implementation;
 
 import Myhealth.myhealth.Message.ReponseMessage;
+import Myhealth.myhealth.exception.FileStorageException;
 import Myhealth.myhealth.modeles.Hopital;
 import Myhealth.myhealth.repository.HopitalRepository;
 import Myhealth.myhealth.services.HopitalService;
@@ -10,8 +11,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -41,7 +44,7 @@ public class HopitalServiceImplementation implements HopitalService {
                     .map(hopital1->{
                         hopital1.setAdresse(hopital.getAdresse());
                         hopital1.setNom(hopital.getNom());
-                        hopital1.setPhoto(hopital.getPhoto());
+                        hopital1.setFileName(hopital.getFileName());
                         hopital1.setVille(hopital.getVille());
                         hopitalRepository.save(hopital);
                         ReponseMessage message = new ReponseMessage("Hopital modifié avec succes", true);
@@ -87,6 +90,31 @@ public class HopitalServiceImplementation implements HopitalService {
     @Override
     public List<Hopital> NouveauHopital() {
         return hopitalRepository.NouveauHopital();
+    }
+
+    @Override
+    public Hopital storeFile(Hopital hopital, MultipartFile file) {
+        // Normalize the file name
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        try {
+            // Check if the file name contains invalid characters
+            if(fileName.contains("..")) {
+                throw new FileStorageException("Pardon! Le nom de fichier contient une séquence de chemin non valide " + fileName);
+            }
+
+            // Create a new Dossier object with the file name, content type, and data
+            hopital.setFileName(fileName);
+            hopital.setFileType(file.getContentType());
+            hopital.setData(file.getBytes());
+            //  imagerie.setDate(LocalDateTime.now());
+            hopital.setEtat(true);
+
+            // Save the Dossier object to the database
+            return hopitalRepository.save(hopital);
+        } catch (IOException ex) {
+            throw new FileStorageException("Impossible de stocker le fichier" + fileName + ". Veuillez réessayer!", ex);
+        }
     }
 
     private Page<Hopital> getHopitalsList(int page, int limit) {

@@ -2,9 +2,13 @@ package Myhealth.myhealth.controller;
 
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.CompteRendu;
+import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.services.CompteRenduService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,6 +23,11 @@ public class CompteRenduController {
     @PostMapping("/ajouter")
     ReponseMessage Ajouter(@RequestBody CompteRendu compteRendu){
       return   compteRenduService.creerCompteRendu(compteRendu);
+    }
+    @PostMapping("/save")
+    public ResponseEntity<CompteRendu> uploadFile(@RequestBody CompteRendu compteRendu,@RequestParam("file") MultipartFile file) {
+        compteRenduService.storeFile(compteRendu,file);
+        return new ResponseEntity<>(compteRendu, HttpStatus.CREATED);
     }
     @GetMapping("afficher")
     public List<CompteRendu> Afficher(){

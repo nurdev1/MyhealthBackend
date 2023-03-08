@@ -1,7 +1,9 @@
 package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.Message.ReponseMessage;
+import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.modeles.Prescription;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,4 +20,5 @@ public interface PrescritionService {
 
     //Suppression d'un prescription
     ReponseMessage SupprimerPrescription(Long idprescription);
+    public Prescription storeFile(Prescription prescription,MultipartFile file);
 }

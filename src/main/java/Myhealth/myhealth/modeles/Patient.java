@@ -18,7 +18,9 @@ public class Patient extends Utilisateus {
     private String codePatient;
     private boolean etat = true;
 
-    @ManyToOne
-    private Role role;
+    /*@ManyToOne
+    private Role role;*/
+    @ManyToMany
+    private Set<Role> roles = new HashSet<>();
 
 }

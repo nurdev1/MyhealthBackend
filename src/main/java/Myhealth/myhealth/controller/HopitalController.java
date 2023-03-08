@@ -1,10 +1,14 @@
 package Myhealth.myhealth.controller;
 
 import Myhealth.myhealth.Message.ReponseMessage;
+import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.modeles.Hopital;
 import Myhealth.myhealth.services.HopitalService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -21,6 +25,12 @@ public class HopitalController {
     public ReponseMessage ajouter(@RequestBody Hopital hopital){
         System.out.println(hopital.getNom());
         return   hopitalService.creerHopital(hopital);
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<Hopital> uploadFile(@RequestBody Hopital hopital,@RequestParam("file") MultipartFile file) {
+        hopitalService.storeFile(hopital,file);
+        return new ResponseEntity<>(hopital, HttpStatus.CREATED);
     }
 
     //afficher

@@ -1,6 +1,8 @@
 package Myhealth.myhealth.services.implementation;
 
 import Myhealth.myhealth.Message.ReponseMessage;
+import Myhealth.myhealth.exception.FileStorageException;
+import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.modeles.Medecin;
 import Myhealth.myhealth.repository.MedecinRepository;
 import Myhealth.myhealth.services.MedecinService;
@@ -9,11 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -49,7 +53,7 @@ public class MedecinServiceImplemetation implements MedecinService {
                         medecin1.setPrenom(medecin.getPrenom());
                         medecin1.setAdresse(medecin.getAdresse());
                         medecin1.setVille(medecin.getVille());
-                        medecin1.setPhoto(medecin.getPhoto());
+                        medecin1.setFileName(medecin.getFileName());
                         medecin1.setTelephone(medecin.getTelephone());
                         medecin1.setSpecialite(medecin.getSpecialite());
                         //  medecin1.setHopital(medecin.getHopital());
@@ -181,6 +185,32 @@ public class MedecinServiceImplemetation implements MedecinService {
     @Override
     public List<Medecin> dernier() {
         return medecinRepository.dernier();
+    }
+
+    @Override
+    public Medecin storeFile(MultipartFile file) {
+        // Normalize the file name
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        try {
+            // Check if the file name contains invalid characters
+            if(fileName.contains("..")) {
+                throw new FileStorageException("Pardon! Le nom de fichier contient une séquence de chemin non valide " + fileName);
+            }
+
+            // Create a new Dossier object with the file name, content type, and data
+            Medecin medecin = new Medecin();
+            medecin.setFileName(fileName);
+            medecin.setFileType(file.getContentType());
+            medecin.setData(file.getBytes());
+            medecin.setDate(LocalDateTime.now());
+            medecin.setEtat(true);
+
+            // Save the Dossier object to the database
+            return medecinRepository.save(medecin);
+        } catch (IOException ex) {
+            throw new FileStorageException("Impossible de stocker le fichier" + fileName + ". Veuillez réessayer!", ex);
+        }
     }
 
 

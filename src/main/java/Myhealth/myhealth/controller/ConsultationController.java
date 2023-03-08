@@ -3,6 +3,7 @@ package Myhealth.myhealth.controller;
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Consultation;
 import Myhealth.myhealth.modeles.DatabaseFile;
+import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.payloadFile.Response;
 import Myhealth.myhealth.services.ConsultationService;
 import Myhealth.myhealth.services.MedecinService;
@@ -28,7 +29,7 @@ public class ConsultationController {
 private ConsultationService consultationService;
 private MedecinService medecinService;
 private PatientService patientService;
-    @PostMapping("/ajouter")
+   /* @PostMapping("/ajouter")
     ReponseMessage Ajouter(@RequestBody Consultation consultation, MultipartFile file){
         System.out.println(consultation);
         Consultation fileName = (Consultation) file;
@@ -40,6 +41,11 @@ private PatientService patientService;
 
         return   consultationService.creerConsultation(consultation,file);
     }
+    @PostMapping("/save")
+    public ResponseEntity<Consultation> uploadFile(@RequestBody Consultation consultation,@RequestParam("file") MultipartFile file) {
+         consultationService.storeFile(consultation,file);
+        return new ResponseEntity<>(consultation, HttpStatus.CREATED);
+    }*/
     //@PathVariable int medecin, @PathVariable int patient  ,medecin,patient
     @GetMapping("/afficher")
     List<Consultation> Afficher(){
@@ -64,6 +70,12 @@ private PatientService patientService;
     public List<Object> MedecinConsultation (Long idmedecin){
         return consultationService.MedecinConsultation(idmedecin);
     }*/
+    @PostMapping("/ajouter")
+    ReponseMessage Ajouter(@RequestBody Consultation consultation){
+    System.out.println(consultation);
+
+    return   consultationService.creerConsultation(consultation);
+}
 
     @GetMapping("")
     public List<Consultation> getAllConsultations() {

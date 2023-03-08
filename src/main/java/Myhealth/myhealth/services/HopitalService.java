@@ -1,6 +1,7 @@
 package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.Message.ReponseMessage;
+import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.modeles.Hopital;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -27,6 +28,7 @@ public interface HopitalService {
     int NombreHopital();
     List<Object> NombreHopitalParVille();
     List<Hopital> NouveauHopital();
+    public Hopital storeFile(Hopital hopital,MultipartFile file);
 
 
 

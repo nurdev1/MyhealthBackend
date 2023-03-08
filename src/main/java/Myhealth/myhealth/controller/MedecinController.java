@@ -83,20 +83,21 @@ public ResponseEntity<?> registerMedecin(@Valid @RequestBody SignupMedecinReques
     encoder.encode(signupMedecinRequest.getPassword());
     medecin.setNom(signupMedecinRequest.getNom());
     medecin.setPrenom(signupMedecinRequest.getPrenom());
-    medecin.setPhoto(signupMedecinRequest.getPhoto());
+    medecin.setFileName(signupMedecinRequest.getFileName());
     medecin.setTelephone(signupMedecinRequest.getTelephone());
     medecin.setSpecialite(signupMedecinRequest.getSpecialitet());
     medecin.setPassword(encoder.encode(signupMedecinRequest.getPassword()));
     // patient.setRole(roleRepository.findByName(PATIENT));
-    Role patientRole = roleRepository.findByName(ERole.MEDECIN);
+    Role medecinRole = roleRepository.findByName(ERole.MEDECIN);
     // .orElseThrow(() -> new RuntimeException("Erreur: le rôle n'est pas trouvé."));
-    medecin.setRole(patientRole);
+  //  medecin.setRole(patientRole);
 
 
 
     System.out.println(medecin);
     // mailSender.send(emailMedecinConstructor.constructNewMedecinEmail(medecin,medecin.getPassword()));
 
+    medecin.getRoles().add(medecinRole);
     medecinRepository.save(medecin);
     System.out.println(medecin);
 

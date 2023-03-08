@@ -24,13 +24,13 @@ public class Consultation {
     private Long id;
     private String nom;
     private String description;
-    private String fichier;
     private String fileName;
 
     private String fileType;
 
     @Lob
     private byte[] data;
+
     private boolean etat = true;
     private Date date;
     private  String observations;
@@ -51,27 +51,14 @@ public class Consultation {
 
 
     public String getFileName() {
+
+
         return fileName;
     }
-
-    public String getFileType() {
-        return fileType;
-    }
-
-    public byte[] getData() {
-        return data;
-    }
-
     public void setFileName(String fileName) {
+
+
         this.fileName = fileName;
-    }
-
-    public void setFileType(String fileType) {
-        this.fileType = fileType;
-    }
-
-    public void setData(byte[] data) {
-        this.data = data;
     }
 }
 

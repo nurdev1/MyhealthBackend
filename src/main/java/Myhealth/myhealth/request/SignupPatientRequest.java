@@ -28,7 +28,7 @@ public class SignupPatientRequest {
     @NotBlank
     private String telephone;
     @NotBlank
-    private String photo;
+    private String fileName;
 
     public String getUsername() {
         return username;
@@ -84,11 +84,11 @@ public class SignupPatientRequest {
     public String getPrenom() {
         return prenom;
     }
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
-    public String getPhoto() {
-        return photo;
+    public String getFileName() {
+        return fileName;
     }
 
 }

@@ -2,6 +2,7 @@ package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Dossier;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.util.List;
@@ -25,5 +26,6 @@ public interface DossierService {
     Dossier addDossier(Long patientId, Long medecinId, Dossier dossierDto);
     Dossier updateDossier(Long dossierId, Long medecinId, Dossier dossierDto);
     void deleteDossier(Long dossierId, Long medecinId);
+    public Dossier storeFile(Dossier dossier,MultipartFile file);
 }
 

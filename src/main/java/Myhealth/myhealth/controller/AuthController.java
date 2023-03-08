@@ -101,6 +101,9 @@ public class AuthController {
         .map(item -> item.getAuthority())
         .collect(Collectors.toList());
 
+    System.out.println("mes roles");
+    System.out.println(roles);
+
     log.info("conexion controlleur");
 
     //on retourne une reponse, contenant l'id username, e-mail et le role du collaborateur

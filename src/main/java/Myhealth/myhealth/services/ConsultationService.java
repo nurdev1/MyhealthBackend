@@ -2,6 +2,7 @@ package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Consultation;
+import Myhealth.myhealth.modeles.Dossier;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.util.Optional;
 public interface ConsultationService {
 
     // Création d'un Consultation
-    ReponseMessage creerConsultation (Consultation consultation, MultipartFile file) ;
+   // ReponseMessage creerConsultation (Consultation consultation, MultipartFile file) ;
     //, int medecin, int patient
 
     // Mise à jour d'un Consultation
@@ -42,4 +43,7 @@ public interface ConsultationService {
 
     void deleteConsultationById(Long id);
 //    public List<Object> MedecinConsultation (Long idmedecin);
+
+  //  public Consultation storeFile(Consultation consultation,MultipartFile file);
+  public ReponseMessage  creerConsultation(Consultation consultation);
 }

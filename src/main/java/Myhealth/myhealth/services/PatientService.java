@@ -3,6 +3,7 @@ package Myhealth.myhealth.services;
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.modeles.Patient;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public interface PatientService {
     Dossier updateDossierForPatient(String codePatient, Long dossierId, Dossier dossier);
 
     boolean deleteDossierForPatient(String codePatient, Long dossierId);
+    public Patient Save(MultipartFile file);
 
 
 }

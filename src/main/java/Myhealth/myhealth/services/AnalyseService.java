@@ -2,6 +2,8 @@ package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.Message.ReponseMessage;
 import Myhealth.myhealth.modeles.Analyse;
+import Myhealth.myhealth.modeles.Dossier;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,4 +21,5 @@ public interface AnalyseService {
 
     //Suppression d'un analyse
     ReponseMessage SupprimerAnalyse(Long idanalyse);
+    public Analyse storeFile(Analyse analyse,MultipartFile file);
 }

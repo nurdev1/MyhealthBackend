@@ -1,7 +1,10 @@
 package Myhealth.myhealth.services;
 
 import Myhealth.myhealth.Message.ReponseMessage;
+import Myhealth.myhealth.modeles.Dossier;
+import Myhealth.myhealth.modeles.Hopital;
 import Myhealth.myhealth.modeles.Imagerie;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,4 +22,5 @@ public interface ImagerieService {
 
     //Suppression d'un Imagerie
     ReponseMessage SupprimerImagerie(Long idimagerie);
+    public Imagerie storeFile(Imagerie imagerie,MultipartFile file);
 }

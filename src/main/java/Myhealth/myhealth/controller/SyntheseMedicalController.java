@@ -1,10 +1,14 @@
 package Myhealth.myhealth.controller;
 
 import Myhealth.myhealth.Message.ReponseMessage;
+import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.modeles.SyntheseMedical;
 import Myhealth.myhealth.services.SystheseMedicalService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -23,6 +27,12 @@ public class SyntheseMedicalController {
         System.out.println("jhfvbhvbfjknjgknbnhghbvgvgggggggggggggggggggggggggggggggggggggg");
         System.out.println(syntheseMedical.getId());
         return   systheseMedicalService.AjouterSystheseMedical(syntheseMedical);
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<SyntheseMedical> uploadFile(@RequestBody SyntheseMedical syntheseMedical,@RequestParam("file") MultipartFile file) {
+        systheseMedicalService.storeFile(syntheseMedical, file);
+        return new ResponseEntity<>(syntheseMedical, HttpStatus.CREATED);
     }
     @GetMapping("/modifier")
     public ReponseMessage Modifier(@RequestBody SyntheseMedical syntheseMedical){

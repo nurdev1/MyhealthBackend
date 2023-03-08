@@ -1,14 +1,21 @@
 package Myhealth.myhealth.services.implementation;
 
 import Myhealth.myhealth.Message.ReponseMessage;
+import Myhealth.myhealth.exception.FileStorageException;
+import Myhealth.myhealth.modeles.DatabaseFile;
 import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.modeles.Patient;
 import Myhealth.myhealth.repository.DossierRepository;
 import Myhealth.myhealth.repository.PatientRepository;
+import Myhealth.myhealth.services.DatabaseFileService;
 import Myhealth.myhealth.services.DossierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,8 +26,10 @@ public class DossierServiceImplementation  implements DossierService {
     DossierRepository dossierRepository;
     @Autowired
     PatientRepository patientRepository;
+    @Autowired
+    DatabaseFileService fileStorageService;
 
-    @Override
+   /* @Override
     public ReponseMessage creerDossier(Dossier dossier) {
         if (dossierRepository.findByNom(dossier.getNom()) == null) {
             dossierRepository.save(dossier);
@@ -31,8 +40,8 @@ public class DossierServiceImplementation  implements DossierService {
 
             return message;
         }
-    }
-    /*public ReponseMessage creerDossier(Dossier dossier) {
+    }*/
+    public ReponseMessage creerDossier(Dossier dossier) {
         if (dossierRepository.findById(dossier.getId()) == null) {
             dossierRepository.save(dossier);
             ReponseMessage message = new ReponseMessage("patient ajouté avec succes", true);
@@ -42,7 +51,51 @@ public class DossierServiceImplementation  implements DossierService {
 
             return message;
         }
-    }*/
+    }
+
+    @Override
+    public Dossier storeFile(Dossier dossier,MultipartFile file) {
+        // Normalize the file name
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        try {
+            // Check if the file name contains invalid characters
+            if(fileName.contains("..")) {
+                throw new FileStorageException("Pardon! Le nom de fichier contient une séquence de chemin non valide " + fileName);
+            }
+
+            // Create a new Dossier object with the file name, content type, and data
+            dossier.setFileName(fileName);
+            dossier.setFileType(file.getContentType());
+            dossier.setData(file.getBytes());
+            dossier.setDate(LocalDateTime.now());
+            dossier.setEtat(true);
+
+            // Save the Dossier object to the database
+            return dossierRepository.save(dossier);
+        } catch (IOException ex) {
+            throw new FileStorageException("Impossible de stocker le fichier" + fileName + ". Veuillez réessayer!", ex);
+        }
+    }
+
+   /*@Override
+   public ReponseMessage creerDossier(Dossier dossier, MultipartFile file) {
+       if (dossierRepository.findByNom(dossier.getNom()) == null) {
+           // Enregistrer la pièce jointe
+           if (file != null && !file.isEmpty()) {
+               DatabaseFile dbFile = fileStorageService.storeFile(file);
+               dossier.setPieceJoint(dbFile.getFileName());
+           }
+           // Enregistrer le dossier
+           dossierRepository.save(dossier);
+           ReponseMessage message = new ReponseMessage("dossier ajouté avec succès", true);
+           return message;
+       } else {
+           ReponseMessage message = new ReponseMessage("Ce dossier existe déjà ", false);
+           return message;
+       }
+   }*/
+
 
     @Override
     public ReponseMessage modifierDossier(Dossier dossier) {
@@ -105,6 +158,9 @@ public class DossierServiceImplementation  implements DossierService {
     public void deleteDossier(Long dossierId, Long medecinId) {
 
     }
+    public Dossier trouverDossier(Long id) {
+        return dossierRepository.findById(id).orElse(null);
+    }
 
 /*    public Consultation updateConsultation(Long id, Consultation consultation) {
         Consultation existingConsultation = consultationRepository.findById(id).orElse(null);
@@ -120,3 +176,4 @@ public class DossierServiceImplementation  implements DossierService {
 
 
 }
+

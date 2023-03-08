@@ -1,11 +1,18 @@
-package Myhealth.myhealth.services;
+package Myhealth.myhealth.services.implementation;
 
 import Myhealth.myhealth.Message.ReponseMessage;
+import Myhealth.myhealth.exception.FileStorageException;
 import Myhealth.myhealth.modeles.Analyse;
+import Myhealth.myhealth.modeles.Dossier;
 import Myhealth.myhealth.repository.AnalyseRepository;
+import Myhealth.myhealth.services.AnalyseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -35,7 +42,7 @@ public class AnalyseServiceImplementation implements AnalyseService {
                     .map(analyse1->{
                         analyse1.setNom(analyse.getNom());
                         analyse1.setDescription(analyse.getDescription());
-                        analyse1.setFichier(analyse.getFichier());
+                        analyse1.setFileName(analyse.getFileName());
                         analyseRepository.save(analyse1);
                         ReponseMessage message = new ReponseMessage("analyse modifié avec succes", true);
                         return  message;
@@ -76,6 +83,31 @@ public class AnalyseServiceImplementation implements AnalyseService {
         else {
             ReponseMessage message = new ReponseMessage(" Analyse non trouvée", false);
             return message;
+        }
+    }
+
+    @Override
+    public Analyse storeFile(Analyse analyse,MultipartFile file) {
+        // Normalize the file name
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        try {
+            // Check if the file name contains invalid characters
+            if(fileName.contains("..")) {
+                throw new FileStorageException("Pardon! Le nom de fichier contient une séquence de chemin non valide " + fileName);
+            }
+
+            // Create a new Dossier object with the file name, content type, and data
+            analyse.setFileName(fileName);
+            analyse.setFileType(file.getContentType());
+            analyse.setData(file.getBytes());
+           // analyse.setDate(LocalDateTime.now());
+            analyse.setEtat(true);
+
+            // Save the Dossier object to the database
+            return analyseRepository.save(analyse);
+        } catch (IOException ex) {
+            throw new FileStorageException("Impossible de stocker le fichier" + fileName + ". Veuillez réessayer!", ex);
         }
     }
 }

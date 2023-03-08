@@ -5,6 +5,8 @@ import javax.validation.constraints.NotBlank;
 public class LoginRequest {
 	@NotBlank
   private String username;
+	@NotBlank
+	private String codePatient;
 
 	@NotBlank
 	private String password;
@@ -15,6 +17,14 @@ public class LoginRequest {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getCodePatient() {
+		return codePatient;
+	}
+
+	public void setCodePatient(String codePatient) {
+		this.codePatient = codePatient;
 	}
 
 	public String getPassword() {

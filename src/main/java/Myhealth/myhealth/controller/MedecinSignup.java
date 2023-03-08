@@ -62,7 +62,7 @@ public class MedecinSignup {
     @Autowired
     JwtUtils jwtUtils;
 
-    @PostMapping("/signup")
+    /*@PostMapping("/signup")
     public ResponseEntity<?> registerMedecin(@Valid @RequestBody SignupMedecinRequest signupMedecinRequest) {
         if (medecinRepository.existsByEmail(signupMedecinRequest.getUsername())) {
             return ResponseEntity
@@ -85,7 +85,7 @@ public class MedecinSignup {
                 encoder.encode(signupMedecinRequest.getPassword());
         medecin.setNom(signupMedecinRequest.getNom());
         medecin.setPrenom(signupMedecinRequest.getPrenom());
-        medecin.setPhoto(signupMedecinRequest.getPhoto());
+        medecin.setFileName(signupMedecinRequest.getFileName());
         medecin.setTelephone(signupMedecinRequest.getTelephone());
         medecin.setSpecialite(signupMedecinRequest.getSpecialitet());
         medecin.setPassword(encoder.encode(signupMedecinRequest.getPassword()));
@@ -104,7 +104,7 @@ public class MedecinSignup {
 
         return ResponseEntity.ok(new MessageResponse("Medecin enregistré avec succès!"));
     }
-
+*/
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
